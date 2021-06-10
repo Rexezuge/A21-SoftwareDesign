@@ -19,11 +19,11 @@ void deleteContact(struct Contact* Input){
   free(Input->Address);
 }
 
-unsigned int Hash(struct Contact* Input,int numBlocks){
+int Hash(struct Contact* Input,int numBlocks){
   int StringSum=0;
   for(int i=0;i<(int)strlen(Input->Name);i++)
     StringSum+=(int)*(Input->Name+i);
   for(int i=0;i<(int)strlen(Input->Address);i++)
     StringSum+=(int)*(Input->Address+i);
-  return (unsigned int)StringSum%numBlocks;
+  return StringSum%numBlocks;
 }
