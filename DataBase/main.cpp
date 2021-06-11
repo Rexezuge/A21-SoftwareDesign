@@ -1,8 +1,8 @@
 #include<stdio.h>
-#include<stdlib.h>
+#include<iostream>
 #include"contact.h"
 
-int main(int numArgs,char** Argv){
+int main(){
   
   return EXIT_SUCCESS;
 }
