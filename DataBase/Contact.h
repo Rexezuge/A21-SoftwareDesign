@@ -21,5 +21,5 @@ class Contact{
         StringSum+=(int)_Address[i];
       return (int)StringSum%StackSize;
     }
-    std::string toString(){ return std::string(_Name+"%%%"+std::to_string(_Phone)+"%%%"+_Address); }
+    bool operator==(Contact Input) { return this->_Name==Input._Name&&this->_Phone==Input._Phone&&this->_Address==Input._Address; }
 };
