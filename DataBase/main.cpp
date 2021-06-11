@@ -1,8 +1,9 @@
 #include<stdio.h>
 #include<iostream>
-#include"contact.h"
+#include"Contact.h"
+#include"TierDB.h"
 
 int main(){
-  
+
   return EXIT_SUCCESS;
 }
