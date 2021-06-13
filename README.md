@@ -9,7 +9,7 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 ## Clone Repo
 
 ```bash
-https://github.com/reC4P7CH4/A21-EasyContact.git
+git clone https://github.com/reC4P7CH4/A21-EasyContact.git
 ```
 
 ## License
