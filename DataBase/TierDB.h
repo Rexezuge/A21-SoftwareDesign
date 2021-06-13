@@ -1,9 +1,12 @@
+#ifndef GONGZ3_CSCI4440_TIERDB
+#define GONGZ3_CSCI4440_TIERDB
+
 #include<map>
 #include<vector>
 #include<string>
 #include<utility>
 #include"Contact.h"
-
+#define BYPASSUNUSED(X)(void)(X)
 using namespace std;
 
 class TierDB{
@@ -23,3 +26,5 @@ class TierDB{
     }
     void reOrderX();
 };
+
+#endif

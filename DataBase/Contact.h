@@ -1,3 +1,6 @@
+#ifndef GONGZ3_CSCI4440_CONTACT
+#define GONGZ3_CSCI4440_CONTACT
+
 #include<string>
 
 class Contact{
@@ -23,3 +26,5 @@ class Contact{
     }
     bool operator==(Contact Input) { return this->_Name==Input._Name&&this->_Phone==Input._Phone&&this->_Address==Input._Address; }
 };
+
+#endif
