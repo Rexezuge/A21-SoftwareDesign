@@ -1,5 +1,5 @@
-#ifndef GONGZ3_CSCI4440_CONTACT
-#define GONGZ3_CSCI4440_CONTACT
+#ifndef SDD_EASYCONTACT_DATABASE_CONTACT
+#define SDD_EASYCONTACT_DATABASE_CONTACT
 #include<string>
 class Contact{
   long unsigned int _Phone;
