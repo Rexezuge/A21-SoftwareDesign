@@ -4,9 +4,13 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 
 ![](.FILES/200x200.png)
 
+## Team Drive (Authorized Only)
+
+[Link to Google Drive](https://drive.google.com/drive/folders/1_5wAIFeJw4zVVjDTp-KmLhhhi76vAoGF?usp=sharing)
+
 ## Contribution
 
-/DataBase Zhenyuan Gong
+[Contribution Details]()
 
 ## Clone Repo
 
