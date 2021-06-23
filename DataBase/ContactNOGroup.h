@@ -60,7 +60,25 @@ class ContactNOGroup{
 		 * @effects insert the Contact object to desired position
 		 */
 		void setPriority(Contact input, int rank){
+			int size = _Group.size();
 
+			//check if position valid
+			if(size >= rank){
+				return;
+			} else {
+				//remove object from list
+				for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
+					if(it==input){
+						_Group.erase(it);
+						break;
+					}
+				}
+			}
+
+			//re-add object to new position
+			list<Contact>::iterator it = _Group.begin();
+			advance(it, rank);
+			_Group.insert(it, input);
 		}
 
 		/**
@@ -68,13 +86,16 @@ class ContactNOGroup{
 		 * @effects reset the Contact object and append it to the end of the contact list.
 		 */
 		void setContact(Contact input){
-			Contact tmp = input;
-			
-			
 			//remove the target contact
 			for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
-
+				if(it.getNmae()==input.getName()){
+					_Group.erase(it);
+					break;
+				}
 			}
+
+			//append the new one
+			_Group.push_back(input);
 		}
 
 		/**
@@ -90,4 +111,6 @@ class ContactNOGroup{
 			return false;
 		}		
 };
+
+
 #endif
