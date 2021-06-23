@@ -10,7 +10,7 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 
 ## Contribution
 
-[Contribution Details]()
+[Contribution Details](https://docs.google.com/document/d/1rknX-dScFkdTH1MUNyShnIzl-PXCaVpOBf0_MluZPO8/edit?usp=sharing)
 
 ## Clone Repo
 
