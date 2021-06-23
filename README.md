@@ -6,7 +6,8 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 
 ## Contribution
 
-/DataBase Zhenyuan Gong
+- DataBase: Zhenyuan Gong
+- ReadFile: Jensen Chen
 
 ## Clone Repo
 
