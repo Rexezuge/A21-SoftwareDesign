@@ -39,6 +39,7 @@ class FileIO{
           }
         }
       }
+      return primaryInfo;
     }
 };
 #endif
