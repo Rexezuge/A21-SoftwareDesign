@@ -32,7 +32,7 @@ vector<unique_ptr<ContactNOGroup>> _Rep;
     void setPriority(const Contact* contact,int priority){
       for(int i=0;i<_Rep.size();i++){
           if(_Rep[i].contains(contact)){
-              _Rep[i].setPriority(priority);
+              _Rep[i].setPriority(contact,priority);
           }
       }
     }
