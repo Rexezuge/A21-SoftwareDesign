@@ -32,9 +32,7 @@ class FileIO{
           {
             string temp_element=InputInfo[start_index+1];
             for(int i=start_index+2;i<end_index;i++)
-            {
               temp_element=temp_element+InputInfo[start_index];
-            }
             primaryInfo.push_back(temp_element);
             start_index=0;
             end_index=0;
