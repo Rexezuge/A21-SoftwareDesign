@@ -6,13 +6,13 @@ class Contact{
   std::string _Name;
   std::string _Address;
   public:
-    Contact(const std::string* Name,const long unsigned int Phone,const std::string* Address){
-      _Name=std::string(*Name);
-      _Address=std::string(*Address);
+    Contact(const std::string& Name,const long unsigned int Phone,const std::string& Address){
+      _Name=Name;
+      _Address=Address;
       _Phone=Phone;
     }
-    std::string getName() { return _Name; }
-    std::string getAddress() { return _Address; }
+    const std::string& getName() { return _Name; }
+    const std::string& getAddress() { return _Address; }
     int getPhone() { return _Phone; }
     int Hash(int StackSize){
       long StringSum=0;
@@ -22,6 +22,6 @@ class Contact{
         StringSum+=(int)_Address[i];
       return (int)StringSum%StackSize;
     }
-    bool operator==(const Contact* Input) { return this->_Name==Input->_Name&&this->_Phone==Input->_Phone&&this->_Address==Input->_Address; }
+    bool operator==(const Contact& Input) { return this->_Name==Input._Name&&this->_Phone==Input._Phone&&this->_Address==Input._Address; }
 };
 #endif
