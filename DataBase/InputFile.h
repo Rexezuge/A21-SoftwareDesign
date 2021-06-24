@@ -1,15 +1,22 @@
-#ifndef GONGZ3_CSCI4440_FILEIO
-#define GONGZ3_CSCI4440_FILEIO
+  
+#ifndef CSCI4400_INPUTFILE
+#define CSCI4440_INPUTFILE
 #include<stdio.h>
 #include<stdlib.h>
 #include<string>
-class FileIO{
+#include<vector>
+#include<iostream>
+#include<fstream>
+
+using namespace std; 
+
+class InputFile{
   FILE* FPRep;
   vector<string> InputInfo;
   vector<string> primaryInfo;
   public:
-    FileIO(string FileName) { FPRep=fopen(FileName.c_str(),"r"); }
-    std::vector<string> GatherInfoFromFile(){
+    InputFile(string FileName) { FPRep=fopen(FileName.c_str(),"r"); }
+    vector<string> GatherInfoFromFile(){
       if(FPRep==NULL) perror ("Error opening file");
       else{
         int c;
