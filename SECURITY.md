@@ -3,14 +3,15 @@
 ## Supported Versions
 
 The Following Version Are Currently Supported
-*Note Dev Version Are Always Supported
 
-| Version | Supported          |
-| ------- | ------------------ |
-| Dev     | ⚠️: |
-| Interim | ✖️: |
-| Beta    | ✖️:                |
-| Final   | ✖️: |
+-Note Dev Version Are Always Supported
+
+| Version | Supported |
+| ------- | --------- |
+| Dev     | ⚠️ |
+| Interim | ✖️ |
+| Beta    | ✖️ |
+| Final   | ✖️ |
 
 ## Reporting a Vulnerability
 
