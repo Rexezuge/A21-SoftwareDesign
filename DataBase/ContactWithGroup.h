@@ -4,6 +4,12 @@
 #include<memory>
 #include"ContactNOGroup.h"
 using namespace std;
+/*
+ * @author Zhenyuan Gong
+ * ContactWithGroup represents an mutable database
+ *   to store all of the Contact objects
+ * This class contains: Rep
+ */
 class ContactWithGroup{
     vector<unique_ptr<ContactNOGroup>> _Rep;
     public:

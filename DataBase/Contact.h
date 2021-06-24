@@ -7,7 +7,7 @@
  * This class contains: Name, Phone, Address
  */
 class Contact{
-  long unsigned int _Phone;
+  long unsigned int _Phone=0;
   std::string _Name;
   std::string _Address;
   public:
@@ -41,6 +41,10 @@ class Contact{
         StringSum+=(int)_Address[i];
       return (int)StringSum%StackSize;
     }
+    /*
+     * @return bool : true if equal, false if not  equal
+     * Compares if the current Contact equal to the reference Contact
+     */
     bool operator==(const Contact& Input) { return this->_Name==Input._Name&&this->_Phone==Input._Phone&&this->_Address==Input._Address; }
 };
 #endif
