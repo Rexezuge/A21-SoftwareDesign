@@ -70,7 +70,7 @@ class ContactNOGroup{
 			} else {
 				//remove object from list
 				for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
-					if(*it==input){
+					if(*it==&input){
 						_Group.erase(it);
 						break;
 					}
@@ -106,7 +106,7 @@ class ContactNOGroup{
 		 */
 		bool Contains(Contact input){
 			for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
-				if(*it==input){
+				if(*it==&input){
 					return true;
 				}
 			}
