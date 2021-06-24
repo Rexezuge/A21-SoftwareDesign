@@ -6,9 +6,9 @@ class Contact{
   std::string _Name;
   std::string _Address;
   public:
-    Contact(std::string Name,long unsigned int Phone,std::string Address){
-      _Name=Name;
-      _Address=Address;
+    Contact(const std::string* Name,const long unsigned int Phone,const std::string* Address){
+      _Name=std::string(*Name);
+      _Address=std::string(*Address);
       _Phone=Phone;
     }
     std::string getName() { return _Name; }
@@ -22,6 +22,6 @@ class Contact{
         StringSum+=(int)_Address[i];
       return (int)StringSum%StackSize;
     }
-    bool operator==(Contact Input) { return this->_Name==Input._Name&&this->_Phone==Input._Phone&&this->_Address==Input._Address; }
+    bool operator==(const Contact* Input) { return this->_Name==Input->_Name&&this->_Phone==Input->_Phone&&this->_Address==Input->_Address; }
 };
 #endif
