@@ -33,4 +33,3 @@ jobs:
       - name: DataBase Compile Test
         run:
           ls -a -l
-          g++ -std=gnu++11 -Werror -Wall -Wextra -g ~/DataBase/*.c
