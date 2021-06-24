@@ -51,7 +51,7 @@ class ContactNOGroup{
 		 * @effects append a Contact object to the end of the contact list if no duplicate.
 		 */
 		void addContact(Contact input){
-			if(!this->Contains(input)){
+			if(!this->contains(input)){
 				_Group.push_back(input);
 			}
 		}
@@ -104,7 +104,7 @@ class ContactNOGroup{
 		 * @param input : The Contact object to be check.
 		 * @effects check if the contact list contains the Contact object.
 		 */
-		bool Contains(Contact input){
+		bool contains(Contact input){
 			for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
 				if(*it==&input){
 					return true;
