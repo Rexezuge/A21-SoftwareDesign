@@ -2,7 +2,7 @@
 
 A Contact Book & Address Book system aims to polarize information stored in the DataBase using Deep Learning
 
-![](.FILES/200x200.png)
+![](.FILES/LOGO_200x200.png)
 
 ## Team Drive (Authorized Only)
 
