@@ -4,6 +4,7 @@
 #include <list>
 #include <iterator>
 #include"Contact.h"
+#define BYPASSUNUSED(X) (void)(X)
 using namespace std;
 
 /**
@@ -27,14 +28,15 @@ class ContactNOGroup{
      	 */
 		ContactNOGroup(string name, list<Contact> gList){
 			_GName = name;
-			_Group.assign.assign(gList.begin(), gList.end());
+			_Group.assign(gList.begin(), gList.end());
+			BYPASSUNUSED(gList);
 		}
 
 		/**
      	 * @effects returns the name for the contact group.
      	 */
 		string getName() {
-			return name;
+			return _GName;
 		}
 
 		/**
@@ -49,7 +51,7 @@ class ContactNOGroup{
 		 * @effects append a Contact object to the end of the contact list if no duplicate.
 		 */
 		void addContact(Contact input){
-			if(!_Group.Contains(input)){
+			if(!this->Contains(input)){
 				_Group.push_back(input);
 			}
 		}
@@ -68,7 +70,7 @@ class ContactNOGroup{
 			} else {
 				//remove object from list
 				for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
-					if(it==input){
+					if(*it==input){
 						_Group.erase(it);
 						break;
 					}
@@ -88,7 +90,7 @@ class ContactNOGroup{
 		void setContact(Contact input){
 			//remove the target contact
 			for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
-				if(it.getNmae()==input.getName()){
+				if(it->getName()==input.getName()){
 					_Group.erase(it);
 					break;
 				}
@@ -104,7 +106,7 @@ class ContactNOGroup{
 		 */
 		bool Contains(Contact input){
 			for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
-				if(it==input){
+				if(*it==input){
 					return true;
 				}
 			}
