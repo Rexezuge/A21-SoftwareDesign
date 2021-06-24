@@ -14,16 +14,20 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 
 ## Clone Repo
 
-```bash
+```shell
 git clone https://github.com/reC4P7CH4/A21-EasyContact.git
 ```
 
 ## Contact
 If you have any question, sent email to
 
-```bash
+```shell
 easycontact.sdd@gmail.com
 ```
 
+## Security
+
+[Security Policy](SECURITY.md)
+
 ## License
-[MIT License](https://raw.githubusercontent.com/reC4P7CH4/A21-EasyContact/main/LICENSE)
+[MIT License](LICENSE)
