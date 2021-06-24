@@ -4,7 +4,7 @@
 
 The Following Version Are Currently Supported
 
--Note Dev Version Are Always Supported
+> Dev Version Are Always Supported
 
 | Version | Supported |
 | ------- | --------- |
