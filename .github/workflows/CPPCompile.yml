@@ -20,7 +20,6 @@ on:
 
 jobs:
   build:
-    name: Compile Test
     runs-on: ubuntu-latest
     steps:
       - name: DataBase Compile Test
