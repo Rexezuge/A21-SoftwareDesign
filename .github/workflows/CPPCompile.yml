@@ -30,6 +30,6 @@ jobs:
       contents: read
       security-events: write
     steps:
-      - name: g++ Compile Test
+      - name: DataBase Compile Test
         run:
-          g++ -std=gnu++11 -Werror -Wall -Wextra -g *.c
+          g++ -std=gnu++11 -Werror -Wall -Wextra -g DataBase/*.c
