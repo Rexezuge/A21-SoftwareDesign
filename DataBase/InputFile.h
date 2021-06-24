@@ -28,7 +28,7 @@ class InputFile{
         fclose(FPRep);
         int start_index=0;
         int end_index=0;
-        for(int i=0;i<InputInfo.size();i++)
+        for(int i=0;i<(int)InputInfo.size();i++)
         {
           if(InputInfo[i].compare("\"")&&start_index==0)
             start_index=i;
