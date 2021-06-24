@@ -1,6 +1,5 @@
-  
-#ifndef CSCI4400_INPUTFILE
-#define CSCI4440_INPUTFILE
+#ifndef SDD_EASYCONTACT_DATABASE_INPUTFILE
+#define SDD_EASYCONTACT_DATABASE_INPUTFILE
 #include<stdio.h>
 #include<stdlib.h>
 #include<string>
