@@ -17,19 +17,11 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ main ]
-  schedule:
-    - cron: '34 10 * * 4'
 
 jobs:
-  analyze:
-    name: Analyze
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
     steps:
       - name: DataBase Compile Test
-        run:
-          ls -a -l
+        run: |
+          g++ DataBase/*.c
