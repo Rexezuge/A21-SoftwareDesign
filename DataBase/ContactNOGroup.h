@@ -21,6 +21,9 @@ class ContactNOGroup{
 		// Default constructor of ContactNOGroup
 		ContactNOGroup() = default;
 
+		//Constructor that only take in _GName
+		ContactNOGroup(string name = ""): _GName(name) {}
+
 		/**
      	 * @param name : The name for the contact group.
      	 * @param gList : The list of Contact object.
