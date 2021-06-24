@@ -20,8 +20,9 @@ on:
 
 jobs:
   build:
+    name: Compile Test
     runs-on: ubuntu-latest
     steps:
       - name: DataBase Compile Test
-        run: |
-          g++ DataBase/*.c
+        run: | g++ DataBase/*.c
+          g++ ./DataBase/main.c
