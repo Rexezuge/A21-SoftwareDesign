@@ -1,5 +1,5 @@
-#ifndef CSCI4400_DBEXPORT
-#define CSCI4440_DBEXPORT
+#ifndef SDD_EASYCONTACT_DBEXPORT
+#define SDD_EASYCONTACT_DBEXPORT
 
 #include <iostream>
 #include <fstream>
@@ -11,6 +11,12 @@ class DbExport{
 
   public:
 
+    /**
+     * @brief Construct a new task of exporting database
+     *
+     * @param _fileName The destination of CSV
+     * @param _contacts A list of contact objects
+     */
     DbExport(std::string _fileName, std::vector<Contact> _contacts)
       : fileName(_fileName), contacts(_contacts) {};
 
@@ -21,11 +27,16 @@ class DbExport{
     int  parse();
     int  write();
 
-    std::string               fileName;
-    std::vector<Contact>      contacts;
-    std::vector<std::string>  names;
-    std::vector<std::string>  emails;
-    std::vector<int>          phones;
+    // file name to the database file, preferably ending with .csv
+    std::string                fileName;
+    // the vector of contact objects
+    std::vector<Contact>       contacts;
+    // the vector of name of  contacts, used at parse()
+    std::vector<std::string>   names;
+    // the vector of emails of contacts, used at parse()
+    std::vector<std::string>   emails;
+    // the vector of phones of contacts, used at parse()
+    std::vector<unsigned long> phones;
 
 };
 
