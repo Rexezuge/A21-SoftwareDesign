@@ -74,7 +74,7 @@ int DbExport::write() {
     return EXIT_FAILURE;
   }
 
-  csvFile << "Name,Email,Phone" << std::endl;
+  csvFile << "\"Name\",\"Email\",\"Phone\"" << std::endl;
 
   for (unsigned int i = 0; i < this->contacts.size(); i++) {
     csvFile << "\"" << this->names[i]  << "\"" << ",";
