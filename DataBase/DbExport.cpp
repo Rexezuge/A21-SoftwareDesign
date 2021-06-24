@@ -44,7 +44,7 @@ int DbExport::parse() {
       std::cerr << "[WARNING] Empty contact address at " << i << ".\n";
     this->emails.push_back(this->contacts[i].getAddress());
 
-    if (this->contacts[i].getPhone() == NULL)
+    if (this->contacts[i].getPhone() == 0)
       std::cerr << "[WARNING] Empty contact phone at " << i << ".\n";
     this->phones.push_back(this->contacts[i].getPhone());
   }
