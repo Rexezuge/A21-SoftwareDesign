@@ -1,0 +1,59 @@
+@import url("https://cdn.jsdelivr.net/npm/normalize.css@latest/normalize.css");
+
+:root {
+    /* Toolbar */
+    --toolbar-min-w: 70px;
+    --toolbar-max-w: 140px;
+    --toolbar-val-w: 33vw;
+    --toolbar-width: clamp(var(--toolbar-min-w), var(--toolbar-val-w), var(--toolbar-max-w));
+    --content-width: calc(100vw - var(--toolbar-width));
+
+    /* Typography */
+    --font-stack-sans: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    --font-stack-serif: Georgia, Times, serif;
+    --font-stack-mono: Menlo, Consolas, Courier, monospace;
+    --line-height: calc(4 / 3);
+    --font-size-base: 1rem;
+    --font-size-s-factor: .73;
+    --font-size-s: calc(var(--font-size-base) * var(--font-size-s-factor));
+
+    /* Colors */
+    --primary-color-h: 0;
+    --primary-color-s: 0%;
+    --primary-color-l: 0%;
+    --primary-color-a: 0%;
+    --secondary-color-h: 0;
+    --secondary-color-s: 0%;
+    --secondary-color-l: 0%;
+    --secondary-color-a: 0%;
+    --background-color-h: 0;
+    --background-color-s: 0%;
+    --background-color-l: 0%;
+    --background-color-a: 0%;
+    --background-color: hsla(var(--background-color-h), var(--background-color-s), var(--background-color-l), var(--background-color-a));
+    --primary-color: hsla(var(--primary-color-h), var(--primary-color-s), var(--primary-color-l), var(--primary-color-a));
+    --secondary-color: hsla(var(--secondary-color-h), var(--secondary-color-s), var(--secondary-color-l), var(--secondary-color-a));
+
+}
+
+html {
+    background-color: var(--background-color);
+    font-family: var(--font-stack-sans);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+}
+
+#main {
+    display: flex;
+    flex-direction: row;
+    font-size: var(--font-size-s);
+}
+
+#control {
+    flex: 1 var(--toolbar-width);
+    border-right: .3px solid white;
+}
+
+#content {
+    flex: 2 var(--content-width);
+}
