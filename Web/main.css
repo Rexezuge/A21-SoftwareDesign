@@ -15,7 +15,13 @@
     --line-height: calc(4 / 3);
     --font-size-base: 1rem;
     --font-size-s-factor: .73;
+    --font-size-m-factor: .8;
+    --font-size-l-factor: .9;
+    --font-size-xl-factor: 1.1;
     --font-size-s: calc(var(--font-size-base) * var(--font-size-s-factor));
+    --font-size-m: calc(var(--font-size-base) * var(--font-size-m-factor));
+    --font-size-l: calc(var(--font-size-base) * var(--font-size-l-factor));
+    --font-size-xl: calc(var(--font-size-base) * var(--font-size-xl-factor));
 
     /* Colors */
     --primary-color-h: 0;
