@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Main Page</title>
+  <!-- <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+  <link rel="stylesheet" href="main_page.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <script src="main_page.js"></script>
+</head>
+<body>
+<div class="header">
+  <h1 class="title">Easy Contact</h1>
+  <!-- <input class="search_input"> -->
+  <button class="search">Search</button>
+  <button class="account">Account</button>
+</div>
+<div class="Info_Display">
+  <div class="Left_Bar">
+    <!-- <div class="Left_Top_Bar"> -->
+    <button class="New_Contact" onclick="displayAddContact()">Add Contact</button>
+    <hr>
+    <!-- </div> -->
+    <!-- <div class="Top"></div> -->
+    <h3 class="group_classification">Group Classification</h3>
+    <button class="Fake_Group" onclick="FakedisplayAddContact()">Family</button>
+    <button class="Fake_Group" onclick="FakedisplayAddContact()">Friend</button>
+    <button class="Fake_Group" onclick="FakedisplayAddContact()">School</button>
+    <!-- <button class="Fake_Group_4"></button> -->
+  </div>
+  <div class="Right_Bar">
+    <!-- <h3>test</h3> -->
+    <div id="Area_Add_Contact">
+      <h2 class="add_contact_title">Add Contact</h2>
+      <hr>
+      <input class="add_contact_input" id="add_contact_name" placeholder="Name">
+      <input class="add_contact_input" id="add_contact_email_1" placeholder="Mail Address 1">
+      <input class="add_contact_input" id="add_contact_email_2" placeholder="Mail Address 2 （IF APPLIED)">
+      <input class="add_contact_input" id="add_contact_group" placeholder="Group">
+      <button class="add_contact_button" id="add_contact_add_btn">Add</button>
+    </div>
+    <div class="Fake_Group_1"></div>
+    <div class="Fake_Group_2"></div>
+    <div class="Fake_Group_3"></div>
+    <!-- <div class="Fake_Group_4"></div> -->
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+body {
+    padding: 2%;
+    max-height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+    background-image: url("https://source.unsplash.com/1920x1080/?sea");
+    /* text-align: center; */
+}
+
+.header {
+    width: 95%;
+    height: 15%;
+    /* padding: 2%; */
+    margin: 0;
+    border: 2px solid black;
+    padding: 1%;
+    border-radius: 12px;
+    background-color:rgba(253, 253, 253,0.8);
+}
+
+.title {
+    margin: 0;
+    display: inline-block;
+}
+
+/* .search_input {
+    display: inline;
+    float: right;
+    margin-right: 30px;
+} */
+
+.search, .account {
+    float: right;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 23px;
+    margin-top: 0.4%;
+    margin-left: 1%;
+}
+
+.Info_Display {
+    width: 95%;
+    height: 80%;
+    padding: 1%;
+}
+
+.Left_Bar {
+    width: 20%;
+    min-height: 80%;
+    /* margin: 0; */
+    /* display: inline; */
+    border: 2px solid black;
+    padding: 1%;
+    margin-top: 1%;
+    border-radius: 6px;
+    display: inline-block;
+    background-color:rgba(253, 253, 253,0.8);
+}
+
+.Fake_Group,.New_Contact {
+    display: block;
+    font-size: 17px;
+    width: 95%;
+    font-weight: bold;
+    margin-left: 2.5%;
+}
+
+.Fake_Group {
+    margin-top: 10px;
+}
+
+.group_classification {
+    margin: 10px;
+    text-align: center;
+}
+
+/* button:hover {
+    background-color: red;
+    color:white;
+} */
+
+.Right_Bar {
+    width: 70%;
+    float: right;
+    min-height: 530px;
+    padding: 2%;
+    border: 2px solid black;
+    margin-top: 1%;
+    border-radius: 6px;
+    background-color:rgba(253, 253, 253,0.8);
+}
+
+.add_contact_title {
+    text-align: center;
+    margin: 0;
+}
+
+.add_contact_input {
+    display: block;
+    padding: 4px;
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 5%;
+    height: 20%;
+    font-size: 22px;
+}
+
+.add_contact_button {
+    display: block;
+    padding: 4px;
+    width: 30%;
+    margin-left: 35.5%;
+    margin-top: 5%;
+    height: 20%;
+    font-size: 24px;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+
+#Area_Add_Contact {
+    display: none;
+}
