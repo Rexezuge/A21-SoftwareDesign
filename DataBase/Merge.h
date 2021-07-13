@@ -3,9 +3,9 @@
 #include<string>
 #include<stdio.h>
 #include<stdlib.h>
-#include <iostream>
-#include <vector>
-#include <list>
+#include<iostream>
+#include<vector>
+#include<list>
 #include"Contact.h"
 
 class Merge{

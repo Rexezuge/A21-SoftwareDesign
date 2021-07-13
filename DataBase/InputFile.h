@@ -6,8 +6,7 @@
 #include<vector>
 #include<iostream>
 #include<fstream>
-
-using namespace std; 
+using namespace std;
 
 class InputFile{
   FILE* FPRep;

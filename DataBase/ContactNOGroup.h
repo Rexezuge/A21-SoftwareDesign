@@ -4,7 +4,7 @@
 #include<string>
 #include<iterator>
 #include"Contact.h"
-#define BYPASSUNUSED(X) (void)(X)
+#define BYPASSUNUSED(X)(void)(X)
 using namespace std;
 
 /**

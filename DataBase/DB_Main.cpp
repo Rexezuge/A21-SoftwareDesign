@@ -1,13 +1,18 @@
 #include<stdio.h>
-#include<iostream>
-#include"TierDB.h"
-#include"FileIO.h"
-#define BYPASSUNUSED(X)(void)(X)
+#include<stdlib.h>
+#include"Contact.h"
+#include"ContactNOGroup.h"
+#include"ContactWithGroup.h"
+#include"DB_Export.h"
+#include"InputFile.h"
+#include"Merge.h"
+using namespace std;
+/*
+ * @author Zhenyuan Gong
+ */
 int main(int numArgs,char** Argv){
   if(numArgs!=1) { return EXIT_FAILURE; }
   setvbuf(stdout,NULL,_IONBF,0);
-  BYPASSUNUSED(Argv);
-  FileIO FPRep=FileIO("data.txt");
-  BYPASSUNUSED(FPRep);
+  InputFile FPRep=InputFile("ECDB.txt");
   return EXIT_SUCCESS;
 }
