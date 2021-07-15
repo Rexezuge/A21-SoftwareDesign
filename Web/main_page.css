@@ -94,7 +94,7 @@ button:hover{
     color: black;
 }
 
-.Fake_Group,.New_Contact {
+.Fake_Group,.New_Contact,.New_Group {
     margin-top: 10%;
     display: block;
     width: 100%;
@@ -108,10 +108,19 @@ button:hover{
     font-weight: bold;
     position: absolute;
     margin: 0;
+    left: -14%;
+}
 
+.New_Group{
+    transform: scale(0.7);
+    font-weight: bold;
+    position: absolute;
+    margin: 0;
+    left: -14%;
+    top:20%;
 }
 hr.BeforeGroup{
-    margin-top: 33%;
+    margin-top: 70%;
     margin-bottom: 0;
 }
 
