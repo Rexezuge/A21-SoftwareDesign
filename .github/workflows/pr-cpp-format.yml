@@ -12,5 +12,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: RafikFarhad/clang-format-github-action@v1.0.1
         with:
-          sources: "DataBase/**/*.cpp, DataBase/**/*.h, DataBase/**/*.c"
+          sources: "**/*.cpp,**/*.h,**/*.c"
           style: Google
