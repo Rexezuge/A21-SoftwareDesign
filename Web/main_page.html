@@ -42,8 +42,31 @@
     <div class="decoration"></div>
       <div class="right">
       <!-- <h3>test</h3> -->
+      <!-- Contact book content -->
+      <div id="Contact_group">
+        <p class="Group_Name">FAMILY</p>
+        <ol>
+          <li class="Contact">
+            <p class="Contact_Name">Contact_Name</p>
+            <p class="Phone Number">Phone_Number</p>
+            <p class="Address">Adress</p>
+          </li>
+        </ol>
+      </div>
+      <!-- Form1 -->
       <div id="Area_Add_Contact">
         <h2 class="add_contact_title">Add Contact</h2>
+        <hr>
+        <input class="add_contact_input" id="add_contact_name" placeholder="Name">
+        <input class="add_contact_input" id="add_contact_email_1" placeholder="Mail Address 1">
+        <input class="add_contact_input" id="add_contact_email_2" placeholder="Mail Address 2 （IF APPLIED)">
+        <input class="add_contact_input" id="add_contact_group" placeholder="Group">
+        <button class="add_contact_button" id="add_contact_add_btn" onclick="addContact()">Add</button>
+      </div>
+
+      <!-- Form2 -->
+      <div id="Area_Add_Contact_Group">
+        <h2 class="add_contact_title">Add Group</h2>
         <hr>
         <input class="add_contact_input" id="add_contact_name" placeholder="Name">
         <input class="add_contact_input" id="add_contact_email_1" placeholder="Mail Address 1">
