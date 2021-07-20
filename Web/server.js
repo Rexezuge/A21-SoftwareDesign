@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var url = "mongodb+srv://yef3:rpi123456@cluster0.ro74a.mongodb.net/contactbook";
 
 //Connect to mongodb
-mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true});
+const connection = mongoose.createConnection(url,{ useUnifiedTopology: true, useNewUrlParser: true});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -23,7 +23,7 @@ const ContactSchema = new Schema({
     phoneNumber: Number,
     adress: String
 }, {collection: "contacts"})
-const Contact = mongoose.model("Contacts", ContactSchema, "contacts");
+const Contact = connection.model("Contacts", ContactSchema, "contacts");
 
 app.use(express.static(__dirname));
 app.listen(3000, () => {
