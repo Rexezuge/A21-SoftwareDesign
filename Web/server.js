@@ -18,12 +18,15 @@ db.once('open', function() {
 
 //Schemas
 const {Schema} = mongoose;
-const ContactSchema = new Schema({
-    name: String,
-    phoneNumber: Number,
-    adress: String
-}, {collection: "contacts"})
-const Contact = connection.model("Contacts", ContactSchema, "contacts");
+const GroupSchema = new Schema({
+    groupName: String,
+    members: [
+        {contactName: String,
+        phoneNumber: Number,
+        adress: String}
+    ]
+}, {collection: "groups"})
+const Group= connection.model("groups", GroupSchema, "groups");
 
 app.use(express.static(__dirname));
 app.listen(3000, () => {
@@ -31,25 +34,45 @@ app.listen(3000, () => {
   })
 
 
-app.get("/addtest/:username", function(req, res){
-    console.log(req.params.username)
-    var text = req.params.username
-    Contact.findOne({name:text}, (err, user)=>{
+app.get("/addGroup/:groupname", function(req, res){
+    console.log(req.params.groupname)
+    var text = req.params.groupname
+    Group.findOne({groupName:text}, (err, user)=>{
     	if (err) throw err;
 	    if (user == null){
-	        var newuser = new Contact({
-	            name : String(req.params.username),
-    			phoneNumber: Number(5189610742),
-    			adress: String("yef3@rpi.edu")
+	        var newuser = new Group({
+                groupName: String(text),
+	            members: []
 	        })
 	        newuser.save((err)=>{
 	            if (err) throw err;
-	            console.log("User " + req.params.username +" added")
+	            console.log("Group " + req.params.username +" added")
 	        })
 	    }
 	    else{
-	        console.log("Finded");
+	        console.log("Already have " + text + " group");
 	        res.status(200);
     	}
+    })
+})
+
+app.get("/addMember/:username&:groupname", function(req, res){
+    console.log(req.params.username)
+    var text = req.params.username
+    var group = req.params.groupname
+    Group.findOne({groupName:group}, (err, user)=>{
+        if (err) throw err;
+        if (user != null){
+            var newuser = {
+                members:{
+                contactName : String(text),
+                phoneNumber: Number(524252340742),
+                adress: String("noooooo")
+                }
+            }
+            Group.updateOne({groupName:group},{'$push': newuser} ).then(result => {
+  }).catch(err => console.error(`Failed to update the item: ${err}`))
+
+        }
     })
 })
