@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lnag="en">
+<head>
+  <meta charset="utf-8">
+  <title>Account</title>
+  <link rel="stylesheet" href="account.css">
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC&display=swap" rel="stylesheet">
+  <script src="account.js"></script>
+</head>
+<body>
+  <div class="account_box">
+    <p class="current_account_name">Account Name</p>
+    <hr>
+    <input class="account_name_change_input" placeholder="New Account Name">
+    <button class="account_name_change_btn">Chnage Account Name</button>
+    <br>
+    <br>
+    <label for="change_theme_color" class="change_theme_color_label">New Theme Color of Main Page</label>
+    <br>
+    <select name="change_theme_color" id="change_theme_color">
+      <option value="Defalut_Color">Defalut Color</option>
+      <option value="2021">Pantone Color of the Year 2021</option>
+      <option value="2021">Pantone Color of the Year 2020</option>
+      <option value="2021">Pantone Color of the Year 2019</option>
+      <option value="2021">Pantone Color of the Year 2018</option>
+    </select>
+    <button class="change_theme_color_btn">Change</button>
+    <button class="back_to_main_page_btn" onclick="location.href='../index.html'">Back to the Main Page</button>
+  </div>
+</body>
+</html>

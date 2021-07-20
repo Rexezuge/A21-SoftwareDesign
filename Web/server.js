@@ -25,31 +25,31 @@ const ContactSchema = new Schema({
 }, {collection: "contacts"})
 const Contact = connection.model("Contacts", ContactSchema, "contacts");
 
-app.use(express.static(__dirname));
-app.listen(3000, () => {
-    console.log(`ContactBook app listening at http://localhost:3000`)
-  })
-
-
 app.get("/addtest/:username", function(req, res){
-    console.log(req.params.username)
+	console.log(req.params.username)
     var text = req.params.username
     Contact.findOne({name:text}, (err, user)=>{
-    	if (err) throw err;
+		if (err) throw err;
 	    if (user == null){
-	        var newuser = new Contact({
-	            name : String(req.params.username),
+			var newuser = new Contact({
+				name : String(req.params.username),
     			phoneNumber: Number(5189610742),
     			adress: String("yef3@rpi.edu")
 	        })
 	        newuser.save((err)=>{
-	            if (err) throw err;
+				if (err) throw err;
 	            console.log("User " + req.params.username +" added")
 	        })
 	    }
 	    else{
-	        console.log("Finded");
+			console.log("Finded");
 	        res.status(200);
     	}
     })
 })
+
+
+app.use(express.static(__dirname));
+app.listen(3000, () => {
+	console.log(`ContactBook app listening at http://localhost:3000`)
+  })

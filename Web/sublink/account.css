@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+SC&display=swap');
+
+body {
+    margin:0 5% 0 5%;
+    font-family: 'Encode Sans SC', sans-serif;
+    height: 100%;
+    /*background-image: url("https://source.unsplash.com/1920x1080/?nature");*/
+    /* text-align: center; */
+}
+
+.account_box {
+    height: 80%;
+    width: 50%;
+    margin: 10% 25%;
+    text-align: center;
+}
+
+.current_account_name {
+    font-size: 27px;
+}
+
+.account_name_change_input {
+    display: block;
+    font-size: 17px;
+    margin-left: 29%;
+    margin-top: 5%;
+    width: 38.5%;
+    padding: 1%;
+}
+
+.account_name_change_btn {
+    display: block;
+    font-size: 17px;
+    margin-left: 35%;
+    width: 30%;
+    margin-top: 5%;
+}
+
+.change_theme_color_label{
+    font-size: 17px;
+    font-weight: bold;  
+}
+
+#change_theme_color{
+    margin-top: 2%;
+}
+
+.change_theme_color_btn {
+    display: block;
+    font-size: 17px;
+    margin-left: 40%;
+    width: 20%;
+    margin-top: 2%;
+}
+
+.back_to_main_page_btn {
+    display: block;
+    font-size: 17px;
+    margin-left: 35%;
+    width: 30%;
+    margin-top: 5%;
+}
