@@ -1,3 +1,13 @@
+$(document).ready(function(){
+  	$("button.test").click(function(){
+  	alert("test");
+  	url = '/addMember/NotToday&b';
+    $.get(url, function(data){
+      alert("back");
+    });
+  });
+});
+
 function displayAddContact() {
 	document.getElementById("Contact_group").style.display = "none";
 	document.getElementById("Area_Add_Contact_Group").style.display = "none";
@@ -16,9 +26,6 @@ function FakedisplayAddContact() {
     document.getElementById("Contact_group").style.display = "";
 }
 
-function addContact() {
-    alert("Add Success!!! (Fake)")
-}
 
 function goToAccountPage(){
 	window.location.href='sublink/account.html';
