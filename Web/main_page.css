@@ -171,7 +171,7 @@ hr.BeforeGroup{
     margin: 0;
 }
 
-.add_contact_input {
+.add_contact_input, .add_group_input {
     display: block;
     padding: 4px;
     width: 30%;
