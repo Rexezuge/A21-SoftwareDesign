@@ -20,3 +20,6 @@ function addContact() {
     alert("Add Success!!! (Fake)")
 }
 
+function goToAccountPage(){
+	window.location.href='sublink/account.html';
+}
