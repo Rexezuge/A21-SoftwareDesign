@@ -44,6 +44,7 @@ function addContact() {
 				alert(data.msg);
 			}
 		);
+	window.location.reload();
 }
 
 function addGroup() {
@@ -60,6 +61,7 @@ function addGroup() {
 			console.log(data);
 			}
 		);
+	 window.location.reload();
 }
 
 function showOneGroupContact(group_name){
