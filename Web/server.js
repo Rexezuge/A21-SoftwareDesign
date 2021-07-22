@@ -120,3 +120,57 @@ app.get('/getGroupContacts/:group_name', function(req, res){
     })
 })
 
+const colorInfo = new Schema ({
+    user_ID: {type: String},
+    color: {type: String},
+});
+const ColorInfo = mongoose.model('ColorInfo', colorInfo);
+
+app.post('/postColor/:user_ID/:color', function(req, res) {
+    var user_ID = req.params.user_ID;
+    var color = req.params.color;
+    
+    ColorInfo.findOne({user_ID: user_ID}).exec(function(err, thiscolor) {
+        if (thiscolor) {
+            console.log("Find one")
+            // ColorInfo.deleteOne({user_ID: user_ID})
+            ColorInfo.findOneAndDelete({user_ID: user_ID}).exec(function(err, thiscolor_2) {
+                if (err) console.log(err);
+                else console.log({'msg': 'Deleted'})
+            });
+
+            var thisColorInfo = new ColorInfo({
+                user_ID: user_ID,
+                color: color
+            })
+            thisColorInfo.save(function (err) {
+                if (err) res.json(err);
+                else {
+                    res.json({'msg': "Saved!"})
+                    console.log("Saved!")
+                }
+            })
+        } else {
+            var thisColorInfo = new ColorInfo({
+                user_ID: user_ID,
+                color: color
+            })
+            thisColorInfo.save(function (err) {
+                if (err) res.json(err);
+                else {
+                    res.json({'msg': "Saved!"})
+                    console.log("Saved!")
+                }
+            })
+        }
+    });
+})
+
+app.get('/getColor/:user_ID', function(req, res){
+    var user_ID = req.params.user_ID;
+    ColorInfo.findOne({user_ID: user_ID},(err, color)=>{
+        console.log(color);
+        res.json(color);
+    })
+})
+

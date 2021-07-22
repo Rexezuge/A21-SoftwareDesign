@@ -1,8 +1,9 @@
 $(document).ready(function(){
 	//When open the web page, the page will automatically show the first group
 	shwoAllGroups();
+	checkAndChangeColor()
 });
-// const axios = require('axios').default;
+
 function displayAddContact() {
 	document.getElementById("Contact_group").style.display = "none";
 	document.getElementById("Area_Add_Contact_Group").style.display = "none";
@@ -107,4 +108,42 @@ function shwoAllGroups(){
 			});
 		}
 	})
+}
+
+// check the color selection and set the color
+function checkAndChangeColor() {
+	url = "http://localhost:3000/getColor/0000"
+	$.get(url, function(data){
+		var current_selected_color = data.color
+		console.log(current_selected_color);
+		if (current_selected_color == "2021") {
+			document.querySelector(".account").style.backgroundColor = '#F5DF4D';
+			document.querySelector(".New_Contact").style.backgroundColor = '#F5DF4D';
+			document.querySelector(".New_Group").style.backgroundColor = '#F5DF4D';
+			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#F5DF4D';
+			document.querySelector("#add_group_add_btn").style.backgroundColor = '#F5DF4D';
+			document.querySelector(".decoration").style.backgroundColor = '#F5DF4D';
+		} else if (current_selected_color == "2020") {
+			document.querySelector(".account").style.backgroundColor = '#34558b';
+			document.querySelector(".New_Contact").style.backgroundColor = '#34558b';
+			document.querySelector(".New_Group").style.backgroundColor = '#34558b';
+			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#34558b';
+			document.querySelector("#add_group_add_btn").style.backgroundColor = '#34558b';
+			document.querySelector(".decoration").style.backgroundColor = '#34558b';
+		} else if (current_selected_color == "2019") {
+			document.querySelector(".account").style.backgroundColor = '#ff6f61';
+			document.querySelector(".New_Contact").style.backgroundColor = '#ff6f61';
+			document.querySelector(".New_Group").style.backgroundColor = '#ff6f61';
+			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#ff6f61';
+			document.querySelector("#add_group_add_btn").style.backgroundColor = '#ff6f61';
+			document.querySelector(".decoration").style.backgroundColor = '#ff6f61';
+		} else if (current_selected_color == "2018") {
+			document.querySelector(".account").style.backgroundColor = '#604c8d';
+			document.querySelector(".New_Contact").style.backgroundColor = '#604c8d';
+			document.querySelector(".New_Group").style.backgroundColor = '#604c8d';
+			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#604c8d';
+			document.querySelector("#add_group_add_btn").style.backgroundColor = '#604c8d';
+			document.querySelector(".decoration").style.backgroundColor = '#604c8d';
+		} 
+	});
 }
