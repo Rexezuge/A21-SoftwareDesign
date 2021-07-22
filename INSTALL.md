@@ -4,9 +4,7 @@ This guide will walk through the installation process.
 
 ## Required Software
 
-```shell
-Node.js
-```
+[Node.js](https://nodejs.org/)
 
 ## Setup
 
