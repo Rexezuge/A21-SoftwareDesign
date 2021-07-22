@@ -36,9 +36,11 @@ function addContact() {
 	}
 		$.post(url, function(data) {
 				alert(data.msg);
+				console.log(data.status)
+			if (data.status!="Fail")
+				window.location.reload();
 			}
 		);
-	window.location.reload();
 }
 
 function addGroup() {
@@ -53,9 +55,9 @@ function addGroup() {
 		$.post(url, function(data) {
 			alert(data.msg);
 			console.log(data);
+			window.location.reload();
 			}
 		);
-	 window.location.reload();
 }
 
 function showOneGroupContact(group_name){
