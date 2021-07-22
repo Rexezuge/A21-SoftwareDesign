@@ -1,5 +1,25 @@
+# Installation
+
+This guide will walk through the installation process.
+
+## Required Software
+
+```shell
+Node.js
+```
+
 ## Setup
-- enter `web`
-- enter `npm install` to download the dependencies
+
+```shell
+npm install
+```
+
 ## Run
-enter `node server.js` to run server
+
+```shell
+node server.js
+```
+
+## Terminate
+
+Use `Ctrl+C` to terminate the application.
