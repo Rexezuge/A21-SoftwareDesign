@@ -7,9 +7,6 @@
 #include"InputFile.h"
 #include"Merge.h"
 using namespace std;
-/*
- * @author Zhenyuan Gong
- */
 int main(int numArgs,char** Argv){
   if(numArgs!=1) { return EXIT_FAILURE; }
   setvbuf(stdout,NULL,_IONBF,0);
