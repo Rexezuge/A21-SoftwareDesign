@@ -9,7 +9,7 @@ The Following Version Are Currently Supported
 | Version | Supported |
 | ------- | --------- |
 | Dev     | ⚠️ |
-| Interim | ✖️ |
+| Interim | ✅ |
 | Beta    | ✖️ |
 | Final   | ✖️ |
 
