@@ -41,11 +41,17 @@ app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', 
     var mail_address_1 = req.params.mail_address_1;
     var mail_address_2 = req.params.mail_address_2;
     var group_in = req.params.group_in;
+    GroupInfo.findOne({group_name: group_in}).exec(function(err,group){
+        if (group==null){
+            res.json({'msg':'Group '+ group_in + " is not exist\n Please create the group first"});
+        }
+
+    })
 
     // avoid saving repetitive info
     ContactInfo.findOne({account_name: account_name, group_in: group_in}).exec(function(err, contact) {
         if (contact) {
-            res.json({'msg': 'Existed'});
+            res.json({'msg': account_name + ' already existed in ' + group_in});
         } else {
             var thisContactInfo = new ContactInfo({
                 account_name: account_name,
@@ -55,7 +61,11 @@ app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', 
             })
             thisContactInfo.save(function (err) {
                 if (err) res.json(err);
-                else res.json({'msg': 'Saved'})
+                else {
+                    text = account_name + " added to Group: " + group_in;
+                    console.log(text);
+                    res.json({'msg': text});
+                }
             })
         }
     });
@@ -74,7 +84,7 @@ app.post('/addGroup/:group_name/:note', function(req, res) {
     // avoid saving repetitive info
     GroupInfo.findOne({group_name: group_name, note: note}).exec(function(err, group) {
         if (group) {
-            res.json({'msg': 'Existed'});
+            res.json({'msg': 'Already existed'});
         } else {
             var thisGroupInfo = new GroupInfo({
                 group_name: group_name,
@@ -82,10 +92,25 @@ app.post('/addGroup/:group_name/:note', function(req, res) {
             })
             thisGroupInfo.save(function (err) {
                 if (err) res.json(err);
-                else res.json({'msg': 'Saved'})
+                else res.json({'msg': group_name + " is added!"})
             })
         }
     });
+})
+
+app.get('/getGroups', function(req, res){
+    GroupInfo.find((err, groups)=>{
+        console.log(groups);
+        res.json(groups);
+    })
+})
+
+app.get('/getGroupContacts/:group_name', function(req, res){
+    var group_name = req.params.group_name;
+    ContactInfo.find({group_in: group_name},(err, contacts)=>{
+        console.log(contacts);
+        res.json(contacts);
+    })
 })
 
 // axios.post('http://localhost:3000/addGroup/Fake_Group/Yes,_it_is_fake', {

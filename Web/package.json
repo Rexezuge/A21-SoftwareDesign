@@ -5,6 +5,7 @@
   "main": "main_page.js",
   "dependencies": {
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^4.0.0",
     "mongoose": "^5.13.3"
