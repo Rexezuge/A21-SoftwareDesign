@@ -8,8 +8,9 @@ using namespace std;
 class Priority{
   int SleepTime;
   vector<pair<string,string>> AlwaysTop;
-  void* TimeTrigger(void* Time);
-  void UpdateDatabase(ContactWithGroup* DB);
-  void setAlwaysTop(string GroupName,string Contact Name);
+  public:
+    void* TimeTrigger(void* Time);
+    void UpdateDatabase(ContactWithGroup* DB);
+    void setAlwaysTop(string GroupName,string Contact Name);
 };
 #endif
