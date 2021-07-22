@@ -6,7 +6,7 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 
 ## Run Application
 
-[Installation Guide](.INSTALL.md)
+[Installation Guide](INSTALL.md)
 
 ## Team Drive (Authorized Only)
 
