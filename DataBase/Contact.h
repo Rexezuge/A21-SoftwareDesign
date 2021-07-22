@@ -1,6 +1,7 @@
 #ifndef SDD_EASYCONTACT_DATABASE_CONTACT
 #define SDD_EASYCONTACT_DATABASE_CONTACT
 #include<string>
+#include"Weight.h"
 /*
  * @author Zhenyuan Gong
  * Contact represents an immutable Contact object for contact address
@@ -11,6 +12,7 @@ class Contact{
   std::string _Name;
   std::string _Address;
   public:
+    Weight _Weight=Weight();
     /*
      * @pram Name : name to be stored
      * @pram Phone : phone number to be stored
