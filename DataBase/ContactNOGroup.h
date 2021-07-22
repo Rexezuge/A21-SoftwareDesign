@@ -1,10 +1,10 @@
 #ifndef SDD_EASYCONTACT_DATABASE_CONTACTNOGROUP
 #define SDD_EASYCONTACT_DATABASE_CONTACTNOGROUP
+#include<list>
 #include<string>
-#include <list>
-#include <iterator>
+#include<iterator>
 #include"Contact.h"
-#define BYPASSUNUSED(X) (void)(X)
+#define BYPASSUNUSED(X)(void)(X)
 using namespace std;
 
 /**
