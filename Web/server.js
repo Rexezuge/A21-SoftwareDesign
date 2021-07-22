@@ -6,7 +6,7 @@ var axios = require('axios');
 const fetch = require('node-fetch');
 var mongoose = require('mongoose');
 var cors = require('cors');
-app.use(cors())
+app.use(cors());
 
 var url = "mongodb+srv://yef3:rpi123456@cluster0.ro74a.mongodb.net/contactbook";
 
@@ -36,6 +36,8 @@ const contactInfo = new Schema ({
 });
 const ContactInfo = mongoose.model('ContactInfo', contactInfo);
 
+
+//Add contact to the database
 app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', function(req, res) {
     var account_name = req.params.account_name;
     var mail_address_1 = req.params.mail_address_1;
@@ -71,12 +73,14 @@ app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', 
     });
 })
 
+//Schema
 const groupInfo = new Schema ({
     group_name: {type: String},
     note: {type: String},
 });
 const GroupInfo = mongoose.model('GroupInfo', groupInfo);
 
+//Add group to the database
 app.post('/addGroup/:group_name/:note', function(req, res) {
     var group_name = req.params.group_name;
     var note = req.params.note;
@@ -98,6 +102,8 @@ app.post('/addGroup/:group_name/:note', function(req, res) {
     });
 })
 
+
+//Get all groups in the database
 app.get('/getGroups', function(req, res){
     GroupInfo.find((err, groups)=>{
         console.log(groups);
@@ -105,6 +111,7 @@ app.get('/getGroups', function(req, res){
     })
 })
 
+//Get contacts in specific Group
 app.get('/getGroupContacts/:group_name', function(req, res){
     var group_name = req.params.group_name;
     ContactInfo.find({group_in: group_name},(err, contacts)=>{
@@ -113,66 +120,3 @@ app.get('/getGroupContacts/:group_name', function(req, res){
     })
 })
 
-// axios.post('http://localhost:3000/addGroup/Fake_Group/Yes,_it_is_fake', {
-// }).then(response => {
-//   console.log(response.data.msg)
-//   if (response.data.msg == "Saved") {
-//     // document.querySelector('.saved_btn_1').innerHTML = "Saved"
-//     console.log("Saved")
-//   }
-// })
-
-// //Schemas
-// const {Schema} = mongoose;
-// const GroupSchema = new Schema({
-//     groupName: String,
-//     members: [
-//         {contactName: String,
-//         phoneNumber: Number,
-//         adress: String}
-//     ]
-// }, {collection: "groups"})
-// const Group= connection.model("groups", GroupSchema, "groups");
-
-// app.get("/addGroup/:groupname", function(req, res){
-//     console.log(req.params.groupname)
-//     var text = req.params.groupname
-//     Group.findOne({groupName:text}, (err, user)=>{
-//     	if (err) throw err;
-// 	    if (user == null){
-// 	        var newuser = new Group({
-//                 groupName: String(text),
-// 	            members: []
-// 	        })
-// 	        newuser.save((err)=>{
-// 	            if (err) throw err;
-// 	            console.log("Group " + req.params.username +" added")
-// 	        })
-// 	    }
-// 	    else{
-// 	        console.log("Already have " + text + " group");
-// 	        res.status(200);
-//     	}
-//     })
-// })
-
-// app.get("/addMember/:username&:groupname", function(req, res){
-//     console.log(req.params.username)
-//     var text = req.params.username
-//     var group = req.params.groupname
-//     Group.findOne({groupName:group}, (err, user)=>{
-//         if (err) throw err;
-//         if (user != null){
-//             var newuser = {
-//                 members:{
-//                 contactName : String(text),
-//                 phoneNumber: Number(524252340742),
-//                 adress: String("noooooo")
-//                 }
-//             }
-//             Group.updateOne({groupName:group},{'$push': newuser} ).then(result => {
-//   }).catch(err => console.error(`Failed to update the item: ${err}`))
-
-//         }
-//     })
-// })
