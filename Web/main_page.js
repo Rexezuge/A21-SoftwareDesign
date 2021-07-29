@@ -61,6 +61,9 @@ function addGroup() {
 }
 
 function showOneGroupContact(group_name){
+	document.getElementById("Contact_group").style.display = "inline";
+	document.getElementById("Area_Add_Contact_Group").style.display = "none";
+    document.getElementById("Area_Add_Contact").style.display = "none";
 	$("#Contacts_Info_List").empty();
 	$(".Group_Name").html(group_name);
 	$.ajax({
@@ -106,6 +109,13 @@ function shwoAllGroups(){
 
 			$(".Contact_Group").click(function(){
 				showOneGroupContact($(this).text());
+			});
+
+			$(".New_Contact").click(function(){
+				displayAddContact();
+			});
+			$(".New_Group").click(function(){
+				displayAddGroup();
 			});
 		}
 	})
