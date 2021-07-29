@@ -45,32 +45,37 @@ app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', 
     var group_in = req.params.group_in;
     GroupInfo.findOne({group_name: group_in}).exec(function(err,group){
         if (group==null){
-            res.json({'msg':'Group '+ group_in + " is not exist\n Please create the group first"});
+            res.json({'msg':'Group '+ group_in + " is not exist\nPlease create the group first",
+                      'status':'Fail'});
+        }
+        else{
+            ContactInfo.findOne({account_name: account_name, group_in: group_in}).exec(function(err, contact) {
+            if (contact) {
+                res.json({'msg': account_name + ' already existed in ' + group_in,
+                          'status':'Fail'});
+            } else {
+                var thisContactInfo = new ContactInfo({
+                    account_name: account_name,
+                    mail_address_1: mail_address_1,
+                    mail_address_2: mail_address_2,
+                    group_in: group_in
+                })
+                thisContactInfo.save(function (err) {
+                    if (err) res.json(err);
+                    else {
+                        text = account_name + " added to Group: " + group_in;
+                        console.log(text);
+                        res.json({'msg': text});
+                    }
+                })
+            }
+        });
         }
 
     })
 
     // avoid saving repetitive info
-    ContactInfo.findOne({account_name: account_name, group_in: group_in}).exec(function(err, contact) {
-        if (contact) {
-            res.json({'msg': account_name + ' already existed in ' + group_in});
-        } else {
-            var thisContactInfo = new ContactInfo({
-                account_name: account_name,
-                mail_address_1: mail_address_1,
-                mail_address_2: mail_address_2,
-                group_in: group_in
-            })
-            thisContactInfo.save(function (err) {
-                if (err) res.json(err);
-                else {
-                    text = account_name + " added to Group: " + group_in;
-                    console.log(text);
-                    res.json({'msg': text});
-                }
-            })
-        }
-    });
+
 })
 
 //Schema
@@ -86,9 +91,10 @@ app.post('/addGroup/:group_name/:note', function(req, res) {
     var note = req.params.note;
 
     // avoid saving repetitive info
-    GroupInfo.findOne({group_name: group_name, note: note}).exec(function(err, group) {
+    GroupInfo.findOne({group_name: group_name}).exec(function(err, group) {
         if (group) {
-            res.json({'msg': 'Already existed'});
+            res.json({'msg': 'Already existed',
+                    'status':'Fail'});
         } else {
             var thisGroupInfo = new GroupInfo({
                 group_name: group_name,

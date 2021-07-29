@@ -37,9 +37,11 @@ function addContact() {
 	}
 		$.post(url, function(data) {
 				alert(data.msg);
+				console.log(data.status)
+			if (data.status!="Fail")
+				window.location.reload();
 			}
 		);
-	window.location.reload();
 }
 
 function addGroup() {
@@ -54,12 +56,16 @@ function addGroup() {
 		$.post(url, function(data) {
 			alert(data.msg);
 			console.log(data);
+			if (data.status!="Fail")
+				window.location.reload();
 			}
 		);
-	 window.location.reload();
 }
 
 function showOneGroupContact(group_name){
+	document.getElementById("Contact_group").style.display = "inline";
+	document.getElementById("Area_Add_Contact_Group").style.display = "none";
+    document.getElementById("Area_Add_Contact").style.display = "none";
 	$("#Contacts_Info_List").empty();
 	$(".Group_Name").html(group_name);
 	$.ajax({
@@ -105,6 +111,13 @@ function shwoAllGroups(){
 
 			$(".Contact_Group").click(function(){
 				showOneGroupContact($(this).text());
+			});
+
+			$(".New_Contact").click(function(){
+				displayAddContact();
+			});
+			$(".New_Group").click(function(){
+				displayAddGroup();
 			});
 		}
 	})
