@@ -1,8 +1,8 @@
-name: DataBase CI
+name: DB-CI
 
 on:
   push:
-    branches: [ DB-CI ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
