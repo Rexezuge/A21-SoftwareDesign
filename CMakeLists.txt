@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.0.0)
+project(DataBase)
+include_directories(DataBase)
+file(GLOB SOURCES "src/*.cpp")
+add_executable(testDataBase ${SOURCES})
