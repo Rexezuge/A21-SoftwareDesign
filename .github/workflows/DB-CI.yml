@@ -1,0 +1,19 @@
+name: DataBase CI
+
+on:
+  push:
+    branches: [ DB-CI ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: cmake
+      run: cmake
+    - name: cmake check
+      run: cmake check
