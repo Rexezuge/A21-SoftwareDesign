@@ -51,7 +51,8 @@ app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', 
         else{
             ContactInfo.findOne({account_name: account_name, group_in: group_in}).exec(function(err, contact) {
             if (contact) {
-                res.json({'msg': account_name + ' already existed in ' + group_in});
+                res.json({'msg': account_name + ' already existed in ' + group_in,
+                          'status':'Fail'});
             } else {
                 var thisContactInfo = new ContactInfo({
                     account_name: account_name,
@@ -90,9 +91,10 @@ app.post('/addGroup/:group_name/:note', function(req, res) {
     var note = req.params.note;
 
     // avoid saving repetitive info
-    GroupInfo.findOne({group_name: group_name, note: note}).exec(function(err, group) {
+    GroupInfo.findOne({group_name: group_name}).exec(function(err, group) {
         if (group) {
-            res.json({'msg': 'Already existed'});
+            res.json({'msg': 'Already existed',
+                    'status':'Fail'});
         } else {
             var thisGroupInfo = new GroupInfo({
                 group_name: group_name,

@@ -55,7 +55,8 @@ function addGroup() {
 		$.post(url, function(data) {
 			alert(data.msg);
 			console.log(data);
-			window.location.reload();
+			if (data.status!="Fail")
+				window.location.reload();
 			}
 		);
 }
