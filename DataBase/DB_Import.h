@@ -1,50 +1,93 @@
-#ifndef SDD_EASYCONTACT_DATABASE_INPUTFILE
-#define SDD_EASYCONTACT_DATABASE_INPUTFILE
+#ifndef SDD_EASYCONTACT_DATABASE_DB_IMPORT
+#define SDD_EASYCONTACT_DATABASE_DB_IMPORT
 #include<stdio.h>
 #include<stdlib.h>
 #include<string>
 #include<vector>
 #include<iostream>
 #include<fstream>
+#include<bits/stdc++.h>
+#include"Contact.h"
+#include"ContactNOGroup.h"
+#include"ContactWithGroup.h"
 using namespace std;
 
-class InputFile{
-  FILE* FPRep;
-  vector<string> InputInfo;
-  vector<string> primaryInfo;
+class DB_Import{
+  string fileName;
+  vector <unique_ptr<ContactNOGroup>> contactBook;
+
   public:
-    InputFile(string FileName) { FPRep=fopen(FileName.c_str(),"r"); }
-    vector<string> GatherInfoFromFile(){
-      if(FPRep==NULL) perror ("Error opening file");
-      else{
-        int c;
-        do{
-          string InputChar;
-          c=getc(FPRep);
-          InputChar=putchar(c);
-          InputInfo.push_back(InputChar);
-        }while(c!=EOF);
-        fclose(FPRep);
-        int start_index=0;
-        int end_index=0;
-        for(int i=0;i<(int)InputInfo.size();i++)
-        {
-          if(InputInfo[i].compare("\"")&&start_index==0)
-            start_index=i;
-          else if(InputInfo[i].compare("\"")&&start_index!=0)
-            end_index=i;
-          if(start_index!=0&&end_index!=0)
-          {
-            string temp_element=InputInfo[start_index+1];
-            for(int i=start_index+2;i<end_index;i++)
-              temp_element=temp_element+InputInfo[start_index];
-            primaryInfo.push_back(temp_element);
-            start_index=0;
-            end_index=0;
+    //Constructor
+    DB_Import(string name) { 
+      fileName = name; 
+    }
+
+    //Read the input file and return a ContactWithGroup object
+    vector <unique_ptr<ContactNOGroup>> extract() {
+        ifstream file;
+        file.open(fileName);
+
+        //read file
+        while (file) {
+          //read each line
+          getline(file, line);
+          
+          //Store contact info
+          string groupName, contactName, mailAddress, phoneNumber;
+          //Store info position
+          int start, end;
+          //Verify which info
+          int check = 0;
+
+          //Run through each character
+          for(int i=0; i< line.length()-1; i++){
+            //get current character
+            char tmp1 = line.at(i);
+            char tmp2 = line.at(i+1);
+
+
+            //If Contact info start
+            if(tmp1=="\"" && tmp2!="," && tmp2!="\n" && start==0){
+              start = i+1;
+            //If Contact info end
+            } else if (tmp1!="\"" && tmp1!="," && tmp2=="\"" && end==0){
+              end = i;
+            }
+            //Locate info
+            if (start!=0 && end!=0){
+              string info = line.substr(start, end);
+              start = 0;
+              end = 0;
+
+              //set contact info
+              if(check==0){
+                groupName = info;
+              } else if(check==1){
+                contactName = info;
+              } else if(check==2){
+                mailAddress = info;
+              } else {
+                phoneNumber = info;
+                check = 0;
+              }
+            }
+          }
+
+          //compose Contact object
+          Contact newContact = Contact(contactName, phoneNumber, mailAddress);
+
+          //If new Contact list
+          if(!contactBook.contain(groupName)){
+            contactBook.addGroup(groupName);
+            contactBook.addContact(groupName, newContact);
+          } else {
+            contactBook.addContact(groupName, newContact);
           }
         }
-      }
-      return primaryInfo;
+
+        file.close();
+        return contactBook;
     }
+
 };
 #endif

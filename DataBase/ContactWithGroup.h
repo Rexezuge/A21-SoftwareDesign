@@ -7,7 +7,7 @@ using namespace std;
 /*
  * @author Zhenyuan Gong
  * ContactWithGroup represents an mutable database
- *   to store all of the Contact objects
+ * to store all of the Contact objects
  * This class contains: Rep
  */
 class ContactWithGroup{
@@ -51,6 +51,14 @@ class ContactWithGroup{
                   _Rep[i]=move(tmpBuffer);
               }
           }
+        }
+        bool containGroup(const string& groupName){
+          for(int i=0;i<(int)_Rep.size();i++){
+            if(_Rep[i]->getName()==groupName){
+              return true;
+            }
+          }
+          return false;
         }
 };
 #endif
