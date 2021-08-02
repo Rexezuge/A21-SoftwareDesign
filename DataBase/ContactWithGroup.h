@@ -52,7 +52,7 @@ class ContactWithGroup{
               }
           }
         }
-        bool containGroup(const string& groupName){
+        bool containBook(const string& groupName){
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->getName()==groupName){
               return true;

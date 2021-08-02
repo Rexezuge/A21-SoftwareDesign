@@ -13,7 +13,7 @@ int main(int numArgs,char** Argv){
   setvbuf(stdout,NULL,_IONBF,0);
   
   DB_Import fp = DB_Import("ECDB.txt");
-  vector<unique_ptr<ContactNOGroup>> _Rep = fp.extract();
+  contactBook _Rep = fp.extract();
 
 
   return EXIT_SUCCESS;

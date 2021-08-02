@@ -23,7 +23,7 @@ class DB_Import{
     }
 
     //Read the input file and return a ContactWithGroup object
-    vector <unique_ptr<ContactNOGroup>> extract() {
+    contactBook extract() {
         ifstream file;
         file.open(fileName);
 
@@ -77,7 +77,7 @@ class DB_Import{
           Contact newContact = Contact(contactName, phoneNumber, mailAddress);
 
           //If new Contact list
-          if(!contactBook.contain(groupName)){
+          if(!contactBook.containBook(groupName)){
             contactBook.addGroup(groupName);
             contactBook.addContact(groupName, newContact);
           } else {
