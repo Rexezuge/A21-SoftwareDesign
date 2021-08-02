@@ -23,7 +23,7 @@ class DB_Import{
     }
 
     //Read the input file and return a ContactWithGroup object
-    contactBook extract() {
+    ContactWithGroup extract() {
         ifstream file;
         file.open(fileName);
 
