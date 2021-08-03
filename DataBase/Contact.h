@@ -1,7 +1,4 @@
-#ifndef SDD_EASYCONTACT_DATABASE_CONTACT
-#define SDD_EASYCONTACT_DATABASE_CONTACT
-#include<string>
-#include"Weight.h"
+#include"DATABASE_INCLUDE.h"
 /*
  * @author Zhenyuan Gong
  * Contact represents an immutable Contact object for contact address
@@ -49,4 +46,3 @@ class Contact{
      */
     bool operator==(const Contact& Input) { return this->_Name==Input._Name&&this->_Phone==Input._Phone&&this->_Address==Input._Address; }
 };
-#endif

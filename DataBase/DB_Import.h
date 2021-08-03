@@ -1,12 +1,4 @@
-#ifndef SDD_EASYCONTACT_DATABASE_INPUTFILE
-#define SDD_EASYCONTACT_DATABASE_INPUTFILE
-#include<stdio.h>
-#include<stdlib.h>
-#include<string>
-#include<vector>
-#include<iostream>
-#include<fstream>
-using namespace std;
+#include"DATABASE_INCLUDE.h"
 
 class InputFile{
   FILE* FPRep;
@@ -47,4 +39,3 @@ class InputFile{
       return primaryInfo;
     }
 };
-#endif

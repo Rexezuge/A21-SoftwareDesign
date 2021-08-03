@@ -1,11 +1,4 @@
-#ifndef SDD_EASYCONTACT_DATABASE_CONTACTNOGROUP
-#define SDD_EASYCONTACT_DATABASE_CONTACTNOGROUP
-#include<list>
-#include<string>
-#include<iterator>
-#include"Contact.h"
-#define BYPASSUNUSED(X)(void)(X)
-using namespace std;
+#include"DATABASE_INCLUDE.h"
 
 /**
  * @author Henry Hongbin Liu
@@ -116,6 +109,3 @@ class ContactNOGroup{
 			return false;
 		}
 };
-
-
-#endif

@@ -1,12 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include"Contact.h"
-#include"ContactNOGroup.h"
-#include"ContactWithGroup.h"
-#include"DB_Export.h"
-#include"InputFile.h"
-#include"Merge.h"
-using namespace std;
+#include"DATABASE_INCLUDE.h"
+
 int main(int numArgs,char** Argv){
   if(numArgs!=1) { return EXIT_FAILURE; }
   setvbuf(stdout,NULL,_IONBF,0);

@@ -1,9 +1,4 @@
-#ifndef SDD_EASYCONTACT_DATABASE_CONTACTWITHGROUP
-#define SDD_EASYCONTACT_DATABASE_CONTACTWITHGROUP
-#include<vector>
-#include<memory>
-#include"ContactNOGroup.h"
-using namespace std;
+#include"DATABASE_INCLUDE.h"
 /*
  * @author Zhenyuan Gong
  * ContactWithGroup represents an mutable database
@@ -53,4 +48,3 @@ class ContactWithGroup{
           }
         }
 };
-#endif
