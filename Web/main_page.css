@@ -58,7 +58,7 @@ button{
 
 .account{
     position: absolute;
-    left: 85%;
+    left: 87%;
     top:2%;
 }
 
@@ -103,7 +103,7 @@ button{
     font-weight: bold;
     position: absolute;
     margin: 0;
-    left: -14%;
+    top:6%;
 }
 
 .New_Group{
@@ -111,8 +111,7 @@ button{
     font-weight: bold;
     position: absolute;
     margin: 0;
-    left: -14%;
-    top:20%;
+    top:27%;
 }
 hr.BeforeGroup{
     margin-top: 70%;
