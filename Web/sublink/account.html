@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lnag="en">
+<head>
+  <meta charset="utf-8">
+  <title>Account</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="account.css">
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC&display=swap" rel="stylesheet">
+  <script src="account.js"></script>
+</head>
+<body>
+  <div class="header">
+    <h1 class="title" onclick="back()" href="../index.html">Easy Contact</h1>
+    <button class="account">ACCOUNT</button>
+  </div>
+
+  <div class="account_box">
+    <p class="current_account_name">Account Name</p>
+    <hr>
+    <form class="form-horizontal">
+    <br>
+    <label for="change_theme_color" class="change_theme_color_label">New Theme Color of Main Page</label>
+    <br>
+    <select name="change_theme_color" id="change_theme_color">
+      <option value="Defalut_Color">Defalut Color</option>
+      <option value="2021">Pantone Color of the Year 2021</option>
+      <option value="2020">Pantone Color of the Year 2020</option>
+      <option value="2019">Pantone Color of the Year 2019</option>
+      <option value="2018">Pantone Color of the Year 2018</option>
+    </select>
+    <button class="change_theme_color_btn" onclick="changeColor()">Change</button>
+    <br>
+    <br>
+    <a class="back_to_main_page_btn" href="../index.html" >Back to the Main Page</a>
+  </div>
+</body>
+
+
+<script>
+function back(){
+    window.location.href='../index.html';
+}
+</script>
+</html>

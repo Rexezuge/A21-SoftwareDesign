@@ -1,6 +1,5 @@
 #ifndef SDD_EASYCONTACT_DATABASE_DBEXPORT
 #define SDD_EASYCONTACT_DATABASE_DBEXPORT
-
 #include <iostream>
 #include <fstream>
 #include <vector>

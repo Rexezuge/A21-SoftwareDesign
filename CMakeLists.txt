@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.5)
+set(CMAKE_CXX_STANDARD 11)
+project(SDD-DataBase)
+set(SOURCE DataBase/DB_Main.cpp)
+add_executable(testDataBase ${SOURCE})

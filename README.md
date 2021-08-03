@@ -4,6 +4,10 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 
 ![](.FILES/LOGO_200x200.png)
 
+## Run Application
+
+[Installation Guide](INSTALL.md)
+
 ## Team Drive (Authorized Only)
 
 [Link to Google Drive](https://drive.google.com/drive/folders/1_5wAIFeJw4zVVjDTp-KmLhhhi76vAoGF?usp=sharing)
@@ -19,6 +23,7 @@ git clone https://github.com/reC4P7CH4/A21-EasyContact.git
 ```
 
 ## Contact
+
 If you have any question, sent email to
 
 ```shell
@@ -30,4 +35,5 @@ easycontact.sdd@gmail.com
 [Security Policy](SECURITY.md)
 
 ## License
+
 [MIT License](LICENSE)
