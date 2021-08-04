@@ -1,10 +1,6 @@
 #include"DATABASE_INCLUDE.h"
+#define _SLEEPTIMER 10
 
-class Priority{
-  int SleepTime;
-  vector<pair<string,string>> AlwaysTop;
-  public:
-    void* TimeTrigger(void* Time);
-    void UpdateDatabase(ContactWithGroup* DB);
-    void setAlwaysTop(string GroupName,string Contact Name);
-};
+void UpdateDatabase(ContactWithGroup* DB){
+
+}

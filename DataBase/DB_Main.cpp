@@ -25,9 +25,13 @@ pid_t SplitChildPS(){
 }
 
 int main(int numArgs,char** Argv){
+  BYPASSUNUSED(Argv);
   if(numArgs!=1) { return EXIT_FAILURE; }
   setvbuf(stdout,NULL,_IONBF,0);
-  pit_t PID_ER=SplitChildPS();
+  #ifdef DEBUG
+    printf("==MAIN %d== PS<DB_MAIN> Running In [DEBUG] Mode\n",getpid());
+  #endif
+  pid_t PID_ER=SplitChildPS();
   signal(SIGUSR1,Signal_Handler);
   InputFile FPRep=InputFile("ECDB.txt");
   kill(PID_ER,SIGTERM);
