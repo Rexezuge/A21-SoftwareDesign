@@ -1,10 +1,4 @@
-#ifndef SDD_EASYCONTACT_DATABASE_DBEXPORT
-#define SDD_EASYCONTACT_DATABASE_DBEXPORT
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include "Contact.h"
+#include"DATABASE_INCLUDE.h"
 
 class DbExport{
 
@@ -38,5 +32,3 @@ class DbExport{
     std::vector<unsigned long> phones;
 
 };
-
-#endif

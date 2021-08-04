@@ -1,7 +1,5 @@
-#ifndef SDD_EASYCONTACT_DATABASE_WEIGHT
-#define SDD_EASYCONTACT_DATABASE_WEIGHT
-#include<list>
-#include<string>
+#include"DATABASE_INCLUDE.h"
+
 class Weight{
   std::string _Mail;
   std::list<int> _Times;
@@ -10,4 +8,3 @@ class Weight{
     const std::string& getMail() { return _Mail; }
     int getPreferedTime();
 };
-#endif
