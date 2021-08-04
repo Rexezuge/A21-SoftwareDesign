@@ -18,10 +18,18 @@ void Signal_Handler(int SIG){
   }
 }
 
+pid_t SplitChildPS(){
+  pid_t PID=fork();
+  if(!PID) { StartEmailReader(); exit(EXIT_SUCCESS); }
+  return PID;
+}
+
 int main(int numArgs,char** Argv){
   if(numArgs!=1) { return EXIT_FAILURE; }
   setvbuf(stdout,NULL,_IONBF,0);
+  pit_t PID_ER=SplitChildPS();
   signal(SIGUSR1,Signal_Handler);
   InputFile FPRep=InputFile("ECDB.txt");
+  kill(PID_ER,SIGTERM);
   return EXIT_SUCCESS;
 }
