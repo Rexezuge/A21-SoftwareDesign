@@ -2,7 +2,7 @@
 
 void Signal_Handler(int SIG){
   if(SIG==SIGUSR1){
-    printf("Received Signal\n");
+    _REP.
   }
 }
 

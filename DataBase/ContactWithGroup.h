@@ -10,13 +10,21 @@ class ContactWithGroup{
     public:
         ContactWithGroup() { _Rep=vector<unique_ptr<ContactNOGroup>>(); }
         void addGroup(const string& name) { _Rep.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name))); }
-        void addContact(const string& groupName,const Contact& contact){
+        bool addContact(const string& groupName,const Contact& contact){
+          for(int i=0;i<(int)_Rep.size();i++){
+            if(_Rep[i]->contains(contact)){
+              return false;
+            }
+          }
           for(int i=0;i<(int)_Rep.size();i++){
               if(_Rep[i]->getName()==groupName){
                   _Rep[i]->addContact(contact);
+                  return true;
               }
           }
         }
+#if 0
+>>> THIS FUNCTION IS NOT USED <<<
         list<Contact>::iterator getContact(const string& groupName){
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->getName()==groupName){
@@ -24,6 +32,7 @@ class ContactWithGroup{
             }
           }
         }
+#endif
         void setContact(const Contact& contact){
           for(int i=0;i<(int)_Rep.size();i++){
               if(_Rep[i]->contains(contact)){
@@ -45,6 +54,14 @@ class ContactWithGroup{
                   _Rep[i+priority]=move(_Rep[i]);
                   _Rep[i]=move(tmpBuffer);
               }
+          }
+        }
+        void updateEmail(const string& contact,int time,const string& email){
+          for(int i=0;i<(int)_Rep.size();i++){
+            if(_Rep[i]->contains(contact)){
+              _Rep[i]->updateEmail(contact,time,email);
+              return;
+            }
           }
         }
 };
