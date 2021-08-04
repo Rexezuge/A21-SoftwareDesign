@@ -8,6 +8,10 @@ int NoNewEmail(FILE* FP){
   return 0;
 }
 
+void SignalMain(){
+  kill(getppid(),SIGUSR1);
+}
+
 int ReadLocalEmail(){
   FILE* EM=fopen("newMail.txt","r");
   if(NoNewEmail(EM)){
@@ -24,6 +28,7 @@ int ReadLocalEmail(){
   printf("==EMRD %d== _RECEIVER\n%s\n",getpid(),_RECEIVER);
   printf("==EMRD %d== _CONTEXT\n%s\n",getpid(),_CONTEXT);
   fclose(EM);
+  SignalMain();
   return EXIT_SUCCESS;
 }
 

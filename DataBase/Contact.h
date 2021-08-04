@@ -9,7 +9,7 @@ class Contact{
   std::string _Name;
   std::string _Address;
   public:
-    Weight _Weight=Weight();
+    Weight _Weight;
     /*
      * @pram Name : name to be stored
      * @pram Phone : phone number to be stored
@@ -20,6 +20,7 @@ class Contact{
       _Name=Name;
       _Address=Address;
       _Phone=Phone;
+      _Weight=Weight();
     }
     /*
      * @return Name : stored name
