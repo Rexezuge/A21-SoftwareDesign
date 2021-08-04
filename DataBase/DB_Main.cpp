@@ -1,8 +1,20 @@
 #include"DATABASE_INCLUDE.h"
 
+void SIGupdateEmail(){
+  FILE* EM=fopen("newMail.txt","r");
+  char _TIME[32];
+  char _RECEIVER[128];
+  char _CONTEXT[2048];
+  fgets(_TIME,32,EM);
+  fgets(_RECEIVER,128,EM);
+  fgets(_CONTEXT,2048,EM);
+  fclose(EM);
+  _Rep.updateEmail(_RECEIVER,_TIME,_CONTEXT);
+}
+
 void Signal_Handler(int SIG){
   if(SIG==SIGUSR1){
-    _REP.
+    SIGupdateEmail();
   }
 }
 
