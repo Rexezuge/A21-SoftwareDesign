@@ -43,7 +43,8 @@ int main(int numArgs,char** Argv){
   pid_t PID_ER=SplitChildPS(1,_Rep);
   pid_t PID_PR=SplitChildPS(2,_Rep);
   signal(SIGUSR1,Signal_Handler);
-  InputFile FPRep=InputFile("ECDB.txt");
+  DB_Import fp = DB_Import("ECDB.txt");
+  ContactWithGroup _Rep = fp.extract();
   kill(PID_ER,SIGTERM);
   kill(PID_PR,SIGTERM);
   return EXIT_SUCCESS;
