@@ -1,16 +1,4 @@
-#ifndef SDD_EASYCONTACT_DATABASE_DB_IMPORT
-#define SDD_EASYCONTACT_DATABASE_DB_IMPORT
-#include<stdio.h>
-#include<stdlib.h>
-#include<string>
-#include<vector>
-#include<iostream>
-#include<fstream>
-#include<bits/stdc++.h>
-#include"Contact.h"
-#include"ContactNOGroup.h"
-#include"ContactWithGroup.h"
-using namespace std;
+#include"DATABASE_INCLUDE.h"
 
 class DB_Import{
   string fileName;
