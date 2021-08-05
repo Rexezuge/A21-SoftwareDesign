@@ -8,7 +8,7 @@ int NoNewEmail(FILE* FP){
   return 0;
 }
 
-void SignalMain(){
+void ER_SignalMain(){
   kill(getppid(),SIGUSR1);
 }
 
@@ -34,7 +34,7 @@ int ReadLocalEmail(){
     printf("==EMRD %d== _CONTEXT\n%s\n",getpid(),_CONTEXT);
   #endif
   fclose(EM);
-  SignalMain();
+  ER_SignalMain();
   return EXIT_SUCCESS;
 }
 

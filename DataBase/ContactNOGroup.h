@@ -126,4 +126,12 @@ class ContactNOGroup{
 				}
 			}
 		}
+
+		int getGroupPreferedTime(){
+			int _RESULT=0;
+			for(list<Contact>::iterator i=_Group.begin();i!=_Group.end();i++){
+				_RESULT+=i->_Weight.getPreferedTime();
+			}
+			return _RESULT/_Group.size();
+		}
 };
