@@ -29,7 +29,8 @@ int main(int numArgs,char** Argv){
   setvbuf(stdout,NULL,_IONBF,0);
   pit_t PID_ER=SplitChildPS();
   signal(SIGUSR1,Signal_Handler);
-  InputFile FPRep=InputFile("ECDB.txt");
+  DB_Import fp = DB_Import("ECDB.txt");
+  ContactWithGroup _Rep = fp.extract();
   kill(PID_ER,SIGTERM);
   return EXIT_SUCCESS;
 }
