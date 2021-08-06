@@ -19,13 +19,6 @@ body {
     font-size: 15px;
 }
 
-/* .search_input {
-    display: inline;
-    float: right;
-    margin-right: 30px;
-} */
-
-
 button{
     border:none;
     border-radius: none;
@@ -35,11 +28,6 @@ button{
     color: white;
     box-shadow:0px 0px  4px  rgba(0, 0, 0,0.4);
 }
-
-/* button:hover{
-    background-color: #006366;
-    cursor: pointer;
-} */
 
 .search, .account {
     font-family: Noto Sans, sans-serif;
@@ -74,8 +62,6 @@ button{
 .Left_Bar {
     width: 20%;
     min-height: 80%;
-    /* margin: 0; */
-    /* display: inline; */
     margin-top: 3%;
     display: inline-block;
     border-top: 1px solid black;
@@ -127,12 +113,6 @@ hr.BeforeGroup{
     /*margin: 10px;*/
 
 }
-
-/* button:hover {
-    background-color: red;
-    color:white;
-} */
-
 
 .decoration{
     width:100px;height:100px;
