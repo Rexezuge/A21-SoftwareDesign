@@ -9,7 +9,7 @@ var cors = require('cors');
 app.use(cors());
 
 var url = "mongodb+srv://yef3:rpi123456@cluster0.ro74a.mongodb.net/contactbook";
-
+//Load the html and css
 app.use(express.static(__dirname));
 
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true });
@@ -44,16 +44,19 @@ app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', 
     var mail_address_2 = req.params.mail_address_2;
     var group_in = req.params.group_in;
     GroupInfo.findOne({group_name: group_in}).exec(function(err,group){
+        //Group is not exist, addContact fail
         if (group==null){
             res.json({'msg':'Group '+ group_in + " is not exist\nPlease create the group first",
                       'status':'Fail'});
         }
         else{
             ContactInfo.findOne({account_name: account_name, group_in: group_in}).exec(function(err, contact) {
+            //Contact already exist, fail to add contact
             if (contact) {
                 res.json({'msg': account_name + ' already existed in ' + group_in,
                           'status':'Fail'});
             } else {
+                //Save new contact into database
                 var thisContactInfo = new ContactInfo({
                     account_name: account_name,
                     mail_address_1: mail_address_1,
@@ -92,6 +95,7 @@ app.post('/addGroup/:group_name/:note', function(req, res) {
 
     // avoid saving repetitive info
     GroupInfo.findOne({group_name: group_name}).exec(function(err, group) {
+        //Group already exist. Fail to add the group
         if (group) {
             res.json({'msg': 'Already existed',
                     'status':'Fail'});
