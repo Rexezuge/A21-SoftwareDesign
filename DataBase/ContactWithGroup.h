@@ -7,6 +7,8 @@
  */
 class ContactWithGroup{
     vector<unique_ptr<ContactNOGroup>> _Rep;
+    string _AlwaysTopGroup;
+    vector<string> _AlwaysTopContact;
     public:
         ContactWithGroup() { _Rep=vector<unique_ptr<ContactNOGroup>>(); }
         void addGroup(const string& name) { _Rep.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name))); }
@@ -64,7 +66,14 @@ class ContactWithGroup{
             }
           }
         }
-
+        void PrioritySort(){
+          for(int i=0;i<(int)_Rep.size();i++){
+            for(int iR=i;iR<(int)_Rep.size();iR++){
+              if(_Rep[i]>_Rep[iR]){
+                swap(_Rep[i],_Rep[iR]);
+              }
+            }
+          }
         bool containBook(const string& groupName){
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->getName()==groupName){
