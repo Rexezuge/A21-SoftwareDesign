@@ -1,12 +1,4 @@
-#ifndef SDD_EASYCONTACT_DATABASE_MERGE
-#define SDD_EASYCONTACT_DATABASE_MERGE
-#include<string>
-#include<stdio.h>
-#include<stdlib.h>
-#include<iostream>
-#include<vector>
-#include<list>
-#include"Contact.h"
+#include"DATABASE_INCLUDE.h"
 
 class Merge{
   std::vector<Contact> _ContactVector;
@@ -33,4 +25,3 @@ class Merge{
       return _ContactVector;
     }
 };
-#endif

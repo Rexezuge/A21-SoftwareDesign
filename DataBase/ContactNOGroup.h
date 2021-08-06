@@ -1,11 +1,4 @@
-#ifndef SDD_EASYCONTACT_DATABASE_CONTACTNOGROUP
-#define SDD_EASYCONTACT_DATABASE_CONTACTNOGROUP
-#include<list>
-#include<string>
-#include<iterator>
-#include"Contact.h"
-#define BYPASSUNUSED(X)(void)(X)
-using namespace std;
+#include"DATABASE_INCLUDE.h"
 
 /**
  * @author Henry Hongbin Liu
@@ -115,7 +108,22 @@ class ContactNOGroup{
 			}
 			return false;
 		}
+
+		bool contains(const std::string& Input){
+			for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
+				if(it->getName()==Input){
+					return true;
+				}
+			}
+			return false;
+		}
+
+		void updateEmail(const string& contact,int time,const string& email){
+			for(list<Contact>::iterator it=_Group.begin(); it!=_Group.end(); it++){
+				if(it->getName()==contact){
+					it->_Weight.newMail(email,time);
+					return;
+				}
+			}
+		}
 };
-
-
-#endif
