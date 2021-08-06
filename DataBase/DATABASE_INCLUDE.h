@@ -9,6 +9,7 @@ using namespace std;
 #include<time.h>
 #include<stdio.h>
 #include<fcntl.h>
+#include<string.h>
 #include<signal.h>
 #include<stdlib.h>
 #include<unistd.h>
@@ -32,7 +33,7 @@ using namespace std;
 #include"DB_Export.h"
 #include"DB_Import.h"
 #include"Merge.h"
-// #include"Priority.h"
+#include"Priority.h"
 #include"EmailReader.h"
 
 #endif
