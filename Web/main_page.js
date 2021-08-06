@@ -4,28 +4,31 @@ $(document).ready(function(){
 	checkAndChangeColor()
 });
 
+//Display AddContact div and hide other divs
 function displayAddContact() {
 	document.getElementById("Contact_group").style.display = "none";
 	document.getElementById("Area_Add_Contact_Group").style.display = "none";
     document.getElementById("Area_Add_Contact").style.display = "inline";
 }
-
+//Display AddGroup div and hide other divs
 function displayAddGroup() {
 	document.getElementById("Contact_group").style.display = "none";
 	document.getElementById("Area_Add_Contact_Group").style.display = "inline";
     document.getElementById("Area_Add_Contact").style.display = "none";
 }
 
-
+//Jump to the AccountPage
 function goToAccountPage(){
 	window.location.href='sublink/account.html';
 }
 
+//Post the input information to the server and save them into the database
 function addContact() {
 	var contact_name = document.querySelector('#add_contact_name').value;
 	var contact_email_1 = document.querySelector('#add_contact_email_1').value;
 	var contact_email_2 = document.querySelector('#add_contact_email_2').value;
 	var contact_group = document.querySelector('#add_contact_group').value;
+	//Check if every block is entered
 	if (contact_name == "" || contact_email_1 == "" || contact_group == "") {
 		alert("Info Missed!")
 	} else {
@@ -34,40 +37,47 @@ function addContact() {
 		}
 		url = "http://localhost:3000/addContact/" + contact_name + '/' + contact_email_1 + '/' + contact_email_2 + '/' + contact_group
 		console.log("Start to post the info!" + url)
-	}
+	}//Post information to the server
 		$.post(url, function(data) {
 				alert(data.msg);
 				console.log(data.status)
+			// If information saved sucessfully, reload the whole page
 			if (data.status!="Fail")
 				window.location.reload();
 			}
 		);
 }
 
+//Post data from input and save the new group into databse
 function addGroup() {
+	//Get data
 	var new_group = document.querySelector('#add_new_group').value;
 	var define_new_group = document.querySelector('#define_new_group').value;
+	//Ensure there is no empty input
 	if (new_group == "" || define_new_group == "") {
 		alert("Info Missed!")
 	} else {
 		console.log("Start to post the info!")
 		url = "http://localhost:3000/addGroup/" + new_group + '/' + define_new_group
-	}
+	}//Post information to the server
 		$.post(url, function(data) {
 			alert(data.msg);
 			console.log(data);
+			// If information saved sucessfully, reload the whole page
 			if (data.status!="Fail")
 				window.location.reload();
 			}
 		);
 }
-
+//Show the contacts information in the group one clicked
 function showOneGroupContact(group_name){
+	//Hide the form and show the div with id=Contact_group
 	document.getElementById("Contact_group").style.display = "inline";
 	document.getElementById("Area_Add_Contact_Group").style.display = "none";
     document.getElementById("Area_Add_Contact").style.display = "none";
 	$("#Contacts_Info_List").empty();
 	$(".Group_Name").html(group_name);
+	//Connerct to the server to get contacts information
 	$.ajax({
 		type:"GET",
 		url: "http://localhost:3000/getGroupContacts/"+group_name,
@@ -77,6 +87,7 @@ function showOneGroupContact(group_name){
 			if (data.length==0){
 				$("#Contacts_Info_List").append("No contacts in this")
 			}
+			//Output information in the screen
 			length = data.length;
 			for (i=0;i<length;i++){
 				var contact_name = data[i].account_name;
@@ -93,6 +104,7 @@ function showOneGroupContact(group_name){
 	})
 }
 
+//List all groups in the database
 function shwoAllGroups(){
 	$.ajax({
 		type:"GET",
@@ -109,6 +121,7 @@ function shwoAllGroups(){
 			//Show the first group automatically
 			showOneGroupContact($("a.Contact_Group")[0].text)
 
+			//Allow clicking the groupname to show details
 			$(".Contact_Group").click(function(){
 				showOneGroupContact($(this).text());
 			});
