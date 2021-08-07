@@ -142,6 +142,7 @@ function checkAndChangeColor() {
 	$.get(url, function(data){
 		var current_selected_color = data.color
 		console.log(current_selected_color);
+		// change the color to the 2021 Pantone year's color
 		if (current_selected_color == "2021") {
 			document.querySelector(".account").style.backgroundColor = '#F5DF4D';
 			document.querySelector(".New_Contact").style.backgroundColor = '#F5DF4D';
@@ -149,6 +150,7 @@ function checkAndChangeColor() {
 			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#F5DF4D';
 			document.querySelector("#add_group_add_btn").style.backgroundColor = '#F5DF4D';
 			document.querySelector(".decoration").style.backgroundColor = '#F5DF4D';
+		// change the color to the 2020 Pantone year's color
 		} else if (current_selected_color == "2020") {
 			document.querySelector(".account").style.backgroundColor = '#34558b';
 			document.querySelector(".New_Contact").style.backgroundColor = '#34558b';
@@ -156,6 +158,7 @@ function checkAndChangeColor() {
 			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#34558b';
 			document.querySelector("#add_group_add_btn").style.backgroundColor = '#34558b';
 			document.querySelector(".decoration").style.backgroundColor = '#34558b';
+		// change the color to the 2019 Pantone year's color
 		} else if (current_selected_color == "2019") {
 			document.querySelector(".account").style.backgroundColor = '#ff6f61';
 			document.querySelector(".New_Contact").style.backgroundColor = '#ff6f61';
@@ -163,6 +166,7 @@ function checkAndChangeColor() {
 			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#ff6f61';
 			document.querySelector("#add_group_add_btn").style.backgroundColor = '#ff6f61';
 			document.querySelector(".decoration").style.backgroundColor = '#ff6f61';
+		// change the color to the 2018 Pantone year's color
 		} else if (current_selected_color == "2018") {
 			document.querySelector(".account").style.backgroundColor = '#604c8d';
 			document.querySelector(".New_Contact").style.backgroundColor = '#604c8d';

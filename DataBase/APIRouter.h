@@ -1,7 +1,4 @@
-#ifndef SDD_EASYCONTACT_API_ROUTER
-#define SDD_EASYCONTACT_API_ROUTER
-
-#include "hv/HttpService.h"
+#include"DATABASE_INCLUDE.h"
 
 class APIRouter {
     public:
@@ -30,5 +27,3 @@ class APIRouter {
         });
     }
 };
-
-#endif

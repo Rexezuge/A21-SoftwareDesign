@@ -6,8 +6,8 @@ class DB_Import{
 
   public:
     //Constructor
-    DB_Import(string name) { 
-      fileName = name; 
+    DB_Import(string name) {
+      fileName = name;
     }
 
     //Read the input file and return a ContactWithGroup object
@@ -19,7 +19,7 @@ class DB_Import{
         while (file) {
           //read each line
           getline(file, line);
-          
+
           //Store contact info
           string groupName, contactName, mailAddress, phoneNumber;
           //Store info position
@@ -62,7 +62,7 @@ class DB_Import{
           }
 
           //compose Contact object
-          Contact newContact = Contact(contactName, phoneNumber, mailAddress);
+          Contact newContact = Contact(contactName, atoi(phoneNumber.c_str()), mailAddress);
 
           //If new Contact list
           if(!contactBook.containBook(groupName)){
@@ -78,4 +78,3 @@ class DB_Import{
     }
 
 };
-#endif

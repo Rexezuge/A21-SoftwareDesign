@@ -1,4 +1,5 @@
 #include"DATABASE_INCLUDE.h"
+ContactWithGroup* _Rep;
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
@@ -43,8 +44,8 @@ int main(int numArgs,char** Argv){
   pid_t PID_ER=SplitChildPS(1,_Rep);
   pid_t PID_PR=SplitChildPS(2,_Rep);
   signal(SIGUSR1,Signal_Handler);
-  DB_Import fp = DB_Import("ECDB.txt");
-  ContactWithGroup _Rep = fp.extract();
+  _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
+  *_Rep=DB_Import("ECDB.txt").extract();
   kill(PID_ER,SIGTERM);
   kill(PID_PR,SIGTERM);
   return EXIT_SUCCESS;

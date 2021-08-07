@@ -1,8 +1,4 @@
-#ifndef SDD_EASYCONTACT_API_HANDLER
-#define SDD_EASYCONTACT_API_HANDLER
-
-#include "hv/HttpServer.h"
-#include "APIRouter.h"
+#include"DATABASE_INCLUDE.h"
 
 class APIServer {
     http_server_t   g_http_server;
@@ -17,5 +13,3 @@ class APIServer {
         http_server_run(&g_http_server);
     }
 };
-
-#endif
