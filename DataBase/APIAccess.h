@@ -28,3 +28,11 @@ bool editContact(const std::string& OLDCONTACT,const std::string& GROUPNAME,cons
 std::vector<std::string> getGroups(){
   return _Rep->getGroups();
 }
+
+bool AlwaysTop(const std::string& GROUP){
+  return _Rep->AlwaysTop(GROUP);
+}
+
+bool AlwaysTop(const std::string& GROUP,const std::string& CONTACT){
+  return _Rep->AlwaysTop(GROUP,CONTACT);
+}

@@ -8,7 +8,7 @@
 class ContactWithGroup{
     vector<unique_ptr<ContactNOGroup>> _Rep;
     string _AlwaysTopGroup;
-    vector<string> _AlwaysTopContact;
+    vector<pair<string,string>> _AlwaysTopContact;
     public:
         ContactWithGroup() { _Rep=vector<unique_ptr<ContactNOGroup>>(); }
         bool addGroup(const string& name) {
@@ -81,6 +81,20 @@ class ContactWithGroup{
             }
           }
           return false;
+        }
+        bool AlwaysTop(const std::string& groupName){
+          _AlwaysTopGroup=groupName;
+          return true;
+        }
+        bool AlwaysTop(const std::string& groupName,const std::string& contactName){
+          for(int i=0;i<(int)_AlwaysTopContact.size();i++){
+            if(_AlwaysTopContact[i].first==groupName){
+              _AlwaysTopContact[i].second=contactName;
+              return true;
+            }
+          }
+          _AlwaysTopContact.push_back(pair<string,string>(groupName,contactName));
+          return true;
         }
         void setPriority(const Contact& contact,int priority){
           for(int i=0;i<(int)_Rep.size();i++){
