@@ -109,7 +109,7 @@ class ContactWithGroup{
         void PrioritySort(){
           for(int i=0;i<(int)_Rep.size();i++){
             for(int iR=i;iR<(int)_Rep.size();iR++){
-              if(_Rep[i]>_Rep[iR]){
+              if(_Rep[i]->getGroupPreferedTime()>_Rep[iR]->getGroupPreferedTime()){
                 swap(_Rep[i],_Rep[iR]);
               }
             }

@@ -1,6 +1,8 @@
 #include"DATABASE_INCLUDE.h"
 ContactWithGroup* _Rep;
 #include"APIAccess.h"
+pid_t PID_ER;
+pid_t PID_PR;
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
@@ -11,10 +13,18 @@ void SIGupdateEmail(){
   fgets(_RECEIVER,128,EM);
   fgets(_CONTEXT,2048,EM);
   fclose(EM);
-  // _Rep.updateEmail(_RECEIVER,_TIME,_CONTEXT);
+  _Rep->updateEmail(_RECEIVER,atoi(_TIME),_CONTEXT);
 }
 
 void Signal_Handler(int SIG){
+  if(SIG==SIGINT){
+    #ifdef DEBUG
+      printf("==MAIN %d== Received Signal [SIGINT], Terminating ALL PS\n",getpid());
+    #endif
+    kill(PID_ER,SIGTERM);
+    kill(PID_PR,SIGTERM);
+    exit(EXIT_FAILURE);
+  }
   if(SIG==SIGUSR1){
     #ifdef DEBUG
       printf("==MAIN %d== Received Signal [SIGUSR1], Just Received New Email\n",getpid());
@@ -38,16 +48,18 @@ pid_t SplitChildPS(int _W,ContactWithGroup* _DB){
 int main(int numArgs,char** Argv){
   BYPASSUNUSED(Argv);
   if(numArgs!=1) { return EXIT_FAILURE; }
-  setvbuf(stdout,NULL,_IONBF,0);
+  signal(SIGINT,SIG_IGN);
   #ifdef DEBUG
+    setvbuf(stdout,NULL,_IONBF,0);
     printf("==MAIN %d== PS<DB_MAIN> Running In [DEBUG] Mode\n",getpid());
   #endif
-  pid_t PID_ER=SplitChildPS(1,_Rep);
-  pid_t PID_PR=SplitChildPS(2,_Rep);
+  PID_ER=SplitChildPS(1,_Rep);
+  PID_PR=SplitChildPS(2,_Rep);
   signal(SIGUSR1,Signal_Handler);
+  signal(SIGUSR2,Signal_Handler);
+  signal(SIGINT,Signal_Handler);
   _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
-  *_Rep=DB_Import("ECDB.txt").extract();
-  kill(PID_ER,SIGTERM);
-  kill(PID_PR,SIGTERM);
+  // *_Rep=DB_Import("ECDB.txt").extract();
+  while(1){ sleep(10); }
   return EXIT_SUCCESS;
 }

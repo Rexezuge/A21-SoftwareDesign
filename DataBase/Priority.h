@@ -5,12 +5,13 @@ void PR_SignalMain(){
   kill(getppid(),SIGUSR2);
 }
 
-void UpdateDatabase(ContactWithGroup* DB){
+int UpdateDatabase(ContactWithGroup* DB){
   #ifdef DEBUG
     printf("==PRST %d== Now Sorting the DataBase\n",getpid());
   #endif
   DB->PrioritySort();
   PR_SignalMain();
+  return EXIT_SUCCESS;
 }
 
 int StartPrioritySort(ContactWithGroup* DB){
