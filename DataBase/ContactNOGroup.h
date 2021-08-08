@@ -38,8 +38,8 @@ class ContactNOGroup{
 		/**
      	 * @effects returns the first Contact object of the contact list.
      	 */
-		list<Contact>::iterator getList() {
-			return _Group.begin();
+		list<Contact> getList() {
+			return std::list<Contact>(_Group);
 		}
 
 		/**
@@ -94,6 +94,16 @@ class ContactNOGroup{
 
 			//append the new one
 			_Group.push_back(input);
+		}
+
+		bool removeContact(const std::string& name){
+			for(list<Contact>::iterator i=_Group.begin();i!=_Group.end();i++){
+				if(i->getName()==name){
+					_Group.erase(i);
+					return true;
+				}
+			}
+			return false;
 		}
 
 		/**

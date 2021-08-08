@@ -1,5 +1,6 @@
 #include"DATABASE_INCLUDE.h"
 ContactWithGroup* _Rep;
+#include"APIAccess.h"
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
