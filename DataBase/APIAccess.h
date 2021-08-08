@@ -19,3 +19,12 @@ bool removeContact(const std::string& CONTACTNAME){
 std::list<Contact> getGroup(const std::string& GROUPNAME){
   return _Rep->getGroup(GROUPNAME);
 }
+
+bool editContact(const std::string& OLDCONTACT,const std::string& GROUPNAME,const Contact& CONTACT){
+  _Rep->removeContact(OLDCONTACT);
+  return _Rep->addContact(GROUPNAME,CONTACT);
+}
+
+std::vector<std::string> getGroups(){
+  return _Rep->getGroups();
+}

@@ -42,6 +42,13 @@ class ContactWithGroup{
           }
           return std::list<Contact>();
         }
+        vector<string> getGroups(){
+          std::vector<std::string> _RESULT;
+          for(int i=0;i<(int)_Rep.size();i++){
+            _RESULT.push_back(_Rep[i]->getName());
+          }
+          return _RESULT;
+        }
         bool setContact(const Contact& contact){
           for(int i=0;i<(int)_Rep.size();i++){
               if(_Rep[i]->contains(contact)){
