@@ -6,12 +6,14 @@ A DataBase System implemented with `C++`.
 
 Requirement
 ```shell
-G++ Version 11.1.0+
+Linux: G++ Version 11.1.0+
+Windows: MinGW Version 9.0.0+
+MacOS: G++ Version 10.1.1+
 ```
 
 Compile
 ```shell
-g++ -std=gnu++11 -Werror -Wall -Wextra -lm -g -O3 -o EasyContact-DataBase.so DB_Main.cpp
+AnyOS: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -g -O3 -o EasyContact-DataBase.so DB_Main.cpp
 ```
 
 ## Execute
