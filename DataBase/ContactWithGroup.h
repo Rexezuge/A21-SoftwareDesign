@@ -11,7 +11,15 @@ class ContactWithGroup{
     vector<string> _AlwaysTopContact;
     public:
         ContactWithGroup() { _Rep=vector<unique_ptr<ContactNOGroup>>(); }
-        void addGroup(const string& name) { _Rep.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name))); }
+        bool addGroup(const string& name) {
+          for(int i=0;i<(int)_Rep.size();i++){
+            if(_Rep[i]->getName()==name){
+              return false;
+            }
+          }
+          _Rep.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name)));
+          return true;
+        }
         bool addContact(const string& groupName,const Contact& contact){
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->contains(contact)){
@@ -24,23 +32,48 @@ class ContactWithGroup{
                   return true;
               }
           }
+          return false;
         }
-#if 0
->>> THIS FUNCTION IS NOT USED <<<
-        list<Contact>::iterator getContact(const string& groupName){
+        list<Contact> getGroup(const string& groupName){
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->getName()==groupName){
               return _Rep[i]->getList();
             }
           }
+          return std::list<Contact>();
         }
-#endif
-        void setContact(const Contact& contact){
+        bool setContact(const Contact& contact){
           for(int i=0;i<(int)_Rep.size();i++){
               if(_Rep[i]->contains(contact)){
                   _Rep[i]->setContact(contact);
               }
           }
+          return true;
+        }
+        bool removeContact(const std::string& name){
+          for(int i=0;i<(int)_Rep.size();i++){
+            if(_Rep[i]->contains(name)){
+              return _Rep[i]->removeContact(name);
+            }
+          }
+          return false;
+        }
+        bool setGroup(const std::string& groupName,const std::string& name){
+          for(int i=0;i<(int)_Rep.size();i++){
+            std::list<Contact> LC=_Rep[i]->getList();
+            for(std::list<Contact>::iterator iR=LC.begin();iR!=LC.end();iR++){
+              if(iR->getName()==name){
+                for(int iL=0;iL<(int)_Rep.size();iL++){
+                  if(_Rep[iL]->getName()==groupName){
+                    _Rep[iL]->addContact(*iR);
+                    _Rep[i]->removeContact(iR->getName());
+                    return true;
+                  }
+                }
+              }
+            }
+          }
+          return false;
         }
         void setPriority(const Contact& contact,int priority){
           for(int i=0;i<(int)_Rep.size();i++){
