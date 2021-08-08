@@ -33,6 +33,14 @@ bool AlwaysTop(const std::string& GROUP){
   return _Rep->AlwaysTop(GROUP);
 }
 
+bool CancelTop(){
+  return _Rep->CancelTop();
+}
+
 bool AlwaysTop(const std::string& GROUP,const std::string& CONTACT){
   return _Rep->AlwaysTop(GROUP,CONTACT);
+}
+
+bool CancelTop(const std::string& GROUP){
+  return _Rep->AlwaysTop(GROUP);
 }

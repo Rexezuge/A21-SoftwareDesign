@@ -8,9 +8,9 @@
 class ContactWithGroup{
     vector<unique_ptr<ContactNOGroup>> _Rep;
     string _AlwaysTopGroup;
-    vector<pair<string,string>> _AlwaysTopContact;
+    deque<pair<string,string>> _AlwaysTopContact;
     public:
-        ContactWithGroup() { _Rep=vector<unique_ptr<ContactNOGroup>>(); }
+        ContactWithGroup() { _Rep=vector<unique_ptr<ContactNOGroup>>(); _AlwaysTopGroup=""; }
         bool addGroup(const string& name) {
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->getName()==name){
@@ -86,6 +86,10 @@ class ContactWithGroup{
           _AlwaysTopGroup=groupName;
           return true;
         }
+        bool CancelTop(){
+          _AlwaysTopGroup="";
+          return true;
+        }
         bool AlwaysTop(const std::string& groupName,const std::string& contactName){
           for(int i=0;i<(int)_AlwaysTopContact.size();i++){
             if(_AlwaysTopContact[i].first==groupName){
@@ -95,6 +99,15 @@ class ContactWithGroup{
           }
           _AlwaysTopContact.push_back(pair<string,string>(groupName,contactName));
           return true;
+        }
+        bool CancelTop(const std::string& groupName){
+          for(std::deque<std::pair<std::string,std::string>>::iterator i=_AlwaysTopContact.begin();i!=_AlwaysTopContact.end();i++){
+            if(i->first==groupName){
+              _AlwaysTopContact.erase(i);
+              return true;
+            }
+          }
+          return false;
         }
         void setPriority(const Contact& contact,int priority){
           for(int i=0;i<(int)_Rep.size();i++){
