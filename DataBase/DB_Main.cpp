@@ -1,8 +1,8 @@
 #include"DATABASE_INCLUDE.h"
-// #include"APIAccess.h"
-// #include"APIRouter.h"
-// #include"APIHandler.h"
-
+#include"APIAccess.h"
+#include"APIRouter.h"
+#include"APIHandler.h"
+pthread_mutex_t REP_INUSE;
 ContactWithGroup* _Rep;
 pthread_t PID_ER;
 pthread_t PID_PR;
@@ -41,24 +41,18 @@ void Signal_Handler(int SIG){
   }
 }
 
-pthread_t SplitChildThread(int _W,ContactWithGroup* _DB){
-  pthread_t PID=fork();
-  if(!PID&&_W==1) { pthread_create(&PID_ER,0,StartEmailReader,_DB); exit(EXIT_SUCCESS); }
-  if(!PID&&_W==2) { pthread_create(&PID_PR,0,StartPrioritySort,_DB); exit(EXIT_SUCCESS); }
-  return PID;
-}
-
 int main(int numArgs,char** Argv){
   BYPASSUNUSED(Argv);
   if(numArgs!=1) { return EXIT_FAILURE; }
   signal(SIGINT,SIG_IGN);
+  REP_INUSE=PTHREAD_MUTEX_INITIALIZER;
   #ifdef DEBUG
     setvbuf(stdout,NULL,_IONBF,0);
     printf("==MAIN %d== PS<DB_MAIN> Running In [DEBUG] Mode\n",getpid());
   #endif
   _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
-  PID_ER=SplitChildThread(1,_Rep);
-  PID_PR=SplitChildThread(2,_Rep);
+  pthread_create(&PID_ER,0,StartEmailReader,_Rep);
+  pthread_create(&PID_PR,0,StartPrioritySort,_Rep);
   signal(SIGUSR1,Signal_Handler);
   signal(SIGUSR2,Signal_Handler);
   signal(SIGINT,Signal_Handler);

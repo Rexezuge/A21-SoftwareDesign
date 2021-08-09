@@ -1,5 +1,6 @@
 #include"DATABASE_INCLUDE.h"
 #define _EMAILTIMER 1
+extern pthread_mutex_t REP_INUSE;
 
 int NoNewEmail(FILE* FP){
   fseek(FP,0,SEEK_END);
@@ -9,7 +10,7 @@ int NoNewEmail(FILE* FP){
 }
 
 void ER_SignalMain(){
-  kill(getppid(),SIGUSR1);
+  kill(getpid(),SIGUSR1);
 }
 
 int ReadLocalEmail(){
@@ -40,11 +41,16 @@ int ReadLocalEmail(){
 
 void* StartEmailReader(void* ARGV){
   BYPASSUNUSED(ARGV);
+  pthread_detach(pthread_self());
   #ifdef DEBUG
     printf("==EMRD %d== PS<EmailReader> Running In [DEBUG] Mode\n",getpid());
   #endif
   while(1){
-    ReadLocalEmail();
+    pthread_mutex_lock(&REP_INUSE);
+    {
+      ReadLocalEmail();
+    }
+    pthread_mutex_unlock(&REP_INUSE);
     sleep(_EMAILTIMER*60);
   }
   return EXIT_SUCCESS;
