@@ -2,10 +2,10 @@
 #include"APIAccess.h"
 #include"APIRouter.h"
 #include"APIHandler.h"
-
+pthread_mutex_t REP_INUSE;
 ContactWithGroup* _Rep;
-pid_t PID_ER;
-pid_t PID_PR;
+pthread_t PID_ER;
+pthread_t PID_PR;
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
@@ -41,27 +41,21 @@ void Signal_Handler(int SIG){
   }
 }
 
-pid_t SplitChildPS(int _W,ContactWithGroup* _DB){
-  pid_t PID=fork();
-  if(!PID&&_W==1) { StartEmailReader(); exit(EXIT_SUCCESS); }
-  if(!PID&&_W==2) { StartPrioritySort(_DB); exit(EXIT_SUCCESS); }
-  return PID;
-}
-
 int main(int numArgs,char** Argv){
   BYPASSUNUSED(Argv);
   if(numArgs!=1) { return EXIT_FAILURE; }
   signal(SIGINT,SIG_IGN);
+  REP_INUSE=PTHREAD_MUTEX_INITIALIZER;
   #ifdef DEBUG
     setvbuf(stdout,NULL,_IONBF,0);
     printf("==MAIN %d== PS<DB_MAIN> Running In [DEBUG] Mode\n",getpid());
   #endif
-  PID_ER=SplitChildPS(1,_Rep);
-  PID_PR=SplitChildPS(2,_Rep);
+  _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
+  pthread_create(&PID_ER,0,StartEmailReader,_Rep);
+  pthread_create(&PID_PR,0,StartPrioritySort,_Rep);
   signal(SIGUSR1,Signal_Handler);
   signal(SIGUSR2,Signal_Handler);
   signal(SIGINT,Signal_Handler);
-  _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
   // *_Rep=DB_Import("ECDB.txt").extract();
   while(1){ sleep(10); }
   return EXIT_SUCCESS;

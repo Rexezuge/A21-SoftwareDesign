@@ -20,7 +20,7 @@ class DB_Import{
           string line;
           while (getline(file, line)) {
 
-            //Store contact info 
+            //Store contact info
             string groupName, contactName, mailAddress, phoneNumber;
             //Store info position
             int start, end;
