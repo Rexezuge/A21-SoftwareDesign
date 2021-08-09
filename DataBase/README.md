@@ -13,7 +13,8 @@ MacOS: G++ Version 10.1.1+
 
 Compile
 ```shell
-AnyOS: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -g -O3 -o EasyContact-DataBase.so DB_Main.cpp
+AnyOS: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -O3 -o EasyContact-DataBase.so DB_Main.cpp
+DEBUG: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -g -o EasyContact-DataBase-DEBUG.so DB_Main.cpp
 ```
 
 ## Execute

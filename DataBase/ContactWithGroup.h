@@ -10,7 +10,7 @@ class ContactWithGroup{
     string _AlwaysTopGroup;
     deque<pair<string,string>> _AlwaysTopContact;
     public:
-        ContactWithGroup() { _Rep=vector<unique_ptr<ContactNOGroup>>(); _AlwaysTopGroup=""; }
+        ContactWithGroup() { _AlwaysTopGroup=""; }
         bool addGroup(const string& name) {
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->getName()==name){

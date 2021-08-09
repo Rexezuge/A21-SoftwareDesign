@@ -1,4 +1,5 @@
 #include"DATABASE_INCLUDE.h"
+extern ContactWithGroup* _Rep;
 
 bool addGroup(const std::string& GROUPNAME){
   return _Rep->addGroup(GROUPNAME);
