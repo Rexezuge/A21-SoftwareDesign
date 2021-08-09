@@ -14,6 +14,8 @@ std::vector<std::string> getContact(const std::string& NAME) {
   ret.push_back(tmp.getName());
   ret.push_back(std::to_string(tmp.getPhone()));
   ret.push_back(tmp.getAddress());
+  ret.push_back(tmp._Weight.getMail());
+  ret.push_back(std::to_string(tmp._Weight.getLatestTime()));
   return ret;
 }
 
@@ -32,9 +34,8 @@ bool removeContact(const std::string& CONTACTNAME){
 std::vector<Contact> getGroup(const std::string& GROUPNAME){
   std::list<Contact> tmp = _Rep->getGroup(GROUPNAME);
   std::vector<Contact> ret;
-  for (std::list<Contact>::iterator i = tmp.begin(); i != tmp.end(); i++) {
+  for (std::list<Contact>::iterator i = tmp.begin(); i != tmp.end(); i++)
     ret.push_back(*i);
-  }
   return ret;
 }
 
@@ -60,7 +61,7 @@ bool AlwaysTop(const std::string& GROUP,const std::string& CONTACT){
 }
 
 bool CancelTop(const std::string& GROUP){
-  return _Rep->AlwaysTop(GROUP);
+  return _Rep->CancelTop(GROUP);
 }
 
 #endif
