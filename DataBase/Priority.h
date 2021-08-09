@@ -8,7 +8,7 @@ void PR_SignalMain(){
 
 int UpdateDatabase(ContactWithGroup* DB){
   #ifdef DEBUG
-    printf("==PRST %d== Now Sorting the DataBase\n",getpid());
+    printf("==PRST== Now Sorting the DataBase\n");
   #endif
   DB->PrioritySort();
   PR_SignalMain();
@@ -19,7 +19,10 @@ void* StartPrioritySort(void* ARGV){
   ContactWithGroup* DB=(ContactWithGroup*)ARGV;
   pthread_detach(pthread_self());
   #ifdef DEBUG
-    printf("==PRST %d== PS<PrioritySort> Running In [DEBUG] Mode\n",getpid());
+    printf("==PRST== PTHREAD<PrioritySort> Running In [DEBUG] Mode\n");
+  #endif
+  #ifdef PRESENT
+    printf("==PRST== PTHREAD<PrioritySort> Running In [PRESENTATION] Mode\n");
   #endif
   while(1){
     pthread_mutex_lock(&REP_INUSE);
@@ -27,7 +30,11 @@ void* StartPrioritySort(void* ARGV){
       UpdateDatabase(DB);
     }
     pthread_mutex_unlock(&REP_INUSE);
-    sleep(_SLEEPTIMER*60);
+    #ifdef PRESENT
+      sleep(_SLEEPTIMER*10);
+    #else
+      sleep(_SLEEPTIMER*60);
+    #endif
   }
   return EXIT_SUCCESS;
 }
