@@ -28,9 +28,6 @@ using namespace std;
 // [libhv] LIBIARY
 #include"libhv/HttpServer.h"
 #include"libhv/HttpService.h"
-// API LIBIARY
-#include"APIRouter.h"
-#include"APIHandler.h"
 // LOCAL LIBIARY
 #include"Weight.h"
 #include"Contact.h"

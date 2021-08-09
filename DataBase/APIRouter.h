@@ -1,3 +1,6 @@
+#ifndef SDD_EASYCONTACT_APIROUTER
+#define SDD_EASYCONTACT_APIROUTER
+
 #include"DATABASE_INCLUDE.h"
 
 class APIRouter {
@@ -34,13 +37,13 @@ class APIRouter {
                     });
             } else {
                 // Retrieve the specific contact
-                std::vector<std::string> q = getContact(contactName);
-                if (q[0] == "NULL")  return 404;
-                resp->json["name"] = q[0];
-                resp->json["phone"] = q[1];
-                resp->json["email"] = q[2];
-                resp->json["mostRecent"] = q[3];
-                resp->json["received"] = q[4];
+                Contact q = getContact(contactName);
+                if (q.getName() == "NULL")  return 404;
+                resp->json["name"] = q.getName();
+                resp->json["phone"] = q.getPhone();
+                resp->json["email"] = q.getAddress();
+                resp->json["mostRecent"] = q._Weight.getMail();
+                resp->json["received"] = q._Weight.getLatestTime();
             }
 
             return 200;
@@ -204,7 +207,7 @@ class APIRouter {
             }
 
             // Check the current contact's existence
-            std::vector<Contact> currentCntcts = getGroup(currentGrps);
+            std::vector<Contact> currentCntcts = getGroup(groupName);
             for (int i = 0; i < currentCntcts.size(); i++) {
                 if (currentCntcts[i].getName() == contactName)  break;
                 if (i == currentCntcts.size() - 1)              return 406;
@@ -224,3 +227,5 @@ class APIRouter {
         });
     }
 };
+
+#endif

@@ -1,5 +1,8 @@
 #include"DATABASE_INCLUDE.h"
 #include"APIAccess.h"
+#include"APIRouter.h"
+#include"APIHandler.h"
+
 ContactWithGroup* _Rep;
 pid_t PID_ER;
 pid_t PID_PR;

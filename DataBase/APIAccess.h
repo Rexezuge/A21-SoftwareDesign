@@ -8,15 +8,8 @@ bool addGroup(const std::string& GROUPNAME){
   return _Rep->addGroup(GROUPNAME);
 }
 
-std::vector<std::string> getContact(const std::string& NAME) {
-  Contact tmp = _Rep->getContact(NAME);
-  std::vector<std::string> ret;
-  ret.push_back(tmp.getName());
-  ret.push_back(std::to_string(tmp.getPhone()));
-  ret.push_back(tmp.getAddress());
-  ret.push_back(tmp._Weight.getMail());
-  ret.push_back(std::to_string(tmp._Weight.getLatestTime()));
-  return ret;
+Contact getContact(const std::string& NAME) {
+  return _Rep->getContact(NAME);
 }
 
 bool addContact(const std::string& GROUPNAME,const Contact& CONTACT){
