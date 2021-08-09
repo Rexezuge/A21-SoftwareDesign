@@ -14,7 +14,8 @@ int UpdateDatabase(ContactWithGroup* DB){
   return EXIT_SUCCESS;
 }
 
-int StartPrioritySort(ContactWithGroup* DB){
+void* StartPrioritySort(void* ARGV){
+  ContactWithGroup* DB=(ContactWithGroup*)ARGV;
   #ifdef DEBUG
     printf("==PRST %d== PS<PrioritySort> Running In [DEBUG] Mode\n",getpid());
   #endif

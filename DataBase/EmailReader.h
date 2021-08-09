@@ -38,7 +38,8 @@ int ReadLocalEmail(){
   return EXIT_SUCCESS;
 }
 
-int StartEmailReader(){
+void* StartEmailReader(void* ARGV){
+  BYPASSUNUSED(ARGV);
   #ifdef DEBUG
     printf("==EMRD %d== PS<EmailReader> Running In [DEBUG] Mode\n",getpid());
   #endif
