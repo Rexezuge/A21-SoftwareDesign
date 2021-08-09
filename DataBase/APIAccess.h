@@ -1,3 +1,6 @@
+#ifndef SDD_EASYCONTACT_APIACCESS
+#define SDD_EASYCONTACT_APIACCESS
+
 #include"DATABASE_INCLUDE.h"
 extern ContactWithGroup* _Rep;
 
@@ -59,3 +62,5 @@ bool AlwaysTop(const std::string& GROUP,const std::string& CONTACT){
 bool CancelTop(const std::string& GROUP){
   return _Rep->AlwaysTop(GROUP);
 }
+
+#endif
