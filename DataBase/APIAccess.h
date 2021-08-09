@@ -1,5 +1,4 @@
 #include"DATABASE_INCLUDE.h"
-
 extern ContactWithGroup* _Rep;
 
 bool addGroup(const std::string& GROUPNAME){
@@ -12,7 +11,6 @@ std::vector<std::string> getContact(const std::string& NAME) {
   ret.push_back(tmp.getName());
   ret.push_back(std::to_string(tmp.getPhone()));
   ret.push_back(tmp.getAddress());
-
   return ret;
 }
 
