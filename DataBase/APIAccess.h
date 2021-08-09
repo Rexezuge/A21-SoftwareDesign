@@ -1,4 +1,5 @@
 #include"DATABASE_INCLUDE.h"
+extern ContactWithGroup* _Rep;
 
 extern ContactWithGroup* _Rep;
 

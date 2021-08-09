@@ -1,6 +1,6 @@
 #include"DATABASE_INCLUDE.h"
-ContactWithGroup* _Rep;
 #include"APIAccess.h"
+ContactWithGroup* _Rep;
 pid_t PID_ER;
 pid_t PID_PR;
 
