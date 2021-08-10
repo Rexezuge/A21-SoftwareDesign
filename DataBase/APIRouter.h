@@ -148,38 +148,12 @@ class APIRouter {
          * Create a new group.
          */
         router.POST("/groups/:groupName/:contactName/:newGroupName", [](HttpRequest* req, HttpResponse* resp) {
-            if (req->content_type != APPLICATION_JSON)  return 400;
             std::string groupName = req->GetParam("groupName");
-
-            std::string topContact = req->GetString("top");
 
             if (groupName == "")       return 400;
             if (!addGroup(groupName))  return 410;
 
-            // Check always top
-            if (topContact != "")
-                if (!AlwaysTop(groupName, topContact))  return 500;
-
             return 201;
-        });
-        /**
-         * PUT /groups/:groupName
-         * Modify a group.
-         */
-        router.PUT("/groups/:groupName/:contactName/:newGroupName", [](HttpRequest* req, HttpResponse* resp) {
-            if (req->content_type != APPLICATION_JSON)  return 400;
-            std::string groupName = req->GetParam("groupName");
-
-            std::string topContact = req->GetString("top");
-
-            if (groupName == "")  return 400;
-
-            if (topContact != "") {
-                if (!CancelTop(groupName))              return 500;
-                if (!AlwaysTop(groupName, topContact))  return 500;
-            }
-
-            return 200;
         });
         /**
          * PATCH /groups/:groupName/:contactName/:newGroupName
@@ -222,6 +196,96 @@ class APIRouter {
             Contact insert(ready.getName(), ready.getPhone(), ready.getAddress());
             insert._Weight = ready._Weight;
             if (!addContact(newGroupName, insert))  return 500;
+
+            return 200;
+        });
+
+        router.POST("/tops/:group/:contact", [](HttpRequest* req, HttpResponse* resp) {
+            std::string groupName = req->GetParam("group");
+            std::string contactName = req->GetParam("contact");
+
+            if (groupName == "" || groupName == "NULL")  return 400;
+
+            if (contactName == "") {
+                // Check if topped already
+                if (hasAlwaysTop())  return 403;
+                // Check this group's existence
+                std::vector<std::string> currentGrps = getGroups();
+                for (int i = 0; i < currentGrps.size(); i++) {
+                    if (currentGrps[i] == groupName)  break;
+                    if (i == currentGrps.size() - 1)  return 404;
+                }
+                AlwaysTop(groupName);
+            } else {
+                if (hasAlwaysTop(groupName))  return 403;
+                // Check this group's existence
+                std::vector<std::string> currentGrps = getGroups();
+                for (int i = 0; i < currentGrps.size(); i++) {
+                    if (currentGrps[i] == groupName)  break;
+                    if (i == currentGrps.size() - 1)  return 404;
+                }
+                // Check the current contact's existence
+                std::vector<Contact> currentCntcts = getGroup(groupName);
+                for (int i = 0; i < currentCntcts.size(); i++) {
+                    if (currentCntcts[i].getName() == contactName)  break;
+                    if (i == currentCntcts.size() - 1)              return 404;
+                }
+                AlwaysTop(groupName, contactName);
+            }
+
+            return 201;
+        });
+        router.PUT("/tops/:group/:contact", [](HttpRequest* req, HttpResponse* resp) {
+            std::string groupName = req->GetParam("group");
+            std::string contactName = req->GetParam("contact");
+
+            if (groupName == "" || groupName == "NULL")  return 400;
+
+            if (contactName == "") {
+                // Check this group's existence
+                std::vector<std::string> currentGrps = getGroups();
+                for (int i = 0; i < currentGrps.size(); i++) {
+                    if (currentGrps[i] == groupName)  break;
+                    if (i == currentGrps.size() - 1)  return 404;
+                }
+                CancelTop();
+                AlwaysTop(groupName);
+            } else {
+                // Check this group's existence
+                std::vector<std::string> currentGrps = getGroups();
+                for (int i = 0; i < currentGrps.size(); i++) {
+                    if (currentGrps[i] == groupName)  break;
+                    if (i == currentGrps.size() - 1)  return 404;
+                }
+                // Check the current contact's existence
+                std::vector<Contact> currentCntcts = getGroup(groupName);
+                for (int i = 0; i < currentCntcts.size(); i++) {
+                    if (currentCntcts[i].getName() == contactName)  break;
+                    if (i == currentCntcts.size() - 1)              return 404;
+                }
+                CancelTop(groupName);
+                AlwaysTop(groupName, contactName);
+            }
+
+            return 200;
+        });
+        router.Delete("/tops/:group/:contact", [](HttpRequest* req, HttpResponse* resp) {
+            std::string groupName = req->GetParam("group");
+            std::string contactName = req->GetParam("contact");
+
+            if (groupName == "" || groupName == "NULL")  return 400;
+
+            if (contactName == "") {
+                CancelTop();
+            } else {
+                // Check this group's existence
+                std::vector<std::string> currentGrps = getGroups();
+                for (int i = 0; i < currentGrps.size(); i++) {
+                    if (currentGrps[i] == groupName)  break;
+                    if (i == currentGrps.size() - 1)  return 404;
+                }
+                CancelTop(groupName);
+            }
 
             return 200;
         });

@@ -91,6 +91,9 @@ class ContactWithGroup{
           }
           return false;
         }
+        bool hasAlwaysTop() {
+          return _AlwaysTopGroup == "";
+        }
         bool AlwaysTop(const std::string& groupName){
           _AlwaysTopGroup=groupName;
           return true;
@@ -98,6 +101,14 @@ class ContactWithGroup{
         bool CancelTop(){
           _AlwaysTopGroup="";
           return true;
+        }
+        bool hasAlwaysTop(const std::string& groupName) {
+          for (int i = 0; i < (int)_AlwaysTopContact.size(); i++) {
+            if (_AlwaysTopContact[i].first == groupName) {
+              return true;
+            }
+          }
+          return false;
         }
         bool AlwaysTop(const std::string& groupName,const std::string& contactName){
           for(int i=0;i<(int)_AlwaysTopContact.size();i++){
