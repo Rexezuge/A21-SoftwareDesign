@@ -9,8 +9,8 @@ The Following Version Are Currently Supported
 | Version | Supported |
 | ------- | --------- |
 | Dev     | ⚠️ |
-| Interim | ✅ |
-| Beta    | ✖️ |
+| Interim | ✖️ |
+| Beta    | ✅ |
 | Final   | ✖️ |
 
 ## Reporting a Vulnerability
