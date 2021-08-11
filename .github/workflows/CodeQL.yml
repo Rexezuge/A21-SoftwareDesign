@@ -29,9 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript' ]
-        # >>CPP IS NOT READY FOR REVIEW YET<<
-        # language: [ 'cpp', 'javascript' ]
+        language: [ 'cpp', 'javascript' ]
 
     steps:
     - name: Checkout repository
