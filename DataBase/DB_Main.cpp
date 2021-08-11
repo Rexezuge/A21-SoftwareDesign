@@ -1,11 +1,13 @@
 #include"DATABASE_INCLUDE.h"
 #include"APIAccess.h"
 #include"APIRouter.h"
-#include"APIHandler.h"
+#include "libhv/HttpServer.h"
 pthread_mutex_t REP_INUSE;
 ContactWithGroup* _Rep;
 pthread_t PID_ER;
 pthread_t PID_PR;
+http_server_t   g_http_server;
+HttpService     g_http_service;
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
@@ -62,6 +64,13 @@ int main(int numArgs,char** Argv){
   _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
   pthread_create(&PID_ER,0,StartEmailReader,_Rep);
   pthread_create(&PID_PR,0,StartPrioritySort,_Rep);
+
+  g_http_server.port = 3001;
+  g_http_service.base_url = "";
+  APIRouter::register_router(g_http_service);
+  g_http_server.service = &g_http_service;
+  http_server_run(&g_http_server, 0);
+
   if(!fork()) {
     #ifdef PRESENT
       printf("==APIC== PS<APIC> Running In [PRESENTATION] Mode\n");

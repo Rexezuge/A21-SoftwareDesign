@@ -1,6 +1,8 @@
 #ifndef SDD_EASYCONTACT_APIROUTER
 #define SDD_EASYCONTACT_APIROUTER
 
+#include "libhv/HttpService.h"
+
 #include"DATABASE_INCLUDE.h"
 
 class APIRouter {
@@ -22,8 +24,8 @@ class APIRouter {
          */
         router.GET("/contacts/:groupName/:contactName", [](HttpRequest* req, HttpResponse* resp) {
             // Parse the query URL
-            std::string groupName = req->GetParam("groupName");
-            std::string contactName = req->GetParam("contactName");
+            std::string groupName = req->HttpRequest::GetParam("groupName");
+            std::string contactName = req->HttpRequest::GetParam("contactName");
 
             // Error check
             if (groupName == "" || contactName == "" || groupName == "NULL")
@@ -67,12 +69,12 @@ class APIRouter {
             if (req->content_type != APPLICATION_JSON)
                 return response_status(resp, 400, "Bad Request");
             // Parse the query
-            std::string groupName = req->GetParam("groupName");
-            std::string contactName = req->GetParam("contactName");
+            std::string groupName = req->HttpRequest::GetParam("groupName");
+            std::string contactName = req->HttpRequest::GetParam("contactName");
 
             // Parse the data payload
-            int phone = req->GetInt("phone");
-            std::string email = req->GetString("email");
+            int phone = req->HttpMessage::GetInt("phone");
+            std::string email = req->HttpMessage::GetString("email");
 
             // Error checking
             if (groupName == "" || contactName == "")
@@ -101,11 +103,11 @@ class APIRouter {
             // Check the request type and parse the query
             if (req->content_type != APPLICATION_JSON)
                 return response_status(resp, 400, "Bad Request");
-            std::string groupName = req->GetParam("groupName");
-            std::string contactName = req->GetParam("contactName");
+            std::string groupName = req->HttpRequest::GetParam("groupName");
+            std::string contactName = req->HttpRequest::GetParam("contactName");
 
-            int phone = req->GetInt("phone");
-            std::string email = req->GetString("email");
+            int phone = req->HttpMessage::GetInt("phone");
+            std::string email = req->HttpMessage::GetString("email");
 
             if (groupName == "" || contactName == "")
                 return response_status(resp, 400, "Bad Request");
@@ -140,7 +142,7 @@ class APIRouter {
          * Delete a contact, in any group.
          */
         router.Delete("/contacts/:groupName/:contactName", [](HttpRequest* req, HttpResponse* resp) {
-            std::string contactName = req->GetParam("contactName");
+            std::string contactName = req->HttpRequest::GetParam("contactName");
             if (contactName == "")
                 return response_status(resp, 400, "Bad Request");
             if (!removeContact(contactName))
@@ -153,7 +155,7 @@ class APIRouter {
          * Get all groups' order and name.
          */
         router.GET("/groups/:groupName/:contactName/:newGroupName", [](HttpRequest* req, HttpResponse* resp) {
-            std::string groupName = req->GetParam("groupName");
+            std::string groupName = req->HttpRequest::GetParam("groupName");
             resp->content_type = APPLICATION_JSON;
             std::vector<std::string> groups = getGroups();
             for (int i = 0; i < (int) groups.size(); i++) {
@@ -170,7 +172,7 @@ class APIRouter {
          * Create a new group.
          */
         router.POST("/groups/:groupName/:contactName/:newGroupName", [](HttpRequest* req, HttpResponse* resp) {
-            std::string groupName = req->GetParam("groupName");
+            std::string groupName = req->HttpRequest::GetParam("groupName");
 
             if (groupName == "")
                 return response_status(resp, 400, "Bad Request");
@@ -184,9 +186,9 @@ class APIRouter {
          * Move a contact from the group to a new group.
          */
         router.PATCH("/groups/:groupName/:contactName/:newGroupName", [](HttpRequest* req, HttpResponse* resp) {
-            std::string groupName = req->GetParam("groupName");
-            std::string contactName = req->GetParam("contactName");
-            std::string newGroupName = req->GetParam("newGroupName");
+            std::string groupName = req->HttpRequest::GetParam("groupName");
+            std::string contactName = req->HttpRequest::GetParam("contactName");
+            std::string newGroupName = req->HttpRequest::GetParam("newGroupName");
 
             if (groupName == newGroupName)
                 return response_status(resp, 400, "Bad Request");
@@ -232,8 +234,8 @@ class APIRouter {
         });
 
         router.POST("/tops/:group/:contact", [](HttpRequest* req, HttpResponse* resp) {
-            std::string groupName = req->GetParam("group");
-            std::string contactName = req->GetParam("contact");
+            std::string groupName = req->HttpRequest::GetParam("group");
+            std::string contactName = req->HttpRequest::GetParam("contact");
 
             if (groupName == "" || groupName == "NULL")
                 return response_status(resp, 400, "Bad Request");
@@ -273,8 +275,8 @@ class APIRouter {
             return response_status(resp, 201, "Created");
         });
         router.PUT("/tops/:group/:contact", [](HttpRequest* req, HttpResponse* resp) {
-            std::string groupName = req->GetParam("group");
-            std::string contactName = req->GetParam("contact");
+            std::string groupName = req->HttpRequest::GetParam("group");
+            std::string contactName = req->HttpRequest::GetParam("contact");
 
             if (groupName == "" || groupName == "NULL")
                 return response_status(resp, 400, "Bad Request");
@@ -311,8 +313,8 @@ class APIRouter {
             return response_status(resp, 200, "OK");
         });
         router.Delete("/tops/:group/:contact", [](HttpRequest* req, HttpResponse* resp) {
-            std::string groupName = req->GetParam("group");
-            std::string contactName = req->GetParam("contact");
+            std::string groupName = req->HttpRequest::GetParam("group");
+            std::string contactName = req->HttpRequest::GetParam("contact");
 
             if (groupName == "" || groupName == "NULL")
                 return response_status(resp, 400, "Bad Request");
