@@ -1,6 +1,7 @@
 #include"DATABASE_INCLUDE.h"
 #define _EMAILTIMER 1
 extern pthread_mutex_t REP_INUSE;
+extern pthread_mutex_t EMAIL_INUSE;
 
 int NoNewEmail(FILE* FP){
   fseek(FP,0,SEEK_END);
@@ -51,7 +52,11 @@ void* StartEmailReader(void* ARGV){
   while(1){
     pthread_mutex_lock(&REP_INUSE);
     {
-      ReadLocalEmail();
+      pthread_mutex_lock(&EMAIL_INUSE);
+      {
+        ReadLocalEmail();
+      }
+      pthread_mutex_unlock(&EMAIL_INUSE);
     }
     pthread_mutex_unlock(&REP_INUSE);
     #ifdef PRESENT

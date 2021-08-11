@@ -9,6 +9,10 @@ class ContactWithGroup{
     vector<unique_ptr<ContactNOGroup>> _Rep;
     string _AlwaysTopGroup;
     deque<pair<string,string>> _AlwaysTopContact;
+    bool CheckRep(){
+      PrioritySort();
+      return true;
+    }
     public:
         ContactWithGroup() { _AlwaysTopGroup=""; }
         bool addGroup(const string& name) {
@@ -18,7 +22,7 @@ class ContactWithGroup{
             }
           }
           _Rep.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name)));
-          return true;
+          return CheckRep();
         }
         bool addContact(const string& groupName,const Contact& contact){
           for(int i=0;i<(int)_Rep.size();i++){
@@ -29,7 +33,7 @@ class ContactWithGroup{
           for(int i=0;i<(int)_Rep.size();i++){
               if(_Rep[i]->getName()==groupName){
                   _Rep[i]->addContact(contact);
-                  return true;
+                  return CheckRep();
               }
           }
           return false;
@@ -96,7 +100,7 @@ class ContactWithGroup{
         }
         bool AlwaysTop(const std::string& groupName){
           _AlwaysTopGroup=groupName;
-          return true;
+          return CheckRep();
         }
         bool CancelTop(){
           _AlwaysTopGroup="";
@@ -114,11 +118,11 @@ class ContactWithGroup{
           for(int i=0;i<(int)_AlwaysTopContact.size();i++){
             if(_AlwaysTopContact[i].first==groupName){
               _AlwaysTopContact[i].second=contactName;
-              return true;
+              return CheckRep();
             }
           }
           _AlwaysTopContact.push_back(pair<string,string>(groupName,contactName));
-          return true;
+          return CheckRep();
         }
         bool CancelTop(const std::string& groupName){
           for(std::deque<std::pair<std::string,std::string>>::iterator i=_AlwaysTopContact.begin();i!=_AlwaysTopContact.end();i++){
@@ -155,6 +159,11 @@ class ContactWithGroup{
         }
         void PrioritySort(){
           for(int i=0;i<(int)_Rep.size();i++){
+            if(_Rep[i]->getName()==_AlwaysTopGroup){
+              swap(_Rep[0],_Rep[i]);
+            }
+          }
+          for(int i=1;i<(int)_Rep.size();i++){
             for(int iR=i;iR<(int)_Rep.size();iR++){
               if(_Rep[i]->getGroupPreferedTime()>_Rep[iR]->getGroupPreferedTime()){
                 swap(_Rep[i],_Rep[iR]);
