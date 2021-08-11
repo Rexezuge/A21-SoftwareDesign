@@ -59,7 +59,8 @@ int main(int numArgs,char** Argv){
   printf("==EZCT== Restoring Contact Information From Local Hard Drive...\n");
   printf("==EZCT== Easy Contact BackEnd DataBase is Now Running...\n");
   printf("==EZCT== To Terminate, Press \"Ctrl+C\"\n");
-  _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
+  _Rep=(DB_Import("ECDB.csv").extract();
+  Import_Email_From_Local("ECDB_EM.csv",_Rep);
   pthread_create(&PID_ER,0,StartEmailReader,_Rep);
   pthread_create(&PID_PR,0,StartPrioritySort,_Rep);
   if(!fork()) {
@@ -71,7 +72,6 @@ int main(int numArgs,char** Argv){
   signal(SIGUSR1,Signal_Handler);
   signal(SIGUSR2,Signal_Handler);
   signal(SIGINT,Signal_Handler);
-  // *_Rep=DB_Import("ECDB.txt").extract();
   while(1){ sleep(10); }
   return EXIT_SUCCESS;
 }
