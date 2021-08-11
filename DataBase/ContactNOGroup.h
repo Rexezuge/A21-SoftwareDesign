@@ -38,8 +38,8 @@ class ContactNOGroup{
 		/**
      	 * @effects returns the first Contact object of the contact list.
      	 */
-		list<Contact>::iterator getList() {
-			return _Group.begin();
+		list<Contact> getList() {
+			return std::list<Contact>(_Group);
 		}
 
 		/**
@@ -96,6 +96,16 @@ class ContactNOGroup{
 			_Group.push_back(input);
 		}
 
+		bool removeContact(const std::string& name){
+			for(list<Contact>::iterator i=_Group.begin();i!=_Group.end();i++){
+				if(i->getName()==name){
+					_Group.erase(i);
+					return true;
+				}
+			}
+			return false;
+		}
+
 		/**
 		 * @param input : The Contact object to be check.
 		 * @effects check if the contact list contains the Contact object.
@@ -130,8 +140,10 @@ class ContactNOGroup{
 		int getGroupPreferedTime(){
 			int _RESULT=0;
 			for(list<Contact>::iterator i=_Group.begin();i!=_Group.end();i++){
+				printf("======================GET TIME\n");
 				_RESULT+=i->_Weight.getPreferedTime();
 			}
+			printf("RETURN PREFERED TIME\n");
 			return _RESULT/_Group.size();
 		}
 };

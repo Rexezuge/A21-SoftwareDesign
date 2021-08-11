@@ -23,4 +23,7 @@ class Weight{
       }
       return _WEIGHT_1/_WEIGHT_1_SIZE*0.4+_WEIGHT_2/_WEIGHT_2_SIZE*0.3+_WEIGHT_3/_WEIGHT_2_SIZE*0.3;
     }
+    int getLatestTime(){
+      return _Times.front();
+    }
 };

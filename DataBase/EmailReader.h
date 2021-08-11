@@ -1,5 +1,6 @@
 #include"DATABASE_INCLUDE.h"
 #define _EMAILTIMER 1
+extern pthread_mutex_t REP_INUSE;
 
 int NoNewEmail(FILE* FP){
   fseek(FP,0,SEEK_END);
@@ -9,7 +10,7 @@ int NoNewEmail(FILE* FP){
 }
 
 void ER_SignalMain(){
-  kill(getppid(),SIGUSR1);
+  kill(getpid(),SIGUSR1);
 }
 
 int ReadLocalEmail(){
@@ -28,23 +29,36 @@ int ReadLocalEmail(){
   fgets(_CONTEXT,2048,EM);
   _CONTEXT[strlen(_CONTEXT)-1]=0;
   #ifdef DEBUG
-    printf("==EMRD %d== Received New Email\n",getpid());
-    printf("==EMRD %d== _TIME\n%s\n",getpid(),_TIME);
-    printf("==EMRD %d== _RECEIVER\n%s\n",getpid(),_RECEIVER);
-    printf("==EMRD %d== _CONTEXT\n%s\n",getpid(),_CONTEXT);
+    printf("==EMRD== Received New Email\n");
+    printf("==EMRD== _TIME\n%s\n",_TIME);
+    printf("==EMRD== _RECEIVER\n%s\n",_RECEIVER);
+    printf("==EMRD== _CONTEXT\n%s\n",_CONTEXT);
   #endif
   fclose(EM);
   ER_SignalMain();
   return EXIT_SUCCESS;
 }
 
-int StartEmailReader(){
+void* StartEmailReader(void* ARGV){
+  BYPASSUNUSED(ARGV);
+  pthread_detach(pthread_self());
   #ifdef DEBUG
-    printf("==EMRD %d== PS<EmailReader> Running In [DEBUG] Mode\n",getpid());
+    printf("==EMRD== PTHREAD<EmailReader> Running In [DEBUG] Mode\n");
+  #endif
+  #ifdef PRESENT
+    printf("==EMRD== PTHREAD<EmailReader> Running In [PRESENTATION] Mode\n");
   #endif
   while(1){
-    ReadLocalEmail();
-    sleep(_EMAILTIMER*60);
+    pthread_mutex_lock(&REP_INUSE);
+    {
+      ReadLocalEmail();
+    }
+    pthread_mutex_unlock(&REP_INUSE);
+    #ifdef PRESENT
+      sleep(_EMAILTIMER*10);
+    #else
+      sleep(_EMAILTIMER*60);
+    #endif
   }
   return EXIT_SUCCESS;
 }
