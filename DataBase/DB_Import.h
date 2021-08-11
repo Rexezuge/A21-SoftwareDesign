@@ -2,7 +2,6 @@
 
 class DB_Import{
   string fileName;
-  ContactWithGroup contactBook;
 
   public:
     //Constructor
@@ -12,6 +11,7 @@ class DB_Import{
 
     //Read the input file and return a ContactWithGroup object
     ContactWithGroup extract() {
+        ContactWithGroup contactBook;
         ifstream file;
         file.open(fileName);
 
