@@ -4,14 +4,14 @@ A DataBase System implemented with `C++`.
 
 ## Compile
 
-Software Requirement
+- Software Requirement
 ```shell
 Linux: G++ Version 11.1.0+
 Windows: MinGW Version 9.0.0+
 MacOS: G++ Version 10.1.1+
 ```
 
-[libhv](https://github.com/ithewei/libhv) Libiary Prerequisite
+- [libhv](https://github.com/ithewei/libhv) Libiary Prerequisite
 
 1. Clone the [libhv](https://github.com/ithewei/libhv) Repository.
 
@@ -34,7 +34,7 @@ make
 sudo make install
 ```
 
-Compile
+- Compile DataBase
 ```shell
 AnyOS: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -O2 -I/usr/local/include/hv -lhv -pthread -o EasyContact-DataBase.so DB_Main.cpp DB_Export.cpp
 DEBUG: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -I/usr/local/include/hv -lhv -g -D DEBUG -pthread -o EasyContact-DataBase-DEBUG.so DB_Main.cpp DB_Export.cpp
