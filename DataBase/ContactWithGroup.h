@@ -159,7 +159,7 @@ class ContactWithGroup{
         }
         void PrioritySort(){
           for(int i=0;i<(int)_Rep.size();i++){
-            if(_Rep[i].getName()==_AlwaysTopGroup){
+            if(_Rep[i]->getName()==_AlwaysTopGroup){
               swap(_Rep[0],_Rep[i]);
             }
           }

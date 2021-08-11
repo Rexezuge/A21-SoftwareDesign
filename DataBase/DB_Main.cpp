@@ -3,6 +3,7 @@
 #include"APIRouter.h"
 #include"APIHandler.h"
 pthread_mutex_t REP_INUSE;
+pthread_mutex_t EMAIL_INUSE;
 ContactWithGroup* _Rep;
 pthread_t PID_ER;
 pthread_t PID_PR;
@@ -16,7 +17,10 @@ void SIGupdateEmail(){
   fgets(_RECEIVER,128,EM);
   fgets(_CONTEXT,2048,EM);
   fclose(EM);
+  FILE* CLEAR_EM=fopen("newMail.txt","w");
+  fclose(CLEAR_EM);
   _Rep->updateEmail(_RECEIVER,atoi(_TIME),_CONTEXT);
+  _Rep->PrioritySort();
 }
 
 void Signal_Handler(int SIG){
@@ -35,7 +39,11 @@ void Signal_Handler(int SIG){
     #ifdef DEBUG
       printf("==MAIN== Received Signal [SIGUSR1], Just Received New Email\n");
     #endif
-    SIGupdateEmail();
+    pthread_mutex_lock(&EMAIL_INUSE);
+    {
+      SIGupdateEmail();
+    }
+    pthread_mutex_unlock(&EMAIL_INUSE);
   }
   if(SIG==SIGUSR2){
     #ifdef DEBUG
@@ -49,6 +57,7 @@ int main(int numArgs,char** Argv){
   if(numArgs!=1) { return EXIT_FAILURE; }
   signal(SIGINT,SIG_IGN);
   REP_INUSE=PTHREAD_MUTEX_INITIALIZER;
+  EMAIL_INUSE=PTHREAD_MUTEX_INITIALIZER;
   #ifdef DEBUG
     setvbuf(stdout,NULL,_IONBF,0);
     printf("==MAIN== PS<DB_MAIN> Running In [DEBUG] Mode\n");
