@@ -11,39 +11,23 @@ A DataBase System implemented with `C++`.
     MacOS: G++ Version 10.1.1+
     ```
 
-- [libhv](https://github.com/ithewei/libhv) Library Prerequisite
+- [libhv](https://github.com/ithewei/libhv) Submodule Initialization
 
-    1. Initialize the submodule.
-        ```shell
-        git submodule init
-        git submodule update
-        ```
-
-    2. Change Directory
-        ```shell
-        cd ./libhv
-        ```
-
-    3. Install [libhv](https://github.com/ithewei/libhv) Library
-
-        ```shell
-        ./configure
-        make
-        sudo make install
-        ```
-
-        _NOTE: System Root Permission is Required._
+    ```shell
+    git submodule update --init --recursive
+    ```
 
 - Compile DataBase
+
     ```shell
-    AnyOS: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -O2 -lhv -pthread -o EasyContact-DataBase.so DB_Main.cpp
-    DEBUG: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -lhv -g -D DEBUG -pthread -o EasyContact-DataBase-DEBUG.so DB_Main.cpp
+    cmake -DEBUG .   # Eliminate -DEBUG in production
+    cmake --build .
     ```
 
 ## Execute
 
 ```shell
-./EasyContact-DataBase.so
+./ecdb
 ```
 
 ## Reference
