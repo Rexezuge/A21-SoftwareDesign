@@ -90,15 +90,15 @@ function showOneGroupContact(group_name){
 			//Output information in the screen
 			length = data.length;
 			for (i=0;i<length;i++){
-				var contact_name = data[i].account_name;
-				var mail1 = data[i].mail_address_1;
-				var mail2 = data[i].mail_address_2;
+				var contact_name = data[i].id;
+				var mail1 = data[i].email;
+				var phone = data[i].phone;
 				var contactHtml = '<li class="Contact">\
 					            <button class="Delete_Contact">Delete</button>\
 								<button class="Top_Contact">Top</button>\
 					            <p class="Contact_Name">'+contact_name+'</p>\
 					            <p class="Address">'+mail1+'</p>\
-					            <p class="Address">'+mail2+'</p>\
+					            <p class="Address">'+phone+'</p>\
 					         </li>'
 				$("#Contacts_Info_List").append(contactHtml);
 			}
@@ -140,11 +140,11 @@ function shwoAllGroups(){
 				//var prev = grouplist.prev();
 				//$(this).before(grouplist);
 				console.log(this);
+				alert($(this).find("a").text());
 				$(this).addClass("TOP");
 				group = $(this).parent();
 				console.log(group);
 				$(groups[1]).before(group);
-				
 				checkAndChangeColor();
 			})
 
@@ -158,6 +158,8 @@ function shwoAllGroups(){
 				$(groups[1]).before(group);
 				checkAndChangeColor();
 			})
+
+
 
 
 			$(".New_Contact").click(function(){
@@ -246,6 +248,24 @@ function checkAndChangeColor() {
 }
 
 
-function topContacts(grouplist){
-	var prev = grouplist.prev();
+function topContact(group_name,contact_name){
+	$.ajax({
+		type:"POST",
+		url: "http://localhost:3000/setTop/"+group_name+"/"+contact_name,
+		beforeSend: function(){},
+		success:function(data){
+			window.location.reload();
+		}
+	})
+}
+
+function topGroup(group_name){
+	$.ajax({
+		type:"POST",
+		url: "http://localhost:3000/setTop/"+group_name+"/",
+		beforeSend: function(){},
+		success:function(data){
+			window.location.reload();
+		}
+	})
 }

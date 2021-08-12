@@ -199,3 +199,16 @@ app.get('/getColor/:user_ID', function(req, res){
     })
 })
 
+app.post('setTop/:group/:contact',function(req, res){
+    var groupName = req.params.group;
+    var contactName = req.params.contact;
+    axios.post('http://localhost:3001/tops/' + groupName + '/' + contactName)
+        .then(function (response) {
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
+})
