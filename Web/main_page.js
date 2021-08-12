@@ -71,6 +71,7 @@ function addGroup() {
 //Show the contacts information in the group one clicked
 function showOneGroupContact(group_name){
 	//Hide the form and show the div with id=Contact_group
+	group_name = group_name.substring(0, group_name.length-3);
 	document.getElementById("Contact_group").style.display = "inline";
 	document.getElementById("Area_Add_Contact_Group").style.display = "none";
     document.getElementById("Area_Add_Contact").style.display = "none";
@@ -116,7 +117,9 @@ function shwoAllGroups(){
 			length = data.length;
 			for (i=0;i<length;i++){
 				group = data[i].group_name;
-				groupHtml = '<a class="Contact_Group" >'+group+' </a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="1 -3 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg><button class="Top_Button">Top</button>'
+				groupHtml = '<a class="Contact_Group" >'+group+' <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="1 -3 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>\
+							<button class="Top_Button">Top</button>\
+							</a>';
 				$("#groups_block").append(groupHtml);
 			}
 			//Show the first group automatically
@@ -130,6 +133,17 @@ function shwoAllGroups(){
 			});
 
 			checkAndChangeColor();
+
+			$(".Top_Button").click(function(){
+				groups = $("#groups_block").contents();
+				console.log(this);
+				$(this).addClass("TOP");
+				group = $(this).parent();
+				console.log(group);
+				$(groups[1]).before(group);
+				
+				checkAndChangeColor();
+			})
 
 			$(".New_Contact").click(function(){
 				displayAddContact();
@@ -162,6 +176,8 @@ function checkAndChangeColor() {
 			$(".Top_Contact").css("border",'2px solid #F5DF4D');
 			$(".Delete_Contact").css("color",'#F5DF4D');
 			$(".Delete_Contact").css("border",'2px solid #F5DF4D');
+			$(".TOP").css("background-color", "#F5DF4D");
+			$(".TOP").css("color", "white");
 		// change the color to the 2020 Pantone year's color
 		} else if (current_selected_color == "2020") {
 			document.querySelector(".account").style.backgroundColor = '#34558b';
@@ -176,6 +192,8 @@ function checkAndChangeColor() {
 			$(".Top_Contact").css("border",'2px solid #34558b');
 			$(".Delete_Contact").css("color",'#34558b');
 			$(".Delete_Contact").css("border",'2px solid #34558b');
+			$(".TOP").css("background-color", "#34558b");
+			$(".TOP").css("color", "white");
 		// change the color to the 2019 Pantone year's color
 		} else if (current_selected_color == "2019") {
 			document.querySelector(".account").style.backgroundColor = '#ff6f61';
@@ -190,6 +208,8 @@ function checkAndChangeColor() {
 			$(".Top_Contact").css("border",'2px solid #ff6f61');
 			$(".Delete_Contact").css("color",'#ff6f61');
 			$(".Delete_Contact").css("border",'2px solid #ff6f61');
+			$(".TOP").css("background-color", "#ff6f61");
+			$(".TOP").css("color", "white");
 		// change the color to the 2018 Pantone year's color
 		} else if (current_selected_color == "2018") {
 			document.querySelector(".account").style.backgroundColor = '#604c8d';
@@ -204,6 +224,13 @@ function checkAndChangeColor() {
 			$(".Top_Contact").css("border",'2px solid #604c8d');
 			$(".Delete_Contact").css("color",'#604c8d');
 			$(".Delete_Contact").css("border",'2px solid #604c8d');
+			$(".TOP").css("background-color", "#604c8d");
+			$(".TOP").css("color", "white");
 		} 
 	});
+}
+
+
+function topContacts(grouplist){
+	var prev = grouplist.prev();
 }
