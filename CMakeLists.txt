@@ -24,4 +24,4 @@ set(THREADS_PREFER_PTHREAD_FLAG on)
 find_package(Threads REQUIRED)
 target_link_libraries(ecdb PUBLIC m Threads::Threads)
 
-add_dependencies(ecdb libhv)
+add_dependencies(ecdb hv)
