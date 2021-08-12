@@ -2,7 +2,7 @@
 
 A DataBase System implemented with `C++`.
 
-## Compile
+## Compile with cmake
 
 - Software Requirement
     ```shell
@@ -22,6 +22,30 @@ A DataBase System implemented with `C++`.
     ```shell
     cmake -DEBUG .   # Eliminate -DEBUG in production
     cmake --build .
+    ```
+
+## Compile apidemo manually
+
+- Initialize Submodule
+
+    ```shell
+    git submodule update --init --recursive
+    ```
+
+- Compile libhv
+
+    ```shell
+    cd DataBase/libhv
+    ./configure
+    make
+    sudo make install
+    ```
+
+- Compile apidemo
+
+    ```shell
+    cd ..
+    g++ -std=gnu++11 apidemo.cpp -pthread -lm -g -Wall -Wextra -lhv
     ```
 
 ## Execute
