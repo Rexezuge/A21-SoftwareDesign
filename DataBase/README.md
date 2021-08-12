@@ -11,7 +11,7 @@ Windows: MinGW Version 9.0.0+
 MacOS: G++ Version 10.1.1+
 ```
 
-- [libhv](https://github.com/ithewei/libhv) Libiary Prerequisite
+- [libhv](https://github.com/ithewei/libhv) Library Prerequisite
 
 1. Initialize the submodule.
 
