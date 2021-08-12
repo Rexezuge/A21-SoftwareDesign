@@ -1,12 +1,16 @@
 #include"DATABASE_INCLUDE.h"
+#include"hv/hv.h"
 #include"APIAccess.h"
 #include"APIRouter.h"
-#include"APIHandler.h"
+#include"hv/HttpServer.h"
+using namespace hv;
 pthread_mutex_t REP_INUSE;
 pthread_mutex_t EMAIL_INUSE;
 ContactWithGroup* _Rep;
 pthread_t PID_ER;
 pthread_t PID_PR;
+http_server_t   g_http_server;
+HttpService     g_http_service;
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
@@ -31,6 +35,7 @@ void Signal_Handler(int SIG){
     printf("==EZCT== Sending Signal [SIGTERM] to ALL Background Processes...\n");
     kill(PID_ER,SIGTERM);
     kill(PID_PR,SIGTERM);
+    http_server_stop(&g_http_server);
     printf("==EZCT== Saving ALL Contact Information to Local Hard Drive...\n");
     printf("==EZCT== ALL Termination Tasks Successfully Finished, Exiting Easy Contact.\n");
     exit(EXIT_FAILURE);
@@ -71,6 +76,13 @@ int main(int numArgs,char** Argv){
   _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
   pthread_create(&PID_ER,0,StartEmailReader,_Rep);
   pthread_create(&PID_PR,0,StartPrioritySort,_Rep);
+
+  g_http_server.port = 3001;
+  g_http_service.base_url = "";
+  APIRouter::register_router(g_http_service);
+  g_http_server.service = &g_http_service;
+  http_server_run(&g_http_server, 0);
+
   if(!fork()) {
     #ifdef PRESENT
       printf("==APIC== PS<APIC> Running In [PRESENTATION] Mode\n");

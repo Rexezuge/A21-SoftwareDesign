@@ -25,10 +25,6 @@ using namespace std;
 #include<iostream>
 #include<iterator>
 #include<algorithm>
-// [libhv] LIBIARY
-#include"libhv/HttpServer.h"
-#include"libhv/HttpService.h"
-#include"libhv/HttpMessage.h"
 // LOCAL LIBIARY
 #include"Weight.h"
 #include"Contact.h"
@@ -39,5 +35,4 @@ using namespace std;
 #include"Merge.h"
 #include"Priority.h"
 #include"EmailReader.h"
-
 #endif
