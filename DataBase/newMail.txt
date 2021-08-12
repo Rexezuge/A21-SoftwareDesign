@@ -1,0 +1,3 @@
+2041
+easycontact.sdd@gmail.com
+This is a Template Email Message. First Line is TIME, Second Line is Recipient, Third Line is Email Context.
