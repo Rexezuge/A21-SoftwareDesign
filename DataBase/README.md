@@ -26,12 +26,13 @@ A DataBase System implemented with `C++`.
 
     3. Install [libhv](https://github.com/ithewei/libhv) Library
 
-    _NOTE: System Root Permission is Required._
         ```shell
         ./configure
         make
         sudo make install
         ```
+
+        _NOTE: System Root Permission is Required._
 
 - Compile DataBase
     ```shell
