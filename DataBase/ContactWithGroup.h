@@ -34,14 +34,14 @@ class ContactWithGroup{
           }
           return false;
         }
-        Contact getContact(const string& name) {
+        Contact* getContact(const string& name) {
           for (int i = 0; i < (int)_Rep.size(); i++) {
             list<Contact> lst = _Rep[i]->getList();
             for (list<Contact>::iterator j = lst.begin(); j != lst.end(); j++) {
-              if (j->getName() == name)  return *j;
+              if (j->getName() == name)  return &*j;
             }
           }
-          return Contact("NULL", 0, 0);
+          return NULL;
         }
         list<Contact> getGroup(const string& groupName){
           for(int i=0;i<(int)_Rep.size();i++){

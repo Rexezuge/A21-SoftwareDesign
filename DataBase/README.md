@@ -13,11 +13,11 @@ MacOS: G++ Version 10.1.1+
 
 - [libhv](https://github.com/ithewei/libhv) Libiary Prerequisite
 
-1. Clone the [libhv](https://github.com/ithewei/libhv) Repository.
+1. Initialize the submodule.
 
-_NOTE: Tested with Commit [a4b7e73](https://github.com/ithewei/libhv/commit/a4b7e730a60e074cec8166b16f5ec3dd3c4dfd74)_
 ```shell
-git clone https://github.com/ithewei/libhv.git
+git submodule init
+git submodule update
 ```
 
 2. Change Directory
@@ -36,8 +36,8 @@ sudo make install
 
 - Compile DataBase
 ```shell
-AnyOS: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -O2 -I/usr/local/include/hv -lhv -pthread -o EasyContact-DataBase.so DB_Main.cpp DB_Export.cpp
-DEBUG: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -I/usr/local/include/hv -lhv -g -D DEBUG -pthread -o EasyContact-DataBase-DEBUG.so DB_Main.cpp DB_Export.cpp
+AnyOS: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -O2 -lhv -pthread -o EasyContact-DataBase.so DB_Main.cpp
+DEBUG: g++ -std=gnu++11 -Werror -Wall -Wextra -lm -lhv -g -D DEBUG -pthread -o EasyContact-DataBase-DEBUG.so DB_Main.cpp
 ```
 
 ## Execute

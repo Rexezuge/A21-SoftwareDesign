@@ -1,9 +1,8 @@
 #include"DATABASE_INCLUDE.h"
-#include"hv.h"
+#include"hv/hv.h"
 #include"APIAccess.h"
-#include"APIServer.h"
 #include"APIRouter.h"
-#include"HttpServer.h"
+#include"hv/HttpServer.h"
 using namespace hv;
 pthread_mutex_t REP_INUSE;
 ContactWithGroup* _Rep;
@@ -32,6 +31,7 @@ void Signal_Handler(int SIG){
     printf("==EZCT== Sending Signal [SIGTERM] to ALL Background Processes...\n");
     kill(PID_ER,SIGTERM);
     kill(PID_PR,SIGTERM);
+    http_server_stop(&g_http_server);
     printf("==EZCT== Saving ALL Contact Information to Local Hard Drive...\n");
     printf("==EZCT== ALL Termination Tasks Successfully Finished, Exiting Easy Contact.\n");
     exit(EXIT_FAILURE);
