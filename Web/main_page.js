@@ -71,7 +71,7 @@ function addGroup() {
 //Show the contacts information in the group one clicked
 function showOneGroupContact(group_name){
 	//Hide the form and show the div with id=Contact_group
-	group_name = group_name.substring(0, group_name.length-3);
+	group_name = group_name.substring(0, group_name.length-18);
 	document.getElementById("Contact_group").style.display = "inline";
 	document.getElementById("Area_Add_Contact_Group").style.display = "none";
     document.getElementById("Area_Add_Contact").style.display = "none";
@@ -130,12 +130,15 @@ function shwoAllGroups(){
 				showOneGroupContact($(this).text());
 				//Change color after every group move
 				checkAndChangeColor();
-			});
 
+			});
 			checkAndChangeColor();
 
 			$(".Top_Button").click(function(){
 				groups = $("#groups_block").contents();
+				//grouplist = $(this).parents("#groups_block");
+				//var prev = grouplist.prev();
+				//$(this).before(grouplist);
 				console.log(this);
 				$(this).addClass("TOP");
 				group = $(this).parent();
@@ -144,6 +147,18 @@ function shwoAllGroups(){
 				
 				checkAndChangeColor();
 			})
+
+			$(".Top_Contact").click(function(){
+				alert("ttt");
+				groups = $("#Contacts_Info_List").contents();
+				console.log(this);
+				$(this).addClass("TOP");
+				console.log(group);
+				group = $(this).parent();
+				$(groups[1]).before(group);
+				checkAndChangeColor();
+			})
+
 
 			$(".New_Contact").click(function(){
 				displayAddContact();
