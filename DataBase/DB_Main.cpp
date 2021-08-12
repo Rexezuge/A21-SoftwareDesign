@@ -9,12 +9,14 @@ pthread_t PID_PR;
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
+  char* _FGETS;
+  BYPASSUNUSED(_FGETS);
   char _TIME[32];
   char _RECEIVER[128];
   char _CONTEXT[2048];
-  fgets(_TIME,32,EM);
-  fgets(_RECEIVER,128,EM);
-  fgets(_CONTEXT,2048,EM);
+  _FGETS=fgets(_TIME,32,EM);
+  _FGETS=fgets(_RECEIVER,128,EM);
+  _FGETS=fgets(_CONTEXT,2048,EM);
   fclose(EM);
   _Rep->updateEmail(_RECEIVER,atoi(_TIME),_CONTEXT);
 }
@@ -59,7 +61,8 @@ int main(int numArgs,char** Argv){
   printf("==EZCT== Restoring Contact Information From Local Hard Drive...\n");
   printf("==EZCT== Easy Contact BackEnd DataBase is Now Running...\n");
   printf("==EZCT== To Terminate, Press \"Ctrl+C\"\n");
-  _Rep=(DB_Import("ECDB.csv").extract();
+  _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
+  *_Rep=DB_Import("ECDB.csv").extract();
   Import_Email_From_Local("ECDB_EM.csv",_Rep);
   pthread_create(&PID_ER,0,StartEmailReader,_Rep);
   pthread_create(&PID_PR,0,StartPrioritySort,_Rep);

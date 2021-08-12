@@ -19,14 +19,16 @@ int ReadLocalEmail(){
     fclose(EM);
     return EXIT_SUCCESS;
   }
+  char* _FGETS;
+  BYPASSUNUSED(_FGETS);
   char _TIME[32];
   char _RECEIVER[128];
   char _CONTEXT[2048];
-  fgets(_TIME,32,EM);
+  _FGETS=fgets(_TIME,32,EM);
   _TIME[strlen(_TIME)-1]=0;
-  fgets(_RECEIVER,128,EM);
+  _FGETS=fgets(_RECEIVER,128,EM);
   _RECEIVER[strlen(_RECEIVER)-1]=0;
-  fgets(_CONTEXT,2048,EM);
+  _FGETS=fgets(_CONTEXT,2048,EM);
   _CONTEXT[strlen(_CONTEXT)-1]=0;
   #ifdef DEBUG
     printf("==EMRD== Received New Email\n");
