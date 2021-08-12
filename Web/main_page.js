@@ -136,15 +136,12 @@ function shwoAllGroups(){
 
 			$(".Top_Button").click(function(){
 				groups = $("#groups_block").contents();
-				//grouplist = $(this).parents("#groups_block");
-				//var prev = grouplist.prev();
-				//$(this).before(grouplist);
 				console.log(this);
-				alert($(this).find("a").text());
-				$(this).addClass("TOP");
+				//$(this).addClass("TOP");
 				group = $(this).parent();
-				console.log(group);
-				$(groups[1]).before(group);
+				group_name = group.text();
+				group_name = group_name.substring(0, group_name.length-18);
+				topGroup(group_name);
 				checkAndChangeColor();
 			})
 
