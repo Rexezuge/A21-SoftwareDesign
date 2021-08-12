@@ -13,5 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: update submodule
+       run: |
+          git submodule update --init --recursive
+
     - name: cmake
       run: cmake .
+
+    -name: cmake build
+      run: cmake --build .
