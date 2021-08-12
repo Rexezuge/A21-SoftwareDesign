@@ -83,12 +83,6 @@ int main(int numArgs,char** Argv){
   g_http_server.service = &g_http_service;
   http_server_run(&g_http_server, 0);
 
-  if(!fork()) {
-    #ifdef PRESENT
-      printf("==APIC== PS<APIC> Running In [PRESENTATION] Mode\n");
-    #endif
-    exit(EXIT_FAILURE);
-  }
   signal(SIGUSR1,Signal_Handler);
   signal(SIGUSR2,Signal_Handler);
   signal(SIGINT,Signal_Handler);
