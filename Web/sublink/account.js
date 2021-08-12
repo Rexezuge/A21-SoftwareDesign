@@ -32,5 +32,5 @@ function checkAndChangeColor() {
 }
 
 window.onload = function () { 
-	checkAndChangeColor()
+	checkAndChangeColor();
 }

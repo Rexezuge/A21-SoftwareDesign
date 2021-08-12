@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	//When open the web page, the page will automatically show the first group
 	shwoAllGroups();
-	checkAndChangeColor()
 });
 
 //Display AddContact div and hide other divs
@@ -126,7 +125,11 @@ function shwoAllGroups(){
 			//Allow clicking the groupname to show details
 			$(".Contact_Group").click(function(){
 				showOneGroupContact($(this).text());
+				//Change color after every group move
+				checkAndChangeColor();
 			});
+
+			checkAndChangeColor();
 
 			$(".New_Contact").click(function(){
 				displayAddContact();
@@ -134,6 +137,7 @@ function shwoAllGroups(){
 			$(".New_Group").click(function(){
 				displayAddGroup();
 			});
+
 		}
 	})
 }
@@ -152,6 +156,12 @@ function checkAndChangeColor() {
 			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#F5DF4D';
 			document.querySelector("#add_group_add_btn").style.backgroundColor = '#F5DF4D';
 			document.querySelector(".decoration").style.backgroundColor = '#F5DF4D';
+			$(".Top_Button").css("color",'#F5DF4D');
+			$(".Top_Button").css("border",'2px solid #F5DF4D');
+			$(".Top_Contact").css("color",'#F5DF4D');
+			$(".Top_Contact").css("border",'2px solid #F5DF4D');
+			$(".Delete_Contact").css("color",'#F5DF4D');
+			$(".Delete_Contact").css("border",'2px solid #F5DF4D');
 		// change the color to the 2020 Pantone year's color
 		} else if (current_selected_color == "2020") {
 			document.querySelector(".account").style.backgroundColor = '#34558b';
@@ -160,6 +170,12 @@ function checkAndChangeColor() {
 			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#34558b';
 			document.querySelector("#add_group_add_btn").style.backgroundColor = '#34558b';
 			document.querySelector(".decoration").style.backgroundColor = '#34558b';
+			$(".Top_Button").css("color",'#34558b');
+			$(".Top_Button").css("border",'2px solid #34558b');
+			$(".Top_Contact").css("color",'#34558b');
+			$(".Top_Contact").css("border",'2px solid #34558b');
+			$(".Delete_Contact").css("color",'#34558b');
+			$(".Delete_Contact").css("border",'2px solid #34558b');
 		// change the color to the 2019 Pantone year's color
 		} else if (current_selected_color == "2019") {
 			document.querySelector(".account").style.backgroundColor = '#ff6f61';
@@ -168,6 +184,12 @@ function checkAndChangeColor() {
 			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#ff6f61';
 			document.querySelector("#add_group_add_btn").style.backgroundColor = '#ff6f61';
 			document.querySelector(".decoration").style.backgroundColor = '#ff6f61';
+			$(".Top_Button").css("color",'#ff6f61');
+			$(".Top_Button").css("border",'2px solid #ff6f61');
+			$(".Top_Contact").css("color",'#ff6f61');
+			$(".Top_Contact").css("border",'2px solid #ff6f61');
+			$(".Delete_Contact").css("color",'#ff6f61');
+			$(".Delete_Contact").css("border",'2px solid #ff6f61');
 		// change the color to the 2018 Pantone year's color
 		} else if (current_selected_color == "2018") {
 			document.querySelector(".account").style.backgroundColor = '#604c8d';
@@ -176,6 +198,12 @@ function checkAndChangeColor() {
 			document.querySelector("#add_contact_add_btn").style.backgroundColor = '#604c8d';
 			document.querySelector("#add_group_add_btn").style.backgroundColor = '#604c8d';
 			document.querySelector(".decoration").style.backgroundColor = '#604c8d';
+			$(".Top_Button").css("color",'#604c8d');
+			$(".Top_Button").css("border",'2px solid #604c8d');
+			$(".Top_Contact").css("color",'#604c8d');
+			$(".Top_Contact").css("border",'2px solid #604c8d');
+			$(".Delete_Contact").css("color",'#604c8d');
+			$(".Delete_Contact").css("border",'2px solid #604c8d');
 		} 
 	});
 }
