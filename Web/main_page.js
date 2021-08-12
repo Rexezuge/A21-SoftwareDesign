@@ -80,7 +80,7 @@ function showOneGroupContact(group_name){
 	//Connerct to the server to get contacts information
 	$.ajax({
 		type:"GET",
-		url: "http://localhost:3000/getGroupContacts/"+group_name,
+		url: "http://localhost:3000/contacts/"+group_name+"/",
 		beforeSend: function(){},
 		success:function(data){
 			//If there is no data
@@ -110,7 +110,7 @@ function showOneGroupContact(group_name){
 function shwoAllGroups(){
 	$.ajax({
 		type:"GET",
-		url: "http://localhost:3000/getGroups",
+		url: "http://localhost:3000/groups/1/1/1",
 		beforeSend: function(){},
 		success:function(data){
 			console.log(data);

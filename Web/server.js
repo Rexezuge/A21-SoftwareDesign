@@ -114,21 +114,36 @@ app.post('/addGroup/:group_name/:note', function(req, res) {
 
 
 //Get all groups in the database
-app.get('/getGroups', function(req, res){
-    GroupInfo.find((err, groups)=>{
-        console.log(groups);
-        res.json(groups);
-    })
+app.get('/groups/:groupName/:contactName/:newGroupName', function(req, res){
+    var groupName = req.params.groupName;
+    var contactName = req.params.contactName;
+    var newGroupName = req.params.newGroupName;
+    axios.post('http://localhost:3001/groups/' + groupName + '/' + contactName + '/' + newGroupName)
+        .then(function (response) {
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
 })
 
 //Get contacts in specific Group
-app.get('/getGroupContacts/:group_name', function(req, res){
-    var group_name = req.params.group_name;
-    ContactInfo.find({group_in: group_name},(err, contacts)=>{
-        console.log(contacts);
-        res.json(contacts);
-    })
+app.get('/contacts/:groupName/:contactName', function(req, res){
+    var groupName = req.params.groupName;
+    var contactName = req.params.contactName;
+    axios.get('http://localhost:3001/contacts/' + groupName + '/' + contactName, req.body)
+        .then(function (response) {
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
 })
+
 
 const colorInfo = new Schema ({
     user_ID: {type: String},
