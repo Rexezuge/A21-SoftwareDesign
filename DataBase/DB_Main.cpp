@@ -9,14 +9,12 @@ pthread_t PID_PR;
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
-  char* _FGETS;
-  BYPASSUNUSED(_FGETS);
   char _TIME[32];
   char _RECEIVER[128];
   char _CONTEXT[2048];
-  _FGETS=fgets(_TIME,32,EM);
-  _FGETS=fgets(_RECEIVER,128,EM);
-  _FGETS=fgets(_CONTEXT,2048,EM);
+  fgets(_TIME,32,EM);
+  fgets(_RECEIVER,128,EM);
+  fgets(_CONTEXT,2048,EM);
   fclose(EM);
   _Rep->updateEmail(_RECEIVER,atoi(_TIME),_CONTEXT);
 }
