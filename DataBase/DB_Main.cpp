@@ -61,6 +61,8 @@ int main(int numArgs,char** Argv){
   BYPASSUNUSED(Argv);
   if(numArgs!=1) { return EXIT_FAILURE; }
   signal(SIGINT,SIG_IGN);
+  signal(SIGUSR1,SIG_IGN);
+  signal(SIGUSR2,SIG_IGN);
   REP_INUSE=PTHREAD_MUTEX_INITIALIZER;
   EMAIL_INUSE=PTHREAD_MUTEX_INITIALIZER;
   #ifdef DEBUG
