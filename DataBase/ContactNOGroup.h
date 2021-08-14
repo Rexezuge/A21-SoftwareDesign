@@ -146,4 +146,16 @@ class ContactNOGroup{
 			printf("RETURN PREFERED TIME\n");
 			return _RESULT/_Group.size();
 		}
+		bool restoreWeight(const std::string& contact,int numMails,const std::string& lastMail,const std::string& times){
+			std::list<int> T;
+			for(int i=0;i<numMails;i++){
+				T.push_back(stoi(times.substr(i*4,4)));
+			}
+			for(std::list<Contact>::iterator i=_Group.begin();i!=_Group.end();i++){
+				if(i->getName()==contact){
+					return i->_Weight.restoreWeight(lastMail,T);
+				}
+			}
+			return false;
+		}
 };

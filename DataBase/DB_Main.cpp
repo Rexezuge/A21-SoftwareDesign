@@ -1,12 +1,16 @@
 #include"DATABASE_INCLUDE.h"
+#include"hv/hv.h"
 #include"APIAccess.h"
 #include"APIRouter.h"
-#include"APIHandler.h"
+#include"hv/HttpServer.h"
+using namespace hv;
 pthread_mutex_t REP_INUSE;
 pthread_mutex_t EMAIL_INUSE;
 ContactWithGroup* _Rep;
 pthread_t PID_ER;
 pthread_t PID_PR;
+http_server_t   g_http_server;
+HttpService     g_http_service;
 
 void SIGupdateEmail(){
   FILE* EM=fopen("newMail.txt","r");
@@ -31,6 +35,7 @@ void Signal_Handler(int SIG){
     printf("==EZCT== Sending Signal [SIGTERM] to ALL Background Processes...\n");
     kill(PID_ER,SIGTERM);
     kill(PID_PR,SIGTERM);
+    http_server_stop(&g_http_server);
     printf("==EZCT== Saving ALL Contact Information to Local Hard Drive...\n");
     printf("==EZCT== ALL Termination Tasks Successfully Finished, Exiting Easy Contact.\n");
     exit(EXIT_FAILURE);
@@ -56,6 +61,8 @@ int main(int numArgs,char** Argv){
   BYPASSUNUSED(Argv);
   if(numArgs!=1) { return EXIT_FAILURE; }
   signal(SIGINT,SIG_IGN);
+  signal(SIGUSR1,SIG_IGN);
+  signal(SIGUSR2,SIG_IGN);
   REP_INUSE=PTHREAD_MUTEX_INITIALIZER;
   EMAIL_INUSE=PTHREAD_MUTEX_INITIALIZER;
   #ifdef DEBUG
@@ -69,18 +76,20 @@ int main(int numArgs,char** Argv){
   printf("==EZCT== Easy Contact BackEnd DataBase is Now Running...\n");
   printf("==EZCT== To Terminate, Press \"Ctrl+C\"\n");
   _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
+  *_Rep=DB_Import("ECDB.csv").extract();
+  Import_Email_From_Local("ECDB_EM.csv",_Rep);
   pthread_create(&PID_ER,0,StartEmailReader,_Rep);
   pthread_create(&PID_PR,0,StartPrioritySort,_Rep);
-  if(!fork()) {
-    #ifdef PRESENT
-      printf("==APIC== PS<APIC> Running In [PRESENTATION] Mode\n");
-    #endif
-    exit(EXIT_FAILURE);
-  }
+
+  g_http_server.port = 3001;
+  g_http_service.base_url = "";
+  APIRouter::register_router(g_http_service);
+  g_http_server.service = &g_http_service;
+  http_server_run(&g_http_server, 0);
+
   signal(SIGUSR1,Signal_Handler);
   signal(SIGUSR2,Signal_Handler);
   signal(SIGINT,Signal_Handler);
-  // *_Rep=DB_Import("ECDB.txt").extract();
   while(1){ sleep(10); }
   return EXIT_SUCCESS;
 }

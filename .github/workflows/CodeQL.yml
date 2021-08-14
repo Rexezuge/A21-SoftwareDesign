@@ -30,7 +30,6 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'javascript' ]
-        # language: [ 'cpp', 'javascript' ]
 
     steps:
     - name: Checkout repository

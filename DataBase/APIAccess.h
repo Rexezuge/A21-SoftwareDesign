@@ -8,7 +8,7 @@ bool addGroup(const std::string& GROUPNAME){
   return _Rep->addGroup(GROUPNAME);
 }
 
-Contact getContact(const std::string& NAME) {
+Contact* getContact(const std::string& NAME) {
   return _Rep->getContact(NAME);
 }
 

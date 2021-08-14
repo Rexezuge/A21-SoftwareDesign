@@ -26,4 +26,9 @@ class Weight{
     int getLatestTime(){
       return _Times.front();
     }
+    bool restoreWeight(const std::string& mail,const std::list<int>& T){
+      _Mail=mail;
+      _Times=T;
+      return true;
+    }
 };
