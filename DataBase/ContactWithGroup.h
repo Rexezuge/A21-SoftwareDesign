@@ -27,12 +27,18 @@ class ContactWithGroup{
         bool addContact(const string& groupName,const Contact& contact){
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->contains(contact)){
+              #ifdef DEBUG
+                printf("==DATA== Contact [%s] Already Exist in Group [%s]\n",contact.getName().c_str(),groupName.c_str());
+              #endif
               return false;
             }
           }
           for(int i=0;i<(int)_Rep.size();i++){
               if(_Rep[i]->getName()==groupName){
                   _Rep[i]->addContact(contact);
+                  #ifdef DEBUG
+                    printf("==DATA== Added New Contact [%s] to Group [%s]\n",contact.getName().c_str(),groupName.c_str());
+                  #endif
                   return CheckRep();
               }
           }
