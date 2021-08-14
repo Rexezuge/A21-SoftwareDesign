@@ -11,6 +11,7 @@ class Weight{
     }
     const std::string& getMail() { return _Mail; }
     int getPreferedTime(){
+      if(!_Times.size()){ return 0; }
       int _INDEX=0;
       int _WEIGHT_1=0,_WEIGHT_1_SIZE=_Times.size()*0.2;
       int _WEIGHT_2=0,_WEIGHT_2_SIZE=_Times.size()*0.5;
