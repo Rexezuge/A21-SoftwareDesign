@@ -32,6 +32,7 @@ using namespace std;
 #include"ContactWithGroup.h"
 #include"DB_Export.h"
 #include"DB_Import.h"
+#include"EM_Import.h"
 #include"Merge.h"
 #include"Priority.h"
 #include"EmailReader.h"

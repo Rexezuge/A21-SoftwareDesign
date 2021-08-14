@@ -179,4 +179,12 @@ class ContactWithGroup{
           }
           return false;
         }
+        bool restoreWeight(const std::string& contact,const std::string& numMails,const std::string& lastMail,const std::string& times){
+          for(int i=0;i<(int)_Rep.size();i++){
+            if(_Rep[i]->contains(contact)){
+              return _Rep[i]->restoreWeight(contact,stoi(numMails),lastMail,times);
+            }
+          }
+          return false;
+        }
 };
