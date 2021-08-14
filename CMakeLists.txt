@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -g")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -g -O2 -w")
 option(EBUG "debug mode" off)
 if(EBUG)
     add_definitions(-DDEBUG)
