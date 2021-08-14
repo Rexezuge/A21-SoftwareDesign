@@ -25,8 +25,14 @@ class ContactWithGroup{
           return CheckRep();
         }
         bool addContact(const string& groupName,const Contact& contact){
+          #ifdef DEBUG
+            printf("==DATA== Request Add New Contact to Group [%s]\n",groupName.c_str());
+          #endif
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->contains(contact)){
+              #ifdef DEBUG
+                printf("==DATA== Contact Already Exist in Group\n");
+              #endif
               return false;
             }
           }
