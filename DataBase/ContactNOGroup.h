@@ -141,12 +141,11 @@ class ContactNOGroup{
 		}
 
 		int getGroupPreferedTime(){
+			if(!_Group.size()){ return 0; }
 			int _RESULT=0;
 			for(list<Contact>::iterator i=_Group.begin();i!=_Group.end();i++){
-				printf("======================GET TIME\n");
 				_RESULT+=i->_Weight.getPreferedTime();
 			}
-			printf("RETURN PREFERED TIME\n");
 			return _RESULT/_Group.size();
 		}
 		bool restoreWeight(const std::string& contact,int numMails,const std::string& lastMail,const std::string& times){
