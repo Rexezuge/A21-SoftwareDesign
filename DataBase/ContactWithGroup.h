@@ -25,10 +25,13 @@ class ContactWithGroup{
           return CheckRep();
         }
         bool addContact(const string& groupName,const Contact& contact){
+          #ifdef DEBUG
+            printf("==DATA== Request Add New Contact to Group [%s]\n",groupName.c_str());
+          #endif
           for(int i=0;i<(int)_Rep.size();i++){
             if(_Rep[i]->contains(contact)){
               #ifdef DEBUG
-                printf("==DATA== Contact [%s] Already Exist in Group [%s]\n",contact.getName().c_str(),groupName.c_str());
+                printf("==DATA== Contact Already Exist in Group\n");
               #endif
               return false;
             }
@@ -36,9 +39,6 @@ class ContactWithGroup{
           for(int i=0;i<(int)_Rep.size();i++){
               if(_Rep[i]->getName()==groupName){
                   _Rep[i]->addContact(contact);
-                  #ifdef DEBUG
-                    printf("==DATA== Added New Contact [%s] to Group [%s]\n",contact.getName().c_str(),groupName.c_str());
-                  #endif
                   return CheckRep();
               }
           }
