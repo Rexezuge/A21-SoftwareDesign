@@ -23,7 +23,8 @@ class DB_Import{
             //Store contact info
             string groupName, contactName, mailAddress, phoneNumber;
             //Store info position
-            int start, end;
+            int start=0;
+            int end=0;
             //Verify which info
             int check = 0;
 
@@ -32,7 +33,6 @@ class DB_Import{
               //get current character
               char tmp1 = line[i];
               char tmp2 = line[i+1];
-
 
               //If Contact info start
               if(tmp1=='\"' && tmp2!=',' && tmp2!='\n' && start==0){
