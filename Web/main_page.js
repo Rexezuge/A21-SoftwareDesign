@@ -110,7 +110,7 @@ function showOneGroupContact(group_name){
 function shwoAllGroups(){
 	$.ajax({
 		type:"GET",
-		url: "http://localhost:3000/groups/1/1/1",
+		url: "http://localhost:3000/groups",
 		beforeSend: function(){},
 		success:function(data){
 			console.log(data);
@@ -123,7 +123,7 @@ function shwoAllGroups(){
 				$("#groups_block").append(groupHtml);
 			}
 			//Show the first group automatically
-			showOneGroupContact($("a.Contact_Group")[0].text)
+			//showOneGroupContact($("a.Contact_Group")[0].text)
 
 			//Allow clicking the groupname to show details
 			$(".Contact_Group").click(function(){

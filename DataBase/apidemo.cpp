@@ -5,6 +5,8 @@
 #include "APIAccess.h"
 #include "APIRouter.h"
 
+
+pthread_mutex_t EMAIL_INUSE;
 pthread_mutex_t REP_INUSE;
 ContactWithGroup* _Rep;
 http_server_t   g_http_server;

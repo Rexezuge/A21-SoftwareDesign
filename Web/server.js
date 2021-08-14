@@ -114,16 +114,18 @@ app.post('/addGroup/:group_name/:note', function(req, res) {
 
 
 //Get all groups in the database
-app.get('/groups/:groupName/:contactName/:newGroupName', function(req, res){
+app.get('/groups', function(req, res){
     var groupName = req.params.groupName;
     var contactName = req.params.contactName;
-    var newGroupName = req.params.newGroupName;
-    axios.post('http://localhost:3001/groups/' + groupName + '/' + contactName + '/' + newGroupName)
+    console.log("______________________________________________________")
+    axios.get('http://localhost:3001/groups')
         .then(function (response) {
-            console.log(response);
+            console.log("————————————————————————————fail__________")
+            console.log(response.data);
             res.json(response);
         })
         .catch(function (error) {
+            console.log("————————————————————————————SUCCESS__________")
             console.log(error);
             res.json(error);
         });
