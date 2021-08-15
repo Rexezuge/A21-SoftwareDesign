@@ -54,7 +54,11 @@ cd DataBase && ./ecdb
     g++ -std=gnu++11 apidemo.cpp -pthread -lm -g -Wall -Wextra -lhv -O2 -o demo.so
     ```
 
+## Execute
 
+```shell
+./demo.so
+```
 
 ## Reference
 [libhv](https://github.com/ithewei/libhv): A C/C++ Network Library for Developing TCP/UDP/SSL/HTTP/WebSocket Client/Server.
