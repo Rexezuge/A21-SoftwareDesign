@@ -105,6 +105,13 @@ function showOneGroupContact(group_name){
 					$("#Contacts_Info_List").append(contactHtml);
 				}
 			}
+			$(".Top_Contact").click(function(){
+				groups = $("#Contacts_Info_List").contents();
+					group = $(this).parent();
+					topContacts(group);
+					console.log(group);
+					showTopContact($("a.Contact_Group")[0].text);
+			})
 		}
 	})
 }
@@ -149,14 +156,11 @@ function shwoAllGroups(){
 			})
 
 			$(".Top_Contact").click(function(){
-				alert("ttt");
 				groups = $("#Contacts_Info_List").contents();
-				console.log(this);
-				$(this).addClass("TOP");
-				console.log(group);
 				group = $(this).parent();
-				$(groups[1]).before(group);
-				checkAndChangeColor();
+				topContacts(group);
+				console.log(group);
+				showTopContact($("a.Contact_Group")[0].text);
 			})
 
 			$(".New_Contact").click(function(){
@@ -245,15 +249,36 @@ function checkAndChangeColor() {
 }
 
 
-function topContact(group_name,contact_name){
+function showTopContact(group_name){
+	group_name = group_name.substring(0, group_name.length-18);
+	//Connerct to the server to get contacts information
 	$.ajax({
-		type:"POST",
-		url: "http://localhost:3000/setTop/"+group_name+"/"+contact_name,
+		type:"GET",
+		url: "http://localhost:3000/getTopContact/"+group_name,
 		beforeSend: function(){},
 		success:function(data){
-			window.location.reload();
+			//If there is no data
+			if (data!=null){
+				var contact_name = data.topContact;
+				contacts = $("#Contacts_Info_List").contents();
+				var top;
+				for (i=0;i<contacts.length;i++){
+					name = $(contacts[i]).contents().filter(".Contact_Name").text()
+					//alert(name);
+					if (contact_name == name){
+						top = contacts[i];
+						console.log(top);
+						break;
+					}
+				}
+				$(top).contents().filter("button").filter(':not(.Delete_Contact)').addClass("TOP");
+				$(contacts[0]).before(top);
+				
+				checkAndChangeColor();
+			}
 		}
 	})
+
 }
 
 function topGroup(group_name){
