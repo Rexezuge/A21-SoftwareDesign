@@ -47,6 +47,9 @@ class Contact {
      * Compares if the current Contact equal to the reference Contact
      */
     bool operator==(const Contact& Input) {
+        return this->_Name == Input._Name;
+    }
+    bool trueEqual(const Contact& Input) {
         return this->_Name == Input._Name && this->_Phone == Input._Phone &&
                this->_Address == Input._Address;
     }

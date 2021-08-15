@@ -6,7 +6,7 @@
 using namespace hv;
 pthread_mutex_t REP_INUSE;
 pthread_mutex_t EMAIL_INUSE;
-ContactWithGroup* _Rep;
+ContactWithGroup* _REP;
 pthread_t PID_ER;
 pthread_t PID_PR;
 http_server_t g_http_server;
@@ -23,8 +23,8 @@ void SIGupdateEmail() {
     fclose(EM);
     FILE* CLEAR_EM = fopen("newMail.txt", "w");
     fclose(CLEAR_EM);
-    _Rep->updateEmail(_RECEIVER, atoi(_TIME), _CONTEXT);
-    _Rep->PrioritySort();
+    _REP->updateEmail(_RECEIVER, atoi(_TIME), _CONTEXT);
+    _REP->PrioritySort();
 }
 
 void Signal_Handler(int SIG) {
@@ -81,11 +81,11 @@ int main(int numArgs, char** Argv) {
     printf("==EZCT== Restoring Contact Information From Local Hard Drive...\n");
     printf("==EZCT== Easy Contact BackEnd DataBase is Now Running...\n");
     printf("==EZCT== To Terminate, Press \"Ctrl+C\"\n");
-    _Rep = (ContactWithGroup*)malloc(sizeof(ContactWithGroup));
-    _Rep = DB_Import("ECDB.csv").extract();
-    Import_Email_From_Local("ECDB_EM.csv", _Rep);
-    pthread_create(&PID_ER, 0, StartEmailReader, _Rep);
-    pthread_create(&PID_PR, 0, StartPrioritySort, _Rep);
+    _REP = (ContactWithGroup*)malloc(sizeof(ContactWithGroup));
+    _REP = DB_Import("ECDB.csv").extract();
+    Import_Email_From_Local("ECDB_EM.csv", _REP);
+    pthread_create(&PID_ER, 0, StartEmailReader, _REP);
+    pthread_create(&PID_PR, 0, StartPrioritySort, _REP);
 
     g_http_server.port = 3001;
     g_http_service.base_url = "";
