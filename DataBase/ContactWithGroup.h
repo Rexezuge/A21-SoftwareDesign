@@ -182,6 +182,9 @@ class ContactWithGroup {
                 }
             }
         }
+        for(int i=0;i<(int)_REP.size();i++){
+          _REP[i]->PrioritySort();
+        }
     }
     bool containBook(const string& groupName) {
         for (int i = 0; i < (int)_REP.size(); i++) {
