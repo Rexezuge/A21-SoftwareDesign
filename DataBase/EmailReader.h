@@ -1,5 +1,5 @@
 #include "DATABASE_INCLUDE.h"
-#define _EMAILTIMER 1
+#define _EMAILTIMER 2
 extern pthread_mutex_t REP_INUSE;
 extern pthread_mutex_t EMAIL_INUSE;
 
@@ -18,6 +18,9 @@ int ReadLocalEmail() {
     FILE* EM = fopen("newMail.txt", "r");
     if (NoNewEmail(EM)) {
         fclose(EM);
+#ifdef DEBUG
+        printf("==EMRD== No New Email\n");
+#endif
         return EXIT_SUCCESS;
     }
     char _TIME[32];
@@ -46,9 +49,6 @@ void* StartEmailReader(void* ARGV) {
 #ifdef DEBUG
     printf("==EMRD== PTHREAD<EmailReader> Running In [DEBUG] Mode\n");
 #endif
-#ifdef PRESENT
-    printf("==EMRD== PTHREAD<EmailReader> Running In [PRESENTATION] Mode\n");
-#endif
     while (1) {
         pthread_mutex_lock(&REP_INUSE);
         {
@@ -57,7 +57,7 @@ void* StartEmailReader(void* ARGV) {
             pthread_mutex_unlock(&EMAIL_INUSE);
         }
         pthread_mutex_unlock(&REP_INUSE);
-#ifdef PRESENT
+#ifdef DEBUG
         sleep(_EMAILTIMER * 10);
 #else
         sleep(_EMAILTIMER * 60);

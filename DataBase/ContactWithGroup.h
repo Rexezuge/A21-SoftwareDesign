@@ -160,10 +160,10 @@ class ContactWithGroup {
             }
         }
     }
-    void updateEmail(const string& contact, int time, const string& email) {
+    void updateEmail(const string& address, int time, const string& email) {
         for (int i = 0; i < (int)_REP.size(); i++) {
-            if (_REP[i]->contains(contact)) {
-                _REP[i]->updateEmail(contact, time, email);
+            if (_REP[i]->containsAddress(address)) {
+                _REP[i]->updateEmail(address, time, email);
                 return;
             }
         }

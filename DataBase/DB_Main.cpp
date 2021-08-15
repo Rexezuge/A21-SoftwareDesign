@@ -18,13 +18,20 @@ void SIGupdateEmail() {
     char _RECEIVER[128];
     char _CONTEXT[2048];
     fgets(_TIME, 32, EM);
+    _TIME[strlen(_TIME) - 1] = 0;
     fgets(_RECEIVER, 128, EM);
+    _RECEIVER[strlen(_RECEIVER) - 1] = 0;
     fgets(_CONTEXT, 2048, EM);
+    _CONTEXT[strlen(_CONTEXT) - 1] = 0;
     fclose(EM);
     FILE* CLEAR_EM = fopen("newMail.txt", "w");
     fclose(CLEAR_EM);
-    _REP->updateEmail(_RECEIVER, atoi(_TIME), _CONTEXT);
-    _REP->PrioritySort();
+    pthread_mutex_lock(&REP_INUSE);
+    {
+        _REP->updateEmail(_RECEIVER, atoi(_TIME), _CONTEXT);
+        _REP->PrioritySort();
+    }
+    pthread_mutex_unlock(&REP_INUSE);
 }
 
 void Signal_Handler(int SIG) {
@@ -75,12 +82,9 @@ int main(int numArgs, char** Argv) {
     setvbuf(stdout, NULL, _IONBF, 0);
     printf("==MAIN== PS<DB_MAIN> Running In [DEBUG] Mode\n");
 #endif
-#ifdef PRESENT
-    printf("==MAIN== PS<DB_MAIN> Running In [PRESENTATION] Mode\n");
-#endif
     printf("==EZCT== Restoring Contact Information From Local Hard Drive...\n");
     _REP = DB_Import("ECDB.csv").extract();
-    // Import_Email_From_Local("ECDB_EM.csv", _REP);
+    Import_Email_From_Local("ECDB_EM.csv", _REP);
     printf("==EZCT== Easy Contact BackEnd DataBase is Now Running...\n");
     printf("==EZCT== To Terminate, Press \"Ctrl+C\"\n");
     pthread_create(&PID_ER, 0, StartEmailReader, _REP);
@@ -95,8 +99,10 @@ int main(int numArgs, char** Argv) {
     signal(SIGUSR1, Signal_Handler);
     signal(SIGUSR2, Signal_Handler);
     signal(SIGINT, Signal_Handler);
+
     while (1) {
-        sleep(10);
+        pause();
     }
+
     return EXIT_SUCCESS;
 }
