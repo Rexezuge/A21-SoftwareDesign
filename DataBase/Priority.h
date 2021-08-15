@@ -19,14 +19,11 @@ void* StartPrioritySort(void* ARGV) {
 #ifdef DEBUG
     printf("==PRST== PTHREAD<PrioritySort> Running In [DEBUG] Mode\n");
 #endif
-#ifdef PRESENT
-    printf("==PRST== PTHREAD<PrioritySort> Running In [PRESENTATION] Mode\n");
-#endif
     while (1) {
         pthread_mutex_lock(&REP_INUSE);
         { UpdateDatabase(DB); }
         pthread_mutex_unlock(&REP_INUSE);
-#ifdef PRESENT
+#ifdef DEBUG
         sleep(_SLEEPTIMER * 10);
 #else
         sleep(_SLEEPTIMER * 60);

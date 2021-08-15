@@ -34,7 +34,7 @@ class Contact {
      * Returns the stored email address
      */
     const std::string& getAddress() { return _Address; }
-    long unsigned int getPhone() { return _Phone; }
+    const long unsigned int& getPhone() { return _Phone; }
     int Hash(int StackSize) {
         long StringSum = 0;
         for (int i = 0; i < (int)_Name.size(); i++) StringSum += (int)_Name[i];
