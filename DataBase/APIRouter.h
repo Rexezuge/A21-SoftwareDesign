@@ -337,25 +337,23 @@ class APIRouter {
             resp->json["msg"] = "OK";
             return 200;
         });
-        router.Delete("/tops/:group",
-                      [](HttpRequest* req, HttpResponse* resp) {
-                          std::string groupName = req->GetParam("group");
+        router.Delete("/tops/:group", [](HttpRequest* req, HttpResponse* resp) {
+            std::string groupName = req->GetParam("group");
 
-                          if (groupName == "" || groupName == "NULL")
-                              return 400;
+            if (groupName == "" || groupName == "NULL") return 400;
 
-                          // Check this group's existence
-                          std::vector<std::string> currentGrps = getGroups();
-                          if (currentGrps.size() == 0) return 404;
-                          for (int i = 0; i < (int)currentGrps.size(); i++) {
-                              if (currentGrps[i] == groupName) break;
-                              if (i == (int)currentGrps.size() - 1) return 404;
-                          }
-                          CancelTop(groupName);
+            // Check this group's existence
+            std::vector<std::string> currentGrps = getGroups();
+            if (currentGrps.size() == 0) return 404;
+            for (int i = 0; i < (int)currentGrps.size(); i++) {
+                if (currentGrps[i] == groupName) break;
+                if (i == (int)currentGrps.size() - 1) return 404;
+            }
+            CancelTop(groupName);
 
-                          resp->json["msg"] = "OK";
-                          return 200;
-                      });
+            resp->json["msg"] = "OK";
+            return 200;
+        });
         router.Delete("/tops", [](HttpRequest* req, HttpResponse* resp) {
             std::string groupName = req->GetParam("group");
 

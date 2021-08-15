@@ -110,7 +110,7 @@ class ContactWithGroup {
         return CheckRep();
     }
     bool CancelTop() {
-        if (!hasAlwaysTop())  return false;
+        if (!hasAlwaysTop()) return false;
         _AlwaysTopGroup = string("");
         return true;
     }
@@ -131,7 +131,7 @@ class ContactWithGroup {
             }
         }
         pair<string, string> top;
-        top.first  = groupName;
+        top.first = groupName;
         top.second = contactName;
         _AlwaysTopContact.push_back(top);
         return CheckRep();
