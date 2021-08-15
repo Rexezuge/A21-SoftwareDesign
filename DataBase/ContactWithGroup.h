@@ -6,7 +6,7 @@
  * This class contains: Rep
  */
 class ContactWithGroup {
-    vector<unique_ptr<ContactNOGroup>> _Rep;
+    vector<unique_ptr<ContactNOGroup>> _REP;
     string _AlwaysTopGroup;
     deque<pair<string, string>> _AlwaysTopContact;
     bool CheckRep() {
@@ -17,12 +17,12 @@ class ContactWithGroup {
    public:
     ContactWithGroup() { _AlwaysTopGroup = ""; }
     bool addGroup(const string& name) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->getName() == name) {
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->getName() == name) {
                 return false;
             }
         }
-        _Rep.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name)));
+        _REP.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name)));
         return CheckRep();
     }
     bool addContact(const string& groupName, const Contact& contact) {
@@ -30,25 +30,25 @@ class ContactWithGroup {
         printf("==DATA== Request Add New Contact to Group [%s]\n",
                groupName.c_str());
 #endif
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->contains(contact)) {
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->contains(contact)) {
 #ifdef DEBUG
-                printf("==DATA== Contact Already Exist in Group\n");
+                printf("==DATA== Contact Already Exist\n");
 #endif
                 return false;
             }
         }
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->getName() == groupName) {
-                _Rep[i]->addContact(contact);
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->getName() == groupName) {
+                _REP[i]->addContact(contact);
                 return CheckRep();
             }
         }
         return false;
     }
     Contact* getContact(const string& name) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            list<Contact> lst = _Rep[i]->getList();
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            list<Contact> lst = _REP[i]->getList();
             for (list<Contact>::iterator j = lst.begin(); j != lst.end(); j++) {
                 if (j->getName() == name) return &*j;
             }
@@ -56,46 +56,46 @@ class ContactWithGroup {
         return NULL;
     }
     list<Contact> getGroup(const string& groupName) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->getName() == groupName) {
-                return _Rep[i]->getList();
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->getName() == groupName) {
+                return _REP[i]->getList();
             }
         }
         return std::list<Contact>();
     }
     vector<string> getGroups() {
         std::vector<std::string> _RESULT;
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            _RESULT.push_back(_Rep[i]->getName());
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            _RESULT.push_back(_REP[i]->getName());
         }
         return _RESULT;
     }
     bool setContact(const Contact& contact) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->contains(contact)) {
-                _Rep[i]->setContact(contact);
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->contains(contact)) {
+                _REP[i]->setContact(contact);
             }
         }
         return true;
     }
     bool removeContact(const std::string& name) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->contains(name)) {
-                return _Rep[i]->removeContact(name);
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->contains(name)) {
+                return _REP[i]->removeContact(name);
             }
         }
         return false;
     }
     bool setGroup(const std::string& groupName, const std::string& name) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            std::list<Contact> LC = _Rep[i]->getList();
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            std::list<Contact> LC = _REP[i]->getList();
             for (std::list<Contact>::iterator iR = LC.begin(); iR != LC.end();
                  iR++) {
                 if (iR->getName() == name) {
-                    for (int iL = 0; iL < (int)_Rep.size(); iL++) {
-                        if (_Rep[iL]->getName() == groupName) {
-                            _Rep[iL]->addContact(*iR);
-                            _Rep[i]->removeContact(iR->getName());
+                    for (int iL = 0; iL < (int)_REP.size(); iL++) {
+                        if (_REP[iL]->getName() == groupName) {
+                            _REP[iL]->addContact(*iR);
+                            _REP[i]->removeContact(iR->getName());
                             return true;
                         }
                     }
@@ -145,47 +145,47 @@ class ContactWithGroup {
         return false;
     }
     void setPriority(const Contact& contact, int priority) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->contains(contact)) {
-                _Rep[i]->setPriority(contact, priority);
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->contains(contact)) {
+                _REP[i]->setPriority(contact, priority);
             }
         }
     }
     void setPriority(const string& groupName, int priority) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->getName() == groupName) {
-                auto tmpBuffer = move(_Rep[i + priority]);
-                _Rep[i + priority] = move(_Rep[i]);
-                _Rep[i] = move(tmpBuffer);
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->getName() == groupName) {
+                auto tmpBuffer = move(_REP[i + priority]);
+                _REP[i + priority] = move(_REP[i]);
+                _REP[i] = move(tmpBuffer);
             }
         }
     }
     void updateEmail(const string& contact, int time, const string& email) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->contains(contact)) {
-                _Rep[i]->updateEmail(contact, time, email);
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->contains(contact)) {
+                _REP[i]->updateEmail(contact, time, email);
                 return;
             }
         }
     }
     void PrioritySort() {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->getName() == _AlwaysTopGroup) {
-                swap(_Rep[0], _Rep[i]);
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->getName() == _AlwaysTopGroup) {
+                swap(_REP[0], _REP[i]);
             }
         }
-        for (int i = 1; i < (int)_Rep.size(); i++) {
-            for (int iR = i; iR < (int)_Rep.size(); iR++) {
-                if (_Rep[i]->getGroupPreferedTime() >
-                    _Rep[iR]->getGroupPreferedTime()) {
-                    swap(_Rep[i], _Rep[iR]);
+        for (int i = 1; i < (int)_REP.size(); i++) {
+            for (int iR = i; iR < (int)_REP.size(); iR++) {
+                if (_REP[i]->getGroupPreferedTime() >
+                    _REP[iR]->getGroupPreferedTime()) {
+                    swap(_REP[i], _REP[iR]);
                 }
             }
         }
     }
     bool containBook(const string& groupName) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->getName() == groupName) {
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->getName() == groupName) {
                 return true;
             }
         }
@@ -193,9 +193,9 @@ class ContactWithGroup {
     }
     bool restoreWeight(const std::string& contact, const std::string& numMails,
                        const std::string& lastMail, const std::string& times) {
-        for (int i = 0; i < (int)_Rep.size(); i++) {
-            if (_Rep[i]->contains(contact)) {
-                return _Rep[i]->restoreWeight(contact, stoi(numMails), lastMail,
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            if (_REP[i]->contains(contact)) {
+                return _REP[i]->restoreWeight(contact, stoi(numMails), lastMail,
                                               times);
             }
         }

@@ -46,13 +46,11 @@ class ContactNOGroup {
      * duplicate.
      */
     void addContact(Contact input) {
-        if (!this->contains(input)) {
 #ifdef DEBUG
-            printf("==DATA== Added New Contact [%s]\n",
-                   input.getName().c_str());
+        printf("==DATA== Added New Contact [%s]\n",
+               input.getName().c_str());
 #endif
-            _Group.push_back(input);
-        }
+        _Group.push_back(input);
     }
 
     /**
@@ -117,7 +115,7 @@ class ContactNOGroup {
      * @param input : The Contact object to be check.
      * @effects check if the contact list contains the Contact object.
      */
-    bool contains(Contact input) {
+    bool contains(const Contact& input) {
         for (list<Contact>::iterator it = _Group.begin(); it != _Group.end();
              it++) {
             if (*it == input) {
