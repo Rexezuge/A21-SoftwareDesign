@@ -77,7 +77,7 @@ int main(int numArgs,char** Argv){
   printf("==EZCT== To Terminate, Press \"Ctrl+C\"\n");
   _Rep=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
   _Rep=DB_Import("ECDB.csv").extract();
-  // Import_Email_From_Local("ECDB_EM.csv",_Rep);
+  Import_Email_From_Local("ECDB_EM.csv",_Rep);
   pthread_create(&PID_ER,0,StartEmailReader,_Rep);
   pthread_create(&PID_PR,0,StartPrioritySort,_Rep);
 
