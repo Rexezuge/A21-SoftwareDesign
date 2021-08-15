@@ -120,25 +120,26 @@ app.get('/groups', function(req, res){
     console.log("______________________________________________________")
     axios.get('http://localhost:3001/groups')
         .then(function (response) {
-            console.log("————————————————————————————fail__________")
+            console.log("—————————————Success———————————————")
             console.log(response.data);
-            res.json(response);
+            res.send(response.data);
         })
         .catch(function (error) {
-            console.log("————————————————————————————SUCCESS__________")
             console.log(error);
             res.json(error);
         });
 })
 
 //Get contacts in specific Group
-app.get('/contacts/:groupName/:contactName', function(req, res){
+app.get('/contacts/:groupName', function(req, res){
     var groupName = req.params.groupName;
-    var contactName = req.params.contactName;
-    axios.get('http://localhost:3001/contacts/' + groupName + '/' + contactName, req.body)
+    //var contactName = req.params.contactName;
+    console.log("GET CONTACTS-START")
+    axios.get('http://localhost:3001/contacts/' + groupName)
         .then(function (response) {
-            console.log(response);
-            res.json(response);
+            console.log("GET CONTACTS: ")
+            console.log(response.data);
+            res.json(response.data);
         })
         .catch(function (error) {
             console.log(error);
@@ -205,6 +206,20 @@ app.post('setTop/:group/:contact',function(req, res){
     var groupName = req.params.group;
     var contactName = req.params.contact;
     axios.post('http://localhost:3001/tops/' + groupName + '/' + contactName)
+        .then(function (response) {
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
+})
+
+app.post('/setTopGroup/:group',function(req, res){
+    var groupName = req.params.group;
+    console.log("TOP "+groupName);
+    axios.post('http://localhost:3001/tops/' + groupName)
         .then(function (response) {
             console.log(response);
             res.json(response);

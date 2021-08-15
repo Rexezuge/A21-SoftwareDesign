@@ -80,27 +80,30 @@ function showOneGroupContact(group_name){
 	//Connerct to the server to get contacts information
 	$.ajax({
 		type:"GET",
-		url: "http://localhost:3000/contacts/"+group_name+"/",
+		url: "http://localhost:3000/contacts/"+group_name,
 		beforeSend: function(){},
 		success:function(data){
 			//If there is no data
-			if (data.length==0){
-				$("#Contacts_Info_List").append("No contacts in this")
+			console.log(data);
+			if (data==null||data.length==0){
+				$("#Contacts_Info_List").append("No contacts in this group")
 			}
-			//Output information in the screen
-			length = data.length;
-			for (i=0;i<length;i++){
-				var contact_name = data[i].id;
-				var mail1 = data[i].email;
-				var phone = data[i].phone;
-				var contactHtml = '<li class="Contact">\
-					            <button class="Delete_Contact">Delete</button>\
-								<button class="Top_Contact">Top</button>\
-					            <p class="Contact_Name">'+contact_name+'</p>\
-					            <p class="Address">'+mail1+'</p>\
-					            <p class="Address">'+phone+'</p>\
-					         </li>'
-				$("#Contacts_Info_List").append(contactHtml);
+			else{
+				//Output information in the screen
+				length = data.length;
+				for (i=0;i<length;i++){
+					var contact_name = data[i].id;
+					var mail1 = data[i].email;
+					var phone = data[i].phone;
+					var contactHtml = '<li class="Contact">\
+						            <button class="Delete_Contact">Delete</button>\
+									<button class="Top_Contact">Top</button>\
+						            <p class="Contact_Name">'+contact_name+'</p>\
+						            <p class="Address">'+mail1+'</p>\
+						            <p class="Address">'+phone+'</p>\
+						         </li>'
+					$("#Contacts_Info_List").append(contactHtml);
+				}
 			}
 		}
 	})
@@ -116,14 +119,14 @@ function shwoAllGroups(){
 			console.log(data);
 			length = data.length;
 			for (i=0;i<length;i++){
-				group = data[i].group_name;
+				group = data[i].name;
 				groupHtml = '<a class="Contact_Group" >'+group+' <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="1 -3 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>\
 							<button class="Top_Button">Top</button>\
 							</a>';
 				$("#groups_block").append(groupHtml);
 			}
 			//Show the first group automatically
-			//showOneGroupContact($("a.Contact_Group")[0].text)
+			showOneGroupContact($("a.Contact_Group")[0].text)
 
 			//Allow clicking the groupname to show details
 			$(".Contact_Group").click(function(){
@@ -155,9 +158,6 @@ function shwoAllGroups(){
 				$(groups[1]).before(group);
 				checkAndChangeColor();
 			})
-
-
-
 
 			$(".New_Contact").click(function(){
 				displayAddContact();
@@ -257,9 +257,10 @@ function topContact(group_name,contact_name){
 }
 
 function topGroup(group_name){
+	alert(group_name);
 	$.ajax({
 		type:"POST",
-		url: "http://localhost:3000/setTop/"+group_name+"/",
+		url: "http://localhost:3000/setTopGroup/"+group_name,
 		beforeSend: function(){},
 		success:function(data){
 			window.location.reload();
