@@ -26,3 +26,4 @@ find_package(Threads REQUIRED)
 target_link_libraries(ecdb PUBLIC m Threads::Threads)
 
 add_dependencies(ecdb hv)
+set_target_properties(ecdb PROPERTIES RUNTIME_OUTPUT_DIRECTORY "DataBase")
