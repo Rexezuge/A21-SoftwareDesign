@@ -8,14 +8,14 @@
 class ContactWithGroup {
     vector<unique_ptr<ContactNOGroup>> _REP;
     string _AlwaysTopGroup;
-    deque<pair<string, string>> _AlwaysTopContact;
+    vector<pair<string, string>> _AlwaysTopContact;
     bool CheckRep() {
         PrioritySort();
         return true;
     }
 
    public:
-    ContactWithGroup() { _AlwaysTopGroup = ""; }
+    ContactWithGroup() { _AlwaysTopGroup = string(""); }
     bool addGroup(const string& name) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->getName() == name) {
@@ -104,13 +104,14 @@ class ContactWithGroup {
         }
         return false;
     }
-    bool hasAlwaysTop() { return _AlwaysTopGroup == ""; }
+    bool hasAlwaysTop() { return _AlwaysTopGroup != ""; }
     bool AlwaysTop(const std::string& groupName) {
         _AlwaysTopGroup = groupName;
         return CheckRep();
     }
     bool CancelTop() {
-        _AlwaysTopGroup = "";
+        if (!hasAlwaysTop())  return false;
+        _AlwaysTopGroup = string("");
         return true;
     }
     bool hasAlwaysTop(const std::string& groupName) {
@@ -129,12 +130,14 @@ class ContactWithGroup {
                 return CheckRep();
             }
         }
-        _AlwaysTopContact.push_back(
-            pair<string, string>(groupName, contactName));
+        pair<string, string> top;
+        top.first  = groupName;
+        top.second = contactName;
+        _AlwaysTopContact.push_back(top);
         return CheckRep();
     }
-    bool CancelTop(const std::string& groupName) {
-        for (std::deque<std::pair<std::string, std::string>>::iterator i =
+    bool CancelTop(const string& groupName) {
+        for (vector<pair<string, string>>::iterator i =
                  _AlwaysTopContact.begin();
              i != _AlwaysTopContact.end(); i++) {
             if (i->first == groupName) {

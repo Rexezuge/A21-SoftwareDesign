@@ -337,10 +337,9 @@ class APIRouter {
             resp->json["msg"] = "OK";
             return 200;
         });
-        router.Delete("/tops/:group/:contact",
+        router.Delete("/tops/:group",
                       [](HttpRequest* req, HttpResponse* resp) {
                           std::string groupName = req->GetParam("group");
-                          std::string contactName = req->GetParam("contact");
 
                           if (groupName == "" || groupName == "NULL")
                               return 400;
@@ -357,7 +356,7 @@ class APIRouter {
                           resp->json["msg"] = "OK";
                           return 200;
                       });
-        router.Delete("/tops/:group", [](HttpRequest* req, HttpResponse* resp) {
+        router.Delete("/tops", [](HttpRequest* req, HttpResponse* resp) {
             std::string groupName = req->GetParam("group");
 
             if (groupName == "" || groupName == "NULL") return 400;

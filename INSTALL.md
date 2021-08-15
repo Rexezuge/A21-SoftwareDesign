@@ -7,7 +7,7 @@ This guide will walk through the installation process.
 ```shell
 git submodule update --init --recursive
 cmake .
-cmake --build . && mv ./ecdb DataBase
+cmake --build .
 ```
 
 ## FrontEnd
