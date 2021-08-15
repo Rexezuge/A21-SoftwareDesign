@@ -1,0 +1,17 @@
+name: DB-Format
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: RafikFarhad/clang-format-github-action@v1.0.1
+        with:
+          sources: "DataBase/*.h,DataBase/*.cpp"
+          style: "file"
