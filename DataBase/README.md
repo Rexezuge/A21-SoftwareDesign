@@ -2,14 +2,14 @@
 
 A DataBase System implemented with `C++`.
 
-## Compile With CMake
-
-- Software Requirement
+## Software Requirement
     ```shell
-    Linux: G++ Version 11.1.0+
-    Windows: MinGW Version 9.0.0+
-    MacOS: G++ Version 10.1.1+
+    Linux: G++ Version 11.1.0+; CMake Version 3.5.0+
+    Windows: MinGW Version 9.0.0+; CMake Version 3.5.0+
+    MacOS: G++ Version 10.1.1+; CMake Version 3.5.0+
     ```
+
+## Compile With CMake
 
 - [libhv](https://github.com/ithewei/libhv) Submodule Initialization
 
@@ -21,10 +21,16 @@ A DataBase System implemented with `C++`.
 
     ```shell
     cmake .   # For DEBUG Usage: cmake -DEBUG=on .
-    cmake --build .
+    cmake --build . && mv ./ecdb DataBase
     ```
+    
+## Execute
 
-## Compile [APIDemo](apidemo.cpp)
+```shell
+cd DataBase && ./ecdb
+```
+
+## Compile [APIDemo](apidemo.cpp) (Developers Only)
 
 - Initialize Submodule
 
@@ -45,13 +51,13 @@ A DataBase System implemented with `C++`.
 
     ```shell
     cd ..
-    g++ -std=gnu++11 apidemo.cpp -pthread -lm -g -Wall -Wextra -lhv
+    g++ -std=gnu++11 apidemo.cpp -pthread -lm -g -Wall -Wextra -lhv -O2 -o demo.so
     ```
 
 ## Execute
 
 ```shell
-./ecdb
+./demo.so
 ```
 
 ## Reference

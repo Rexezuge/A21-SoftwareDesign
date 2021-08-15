@@ -46,13 +46,10 @@ class ContactNOGroup {
      * duplicate.
      */
     void addContact(Contact input) {
-        if (!this->contains(input)) {
 #ifdef DEBUG
-            printf("==DATA== Added New Contact [%s]\n",
-                   input.getName().c_str());
+        printf("==DATA== Added New Contact [%s]\n", input.getName().c_str());
 #endif
-            _Group.push_back(input);
-        }
+        _Group.push_back(input);
     }
 
     /**
@@ -117,7 +114,7 @@ class ContactNOGroup {
      * @param input : The Contact object to be check.
      * @effects check if the contact list contains the Contact object.
      */
-    bool contains(Contact input) {
+    bool contains(const Contact& input) {
         for (list<Contact>::iterator it = _Group.begin(); it != _Group.end();
              it++) {
             if (*it == input) {
@@ -137,10 +134,20 @@ class ContactNOGroup {
         return false;
     }
 
-    void updateEmail(const string& contact, int time, const string& email) {
+    bool containsAddress(const std::string& Input) {
         for (list<Contact>::iterator it = _Group.begin(); it != _Group.end();
              it++) {
-            if (it->getName() == contact) {
+            if (it->getAddress() == Input) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void updateEmail(const string& address, int time, const string& email) {
+        for (list<Contact>::iterator it = _Group.begin(); it != _Group.end();
+             it++) {
+            if (it->getAddress() == address) {
                 it->_Weight.newMail(email, time);
                 return;
             }
