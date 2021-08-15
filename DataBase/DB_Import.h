@@ -17,14 +17,13 @@ class DB_Import {
         // read file
         if (file.is_open()) {
             string line;
+            int check = 0;
             while (getline(file, line)) {
                 // Store contact info
                 string groupName, contactName, mailAddress, phoneNumber;
                 // Store info position
                 int start = 0;
                 int end = 0;
-                // Verify which info
-                int check = 0;
 
                 // Run through each character
                 for (unsigned int i = 0; i < line.length() - 1; i++) {
@@ -37,9 +36,9 @@ class DB_Import {
                         start == 0) {
                         start = i + 1;
                         // If Contact info end
-                    } else if (tmp1 == '\"' && (tmp2 == ',' || tmp2 == '\n') &&
+                    } else if (tmp1 != '\"' && tmp1 != ',' && tmp2 == '\"' &&
                                end == 0) {
-                        end = i - start;
+                        end = i - start + 1;
                     }
                     // Locate info
                     if (start != 0 && end != 0) {
