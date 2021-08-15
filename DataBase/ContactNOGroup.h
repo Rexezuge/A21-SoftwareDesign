@@ -47,8 +47,7 @@ class ContactNOGroup {
      */
     void addContact(Contact input) {
 #ifdef DEBUG
-        printf("==DATA== Added New Contact [%s]\n",
-               input.getName().c_str());
+        printf("==DATA== Added New Contact [%s]\n", input.getName().c_str());
 #endif
         _Group.push_back(input);
     }

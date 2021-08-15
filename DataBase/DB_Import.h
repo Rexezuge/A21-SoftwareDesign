@@ -61,9 +61,8 @@ class DB_Import {
                             check = 0;
 
                             // compose Contact object
-                            Contact newContact =
-                                Contact(contactName, atoi(phoneNumber.c_str()),
-                                        mailAddress);
+                            Contact newContact = Contact(
+                                contactName, stol(phoneNumber), mailAddress);
 
                             // If new Contact list
                             if (!contactBook->containBook(groupName)) {

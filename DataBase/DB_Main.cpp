@@ -79,11 +79,10 @@ int main(int numArgs, char** Argv) {
     printf("==MAIN== PS<DB_MAIN> Running In [PRESENTATION] Mode\n");
 #endif
     printf("==EZCT== Restoring Contact Information From Local Hard Drive...\n");
+    _REP = DB_Import("ECDB.csv").extract();
+    // Import_Email_From_Local("ECDB_EM.csv", _REP);
     printf("==EZCT== Easy Contact BackEnd DataBase is Now Running...\n");
     printf("==EZCT== To Terminate, Press \"Ctrl+C\"\n");
-    _REP = (ContactWithGroup*)malloc(sizeof(ContactWithGroup));
-    _REP = DB_Import("ECDB.csv").extract();
-    Import_Email_From_Local("ECDB_EM.csv", _REP);
     pthread_create(&PID_ER, 0, StartEmailReader, _REP);
     pthread_create(&PID_PR, 0, StartPrioritySort, _REP);
 

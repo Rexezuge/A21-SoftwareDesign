@@ -34,7 +34,7 @@ class Contact {
      * Returns the stored email address
      */
     const std::string& getAddress() { return _Address; }
-    int getPhone() { return _Phone; }
+    long unsigned int getPhone() { return _Phone; }
     int Hash(int StackSize) {
         long StringSum = 0;
         for (int i = 0; i < (int)_Name.size(); i++) StringSum += (int)_Name[i];
@@ -46,9 +46,7 @@ class Contact {
      * @return bool : true if equal, false if not  equal
      * Compares if the current Contact equal to the reference Contact
      */
-    bool operator==(const Contact& Input) {
-        return this->_Name == Input._Name;
-    }
+    bool operator==(const Contact& Input) { return this->_Name == Input._Name; }
     bool trueEqual(const Contact& Input) {
         return this->_Name == Input._Name && this->_Phone == Input._Phone &&
                this->_Address == Input._Address;
