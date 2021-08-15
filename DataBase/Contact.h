@@ -5,7 +5,7 @@
  * This class contains: Name, Phone, Address
  */
 class Contact {
-    unsigned int _Phone = 0;
+    long unsigned int _Phone = 0;
     std::string _Name;
     std::string _Address;
 
@@ -17,7 +17,7 @@ class Contact {
      * @pram Address : email address to be stored
      * This is the constructor for Contact class
      */
-    Contact(const std::string& Name, const unsigned int Phone,
+    Contact(const std::string& Name, const long unsigned int Phone,
             const std::string& Address) {
         _Name = Name;
         _Address = Address;
@@ -34,7 +34,7 @@ class Contact {
      * Returns the stored email address
      */
     const std::string& getAddress() { return _Address; }
-    unsigned int getPhone() { return _Phone; }
+    long unsigned int getPhone() { return _Phone; }
     int Hash(int StackSize) {
         long StringSum = 0;
         for (int i = 0; i < (int)_Name.size(); i++) StringSum += (int)_Name[i];

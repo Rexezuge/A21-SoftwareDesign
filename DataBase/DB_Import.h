@@ -62,7 +62,7 @@ class DB_Import {
 
                             // compose Contact object
                             Contact newContact =
-                                Contact(contactName, atoi(phoneNumber.c_str()),
+                                Contact(contactName, stol(phoneNumber),
                                         mailAddress);
 
                             // If new Contact list
