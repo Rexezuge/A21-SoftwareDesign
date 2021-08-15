@@ -6,9 +6,9 @@ A DataBase System implemented with `C++`.
 
 - Software Requirement
     ```shell
-    Linux: G++ Version 11.1.0+
-    Windows: MinGW Version 9.0.0+
-    MacOS: G++ Version 10.1.1+
+    Linux: G++ Version 11.1.0+; CMake Version 3.5.0+
+    Windows: MinGW Version 9.0.0+; CMake Version 3.5.0+
+    MacOS: G++ Version 10.1.1+; CMake Version 3.5.0+
     ```
 
 - [libhv](https://github.com/ithewei/libhv) Submodule Initialization
