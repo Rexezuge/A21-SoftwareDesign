@@ -179,4 +179,18 @@ class ContactNOGroup {
         }
         return false;
     }
+    bool PrioritySort() {
+        if (_Group.size() < 2) {
+            return true;
+        }
+        for (std::list<Contact>::iterator i = _Group.begin(); i != _Group.end();
+             i++) {
+            for (std::list<Contact>::iterator iR = i; (++iR) != _Group.end();) {
+                if (i->_Weight.getTotalMails() < iR->_Weight.getTotalMails()) {
+                    swap(*i, *iR);
+                }
+            }
+        }
+        return true;
+    }
 };

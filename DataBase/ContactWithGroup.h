@@ -168,7 +168,15 @@ class ContactWithGroup {
             }
         }
     }
-    void PrioritySort() {
+    bool PrioritySort() {
+        this->PrioritySort_Groups();
+        this->PrioritySort_Contacts();
+        return true;
+    }
+    bool PrioritySort_Groups() {
+        if (_REP.size() < 2) {
+            return true;
+        }
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->getName() == _AlwaysTopGroup) {
                 swap(_REP[0], _REP[i]);
@@ -182,6 +190,13 @@ class ContactWithGroup {
                 }
             }
         }
+        return true;
+    }
+    bool PrioritySort_Contacts() {
+        for (int i = 0; i < (int)_REP.size(); i++) {
+            _REP[i]->PrioritySort();
+        }
+        return true;
     }
     bool containBook(const string& groupName) {
         for (int i = 0; i < (int)_REP.size(); i++) {
