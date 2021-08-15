@@ -39,7 +39,7 @@ class DB_Import {
                         // If Contact info end
                     } else if (tmp1 == '\"' && (tmp2 == ',' || tmp2 == '\n') &&
                                end == 0) {
-                        end = i - 1;
+                        end = i - start;
                     }
                     // Locate info
                     if (start != 0 && end != 0) {
@@ -51,18 +51,14 @@ class DB_Import {
                         if (check == 0) {
                             groupName = info;
                             check++;
-                            cout << groupName << "\n";
                         } else if (check == 1) {
                             contactName = info;
                             check++;
-                            cout << contactName << "\n";
                         } else if (check == 2) {
                             mailAddress = info;
                             check++;
-                            cout << mailAddress << "\n";
                         } else if (check == 3) {
                             phoneNumber = info;
-                            cout << phoneNumber << "\n";
                             check = 0;
 
                             // compose Contact object
