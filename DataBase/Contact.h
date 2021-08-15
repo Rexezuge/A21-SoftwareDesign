@@ -11,11 +11,11 @@ class Contact {
 
    public:
     Weight _Weight;
-    Contact(){
-      _Name="";
-      _Address="";
-      _Phone=0;
-      _Weight=Weight();
+    Contact() {
+        _Name = "";
+        _Address = "";
+        _Phone = 0;
+        _Weight = Weight();
     }
     /*
      * @pram Name : name to be stored
@@ -57,10 +57,10 @@ class Contact {
         return this->_Name == Input._Name && this->_Phone == Input._Phone &&
                this->_Address == Input._Address;
     }
-    void cpyContact(const Contact& Input){
-      this->_Phone=Input._Phone;
-      this->_Name=Input._Name;
-      this->_Address=Input._Address;
-      this->_Weight.cpyWeight(Input._Weight);
+    void cpyContact(const Contact& Input) {
+        this->_Phone = Input._Phone;
+        this->_Name = Input._Name;
+        this->_Address = Input._Address;
+        this->_Weight.cpyWeight(Input._Weight);
     }
 };

@@ -70,8 +70,8 @@ class Weight {
         return true;
     }
     int getTotalMails() { return (int)_Times.size(); }
-    void cpyWeight(const Weight& W){
-      this->_Mail=W._Mail;
-      this->_Times=W._Times;
+    void cpyWeight(const Weight& W) {
+        this->_Mail = W._Mail;
+        this->_Times = W._Times;
     }
 };
