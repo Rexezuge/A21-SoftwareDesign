@@ -26,7 +26,8 @@ bool Import_Email_From_Local(const char* FileName, ContactWithGroup* DB) {
                 if (tmp1 == '\"' && tmp2 != ',' && tmp2 != '\n' && start == 0) {
                     start = i + 1;
                     // If Contact info end
-                } else if (tmp1 != '\"' && tmp1 != ',' && tmp2 == '\"' && end == 0) {
+                } else if (tmp1 != '\"' && tmp1 != ',' && tmp2 == '\"' &&
+                           end == 0) {
                     end = i - start + 1;
                 }
                 // Locate info

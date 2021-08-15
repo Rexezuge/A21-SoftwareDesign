@@ -36,7 +36,8 @@ class DB_Import {
                         start == 0) {
                         start = i + 1;
                         // If Contact info end
-                    } else if (tmp1 != '\"' && tmp1 != ',' && tmp2 == '\"' && end == 0) {
+                    } else if (tmp1 != '\"' && tmp1 != ',' && tmp2 == '\"' &&
+                               end == 0) {
                         end = i - start + 1;
                     }
                     // Locate info
