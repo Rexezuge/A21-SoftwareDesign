@@ -18,9 +18,9 @@ int ReadLocalEmail() {
     FILE* EM = fopen("newMail.txt", "r");
     if (NoNewEmail(EM)) {
         fclose(EM);
-        #ifdef DEBUG
-          printf("==EMRD== No New Email\n");
-        #endif
+#ifdef DEBUG
+        printf("==EMRD== No New Email\n");
+#endif
         return EXIT_SUCCESS;
     }
     char _TIME[32];
