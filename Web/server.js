@@ -3,7 +3,6 @@ var app = express();
 var http = require('http').Server(app);
 const path = require('path');
 var axios = require('axios');
-const fetch = require('node-fetch');
 var mongoose = require('mongoose');
 var cors = require('cors');
 app.use(cors());
@@ -65,7 +64,7 @@ const GroupInfo = mongoose.model('GroupInfo', groupInfo);
 //Add group to the database
 app.post('/addGroup/:groupName', function(req, res) {
     var groupName = req.params.groupName;
-    axios.post('http://localhost:3001/groups/' + groupName + '/')
+    axios.post('http://localhost:3001/groups/' + groupName)
         .then(function (response) {
             console.log(response);
             res.json(response);

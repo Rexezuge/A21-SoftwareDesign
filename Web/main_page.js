@@ -56,7 +56,7 @@ function addGroup() {
 		alert("Info Missed!")
 	} else {
 		console.log("Start to post the info!")
-		url = "http://localhost:3000/addGroup/" + new_group + '/';
+		url = "http://localhost:3000/addGroup/" + new_group;
 	}//Post information to the server
 		$.post(url, function(data) {
 			alert(data.msg);
