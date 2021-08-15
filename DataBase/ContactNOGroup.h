@@ -179,14 +179,16 @@ class ContactNOGroup {
         }
         return false;
     }
-    void PrioritySort(){
-      std::list<Contact>::iterator i=_Group.begin();
-      while(i!=_Group.end()){
-        std::list<Contact>::iterator iR=i;
-        if(i->getTotalMails()<++iR->getTotalMails()){
-          swap(i,iR);
+    bool PrioritySort(){
+      if(_Group.size()<2){return true;}
+      for(std::list<Contact>::iterator i=_Group.begin();i!=_Group.end();i++){
+        for(std::list<Contact>::iterator iR=i;(++iR)!=_Group.end();){
+          if(i->_Weight.getTotalMails()<iR->_Weight.getTotalMails()){
+            swap(*i,*iR);
+          }
         }
-        i=_Group.begin();
       }
+      return true;
     }
+
 };

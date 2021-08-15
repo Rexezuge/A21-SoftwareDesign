@@ -168,23 +168,33 @@ class ContactWithGroup {
             }
         }
     }
-    void PrioritySort() {
-        for (int i = 0; i < (int)_REP.size(); i++) {
-            if (_REP[i]->getName() == _AlwaysTopGroup) {
-                swap(_REP[0], _REP[i]);
-            }
-        }
-        for (int i = 1; i < (int)_REP.size(); i++) {
-            for (int iR = i; iR < (int)_REP.size(); iR++) {
-                if (_REP[i]->getGroupPreferedTime() >
-                    _REP[iR]->getGroupPreferedTime()) {
-                    swap(_REP[i], _REP[iR]);
-                }
-            }
-        }
-        for(int i=0;i<(int)_REP.size();i++){
-          _REP[i]->PrioritySort();
-        }
+    bool PrioritySort() {
+        this->PrioritySort_Groups();
+        this->PrioritySort_Contacts();
+        return true;
+    }
+    bool PrioritySort_Groups(){
+      if(_REP.size()<2){return true;}
+      for (int i = 0; i < (int)_REP.size(); i++) {
+          if (_REP[i]->getName() == _AlwaysTopGroup) {
+              swap(_REP[0], _REP[i]);
+          }
+      }
+      for (int i = 1; i < (int)_REP.size(); i++) {
+          for (int iR = i; iR < (int)_REP.size(); iR++) {
+              if (_REP[i]->getGroupPreferedTime() >
+                  _REP[iR]->getGroupPreferedTime()) {
+                  swap(_REP[i], _REP[iR]);
+              }
+          }
+      }
+      return true;
+    }
+    bool PrioritySort_Contacts(){
+      for(int i=0;i<(int)_REP.size();i++){
+        _REP[i]->PrioritySort();
+      }
+      return true;
     }
     bool containBook(const string& groupName) {
         for (int i = 0; i < (int)_REP.size(); i++) {

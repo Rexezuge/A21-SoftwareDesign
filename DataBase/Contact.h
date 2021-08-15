@@ -5,12 +5,18 @@
  * This class contains: Name, Phone, Address
  */
 class Contact {
-    long unsigned int _Phone = 0;
+    long unsigned int _Phone;
     std::string _Name;
     std::string _Address;
 
    public:
     Weight _Weight;
+    Contact(){
+      _Name="";
+      _Address="";
+      _Phone=0;
+      _Weight=Weight();
+    }
     /*
      * @pram Name : name to be stored
      * @pram Phone : phone number to be stored
@@ -50,5 +56,11 @@ class Contact {
     bool trueEqual(const Contact& Input) {
         return this->_Name == Input._Name && this->_Phone == Input._Phone &&
                this->_Address == Input._Address;
+    }
+    void cpyContact(const Contact& Input){
+      this->_Phone=Input._Phone;
+      this->_Name=Input._Name;
+      this->_Address=Input._Address;
+      this->_Weight.cpyWeight(Input._Weight);
     }
 };
