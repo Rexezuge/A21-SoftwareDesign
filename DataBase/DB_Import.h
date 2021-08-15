@@ -10,8 +10,8 @@ class DB_Import{
     }
 
     //Read the input file and return a ContactWithGroup object
-    ContactWithGroup extract() {
-        ContactWithGroup contactBook;
+    ContactWithGroup * extract() {
+        ContactWithGroup * contactBook=(ContactWithGroup*)malloc(sizeof(ContactWithGroup));
         ifstream file;
         file.open(fileName);
 
@@ -38,8 +38,8 @@ class DB_Import{
               if(tmp1=='\"' && tmp2!=',' && tmp2!='\n' && start==0){
                 start = i+1;
               //If Contact info end
-              } else if (tmp1!='\"' && tmp1!=',' && tmp2=='\"' && end==0){
-                end = i;
+              } else if (tmp1=='\"' && (tmp2==',' || tmp2=='\n') && end==0){
+                end = i-start;
               }
               //Locate info
               if (start!=0 && end!=0){
@@ -50,26 +50,29 @@ class DB_Import{
                 //set contact info
                 if(check==0){
                   groupName = info;
+                  check++;
                 } else if(check==1){
                   contactName = info;
+                  check++;
                 } else if(check==2){
                   mailAddress = info;
-                } else {
+                  check++;
+                } else if(check==3){
                   phoneNumber = info;
                   check = 0;
+
+                  //compose Contact object
+                  Contact newContact = Contact(contactName, atoi(phoneNumber.c_str()), mailAddress);
+
+                  //If new Contact list
+                  if(!contactBook->containBook(groupName)){
+                    contactBook->addGroup(groupName);
+                    contactBook->addContact(groupName, newContact);
+                  } else {
+                    contactBook->addContact(groupName, newContact);
+                  }
                 }
               }
-            }
-
-            //compose Contact object
-            Contact newContact = Contact(contactName, atoi(phoneNumber.c_str()), mailAddress);
-
-            //If new Contact list
-            if(!contactBook.containBook(groupName)){
-              contactBook.addGroup(groupName);
-              contactBook.addContact(groupName, newContact);
-            } else {
-              contactBook.addContact(groupName, newContact);
             }
           }
         }
