@@ -26,6 +26,7 @@ using namespace std;
 #include <utility>
 #include <vector>
 // LOCAL LIBIARY
+#include "Weight.h"
 #include "Contact.h"
 #include "ContactNOGroup.h"
 #include "ContactWithGroup.h"
@@ -35,5 +36,4 @@ using namespace std;
 #include "EmailReader.h"
 #include "Merge.h"
 #include "Priority.h"
-#include "Weight.h"
 #endif
