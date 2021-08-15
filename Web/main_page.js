@@ -92,7 +92,7 @@ function showOneGroupContact(group_name){
 				//Output information in the screen
 				length = data.length;
 				for (i=0;i<length;i++){
-					var contact_name = data[i].id;
+					var contact_name = data[i].name;
 					var mail1 = data[i].email;
 					var phone = data[i].phone;
 					var contactHtml = '<li class="Contact">\
