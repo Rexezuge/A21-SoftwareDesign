@@ -49,21 +49,15 @@ class DB_Import {
                         if (check == 0) {
                             groupName = info;
                             check++;
-                            cout<<groupName<<endl;
                         } else if (check == 1) {
                             contactName = info;
                             check++;
-                            cout<<contactName<<endl;
                         } else if (check == 2) {
                             mailAddress = info;
                             check++;
-                            cout<<mailAddress<<endl;
                         } else if (check == 3) {
                             phoneNumber = info;
-                            cout<<phoneNumber<<endl;
                             check=0;
-
-                            cout<<groupName<<", "<<contactName<<", "<<mailAddress<<", "<<phoneNumber<<"\n";
 
                             // compose Contact object
                             Contact newContact =
