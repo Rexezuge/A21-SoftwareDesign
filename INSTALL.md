@@ -2,20 +2,26 @@
 
 This guide will walk through the installation process.
 
-## Required Software
+## BackEnd
 
-[Node.js](https://nodejs.org/)
+```shell
+git submodule update --init --recursive
+cmake .
+cmake --build . && mv ./ecdb DataBase
+```
 
-## Setup
+## FrontEnd
 
 ```shell
 npm install
+npm install node-fetch
 ```
 
-## Run
+## Execute
 
 ```shell
-node server.js
+cd DataBase && ./ecdb &
+cd ../Web && node server.js
 ```
 
 ## Terminate
