@@ -38,47 +38,21 @@ const ContactInfo = mongoose.model('ContactInfo', contactInfo);
 
 
 //Add contact to the database
-app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', function(req, res) {
+app.post('/addContact/:account_name/:contact_phone/:contact_email/:contact_group', function(req, res) {
     var account_name = req.params.account_name;
-    var mail_address_1 = req.params.mail_address_1;
-    var mail_address_2 = req.params.mail_address_2;
-    var group_in = req.params.group_in;
-    GroupInfo.findOne({group_name: group_in}).exec(function(err,group){
-        //Group is not exist, addContact fail
-        if (group==null){
-            res.json({'msg':'Group '+ group_in + " is not exist\nPlease create the group first",
-                      'status':'Fail'});
-        }
-        else{
-            ContactInfo.findOne({account_name: account_name, group_in: group_in}).exec(function(err, contact) {
-            //Contact already exist, fail to add contact
-            if (contact) {
-                res.json({'msg': account_name + ' already existed in ' + group_in,
-                          'status':'Fail'});
-            } else {
-                //Save new contact into database
-                var thisContactInfo = new ContactInfo({
-                    account_name: account_name,
-                    mail_address_1: mail_address_1,
-                    mail_address_2: mail_address_2,
-                    group_in: group_in
-                })
-                thisContactInfo.save(function (err) {
-                    if (err) res.json(err);
-                    else {
-                        text = account_name + " added to Group: " + group_in;
-                        console.log(text);
-                        res.json({'msg': text});
-                    }
-                })
-            }
-        });
-        }
-
+    var contact_phone = req.params.contact_phone;
+    var contact_email = req.params.contact_email;
+    var contact_group = req.params.contact_group;
+    var meta_info = {phone: Number(parseInt(contact_phone)), contact_email: contact_email}
+    axios.post('http://localhost:3001/contacts/' + contact_group + '/' + account_name + '/', meta_info)
+    .then(function (response) {
+        console.log(response);
+        res.json(response);
     })
-
-    // avoid saving repetitive info
-
+    .catch(function (error) {
+        console.log(error);
+        res.json(error);
+    });
 })
 
 //Schema
@@ -89,27 +63,17 @@ const groupInfo = new Schema ({
 const GroupInfo = mongoose.model('GroupInfo', groupInfo);
 
 //Add group to the database
-app.post('/addGroup/:group_name/:note', function(req, res) {
-    var group_name = req.params.group_name;
-    var note = req.params.note;
-
-    // avoid saving repetitive info
-    GroupInfo.findOne({group_name: group_name}).exec(function(err, group) {
-        //Group already exist. Fail to add the group
-        if (group) {
-            res.json({'msg': 'Already existed',
-                    'status':'Fail'});
-        } else {
-            var thisGroupInfo = new GroupInfo({
-                group_name: group_name,
-                note: note
-            })
-            thisGroupInfo.save(function (err) {
-                if (err) res.json(err);
-                else res.json({'msg': group_name + " is added!"})
-            })
-        }
-    });
+app.post('/addGroup/:groupName', function(req, res) {
+    var groupName = req.params.groupName;
+    axios.post('http://localhost:3001/groups/' + groupName + '/')
+        .then(function (response) {
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
 })
 
 
@@ -228,4 +192,18 @@ app.post('/setTopGroup/:group',function(req, res){
             console.log(error);
             res.json(error);
         });
+})
+
+//Add contact to the database
+app.delete('/DeleteContact/:account_name/', function(req, res) {
+    var account_name = req.params.account_name;
+    axios.delete('http://localhost:3001/contacts/NULL/' + account_name + '/')
+    .then(function (response) {
+        console.log(response);
+        res.json(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.json(error);
+    });
 })

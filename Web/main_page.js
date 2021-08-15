@@ -24,17 +24,14 @@ function goToAccountPage(){
 //Post the input information to the server and save them into the database
 function addContact() {
 	var contact_name = document.querySelector('#add_contact_name').value;
-	var contact_email_1 = document.querySelector('#add_contact_email_1').value;
-	var contact_email_2 = document.querySelector('#add_contact_email_2').value;
+	var contact_phone = document.querySelector('#add_contact_phone').value;
+	var contact_email = document.querySelector('#add_contact_email').value;
 	var contact_group = document.querySelector('#add_contact_group').value;
 	//Check if every block is entered
-	if (contact_name == "" || contact_email_1 == "" || contact_group == "") {
+	if (contact_name == "" || contact_phone == "" || contact_group == "" || contact_email == "") {
 		alert("Info Missed!")
 	} else {
-		if (contact_email_2 == "") {
-			contact_email_2 = "none"
-		}
-		url = "http://localhost:3000/addContact/" + contact_name + '/' + contact_email_1 + '/' + contact_email_2 + '/' + contact_group
+		url = "http://localhost:3000/addContact/" + contact_name + '/' + contact_phone + '/' + contact_email + '/' + contact_group
 		console.log("Start to post the info!" + url)
 	}//Post information to the server
 		$.post(url, function(data) {
@@ -51,13 +48,15 @@ function addContact() {
 function addGroup() {
 	//Get data
 	var new_group = document.querySelector('#add_new_group').value;
-	var define_new_group = document.querySelector('#define_new_group').value;
+
+	// var define_new_group = document.querySelector('#define_new_group').value;
+
 	//Ensure there is no empty input
-	if (new_group == "" || define_new_group == "") {
+	if (new_group == "") {
 		alert("Info Missed!")
 	} else {
 		console.log("Start to post the info!")
-		url = "http://localhost:3000/addGroup/" + new_group + '/' + define_new_group
+		url = "http://localhost:3000/addGroup/" + new_group + '/';
 	}//Post information to the server
 		$.post(url, function(data) {
 			alert(data.msg);
