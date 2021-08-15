@@ -9,17 +9,16 @@ bool Import_Email_From_Local(const char* FileName, ContactWithGroup* DB) {
     // read file
     if (file.is_open()) {
         string line;
+        int check=0;
         while (getline(file, line)) {
             // Store contact info
             string input1, input2, input3, input4;
             // Store info position
             int start = 0;
             int end = 0;
-            // Verify which info
-            int check = 0;
 
             // Run through each character
-            for (unsigned int i = 0; i < line.length() - 1; i++) {
+            for (unsigned int i = 0; i < line.length()-1; i++) {
                 // get current character
                 char tmp1 = line[i];
                 char tmp2 = line[i + 1];
@@ -27,9 +26,8 @@ bool Import_Email_From_Local(const char* FileName, ContactWithGroup* DB) {
                 if (tmp1 == '\"' && tmp2 != ',' && tmp2 != '\n' && start == 0) {
                     start = i + 1;
                     // If Contact info end
-                } else if (tmp1 == '\"' && (tmp2 == ',' || tmp2 == '\n') &&
-                           end == 0) {
-                    end = i - start;
+                } else if (tmp1!='\"' && tmp1!=',' && tmp2=='\"' && end==0) {
+                    end = i - start+1;
                 }
                 // Locate info
                 if (start != 0 && end != 0) {
