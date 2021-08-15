@@ -18,8 +18,11 @@ void SIGupdateEmail() {
     char _RECEIVER[128];
     char _CONTEXT[2048];
     fgets(_TIME, 32, EM);
+    _TIME[strlen(_TIME) - 1] = 0;
     fgets(_RECEIVER, 128, EM);
+    _RECEIVER[strlen(_RECEIVER) - 1] = 0;
     fgets(_CONTEXT, 2048, EM);
+    _CONTEXT[strlen(_CONTEXT) - 1] = 0;
     fclose(EM);
     FILE* CLEAR_EM = fopen("newMail.txt", "w");
     fclose(CLEAR_EM);
@@ -28,7 +31,7 @@ void SIGupdateEmail() {
         _REP->updateEmail(_RECEIVER, atoi(_TIME), _CONTEXT);
         _REP->PrioritySort();
     }
-    pthread_mutex_unlock(&EMAIL_INUSE);
+    pthread_mutex_unlock(&REP_INUSE);
 }
 
 void Signal_Handler(int SIG) {
