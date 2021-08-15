@@ -10,4 +10,3 @@ jobs:
       - uses: RafikFarhad/clang-format-github-action@v1.0.1
         with:
           sources: "DataBase/*.h,DataBase/*.cpp"
-          style: "Google"
