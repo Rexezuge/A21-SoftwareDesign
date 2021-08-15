@@ -2,38 +2,38 @@
 #define SDD_EASYCONTACT_DATABASE
 
 // DEFINE
-#define BYPASSUNUSED(X)(void)(X)
+#define BYPASSUNUSED(X) (void)(X)
 using namespace std;
 // C LIBIARY
-#include<math.h>
-#include<time.h>
-#include<stdio.h>
-#include<fcntl.h>
-#include<string.h>
-#include<signal.h>
-#include<stdlib.h>
-#include<unistd.h>
+#include <fcntl.h>
+#include <math.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
 // C++ LIBIARY
-#include<list>
-#include<queue>
-#include<deque>
-#include<fstream>
-#include<string>
-#include<vector>
-#include<memory>
-#include<utility>
-#include<iostream>
-#include<iterator>
-#include<algorithm>
+#include <algorithm>
+#include <deque>
+#include <fstream>
+#include <iostream>
+#include <iterator>
+#include <list>
+#include <memory>
+#include <queue>
+#include <string>
+#include <utility>
+#include <vector>
 // LOCAL LIBIARY
-#include"Weight.h"
-#include"Contact.h"
-#include"ContactNOGroup.h"
-#include"ContactWithGroup.h"
-#include"DB_Export.h"
-#include"DB_Import.h"
-#include"EM_Import.h"
-#include"Merge.h"
-#include"Priority.h"
-#include"EmailReader.h"
+#include "Contact.h"
+#include "ContactNOGroup.h"
+#include "ContactWithGroup.h"
+#include "DB_Export.h"
+#include "DB_Import.h"
+#include "EM_Import.h"
+#include "EmailReader.h"
+#include "Merge.h"
+#include "Priority.h"
+#include "Weight.h"
 #endif
