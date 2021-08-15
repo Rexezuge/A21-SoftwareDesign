@@ -26,7 +26,7 @@ class DB_Import {
                 int end = 0;
 
                 // Run through each character
-                for (unsigned int i = 0; i < line.length()-1; i++) {
+                for (unsigned int i = 0; i < line.length() - 1; i++) {
                     // get current character
                     char tmp1 = line[i];
                     char tmp2 = line[i + 1];
@@ -36,8 +36,8 @@ class DB_Import {
                         start == 0) {
                         start = i + 1;
                         // If Contact info end
-                    } else if (tmp1!='\"' && tmp1!=',' && tmp2=='\"' && end==0) {
-                        end = i - start+1;
+                    } else if (tmp1 != '\"' && tmp1 != ',' && tmp2 == '\"' && end == 0) {
+                        end = i - start + 1;
                     }
                     // Locate info
                     if (start != 0 && end != 0) {
@@ -57,7 +57,7 @@ class DB_Import {
                             check++;
                         } else if (check == 3) {
                             phoneNumber = info;
-                            check=0;
+                            check = 0;
 
                             // compose Contact object
                             Contact newContact =
