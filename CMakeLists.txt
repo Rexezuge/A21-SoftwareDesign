@@ -12,9 +12,10 @@ project(EasyContact-DataBase)
 set(LIBHVR DataBase/libhv)
 set(SOURCE DataBase/DB_Main.cpp)
 
-set(BUILD_SHARED on)
-set(BUILD_STATIC off)
-set(BUILD_EXAMPLES off)
+set(BUILD_STATIC OFF CACHE BOOL "build static library")
+set(BUILD_EXAMPLES OFF CACHE BOOL "build examples")
+set(WITH_HTTP_CLIENT OFF CACHE BOOL "compile http/client")
+
 add_subdirectory(${LIBHVR})
 include_directories(${PROJECT_SOURCE_DIR}/${LIBHVR}/include)
 link_libraries(${PROJECT_SOURCE_DIR}/${LIBHVR}/lib/libhv.so)
