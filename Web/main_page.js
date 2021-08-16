@@ -35,11 +35,11 @@ function addContact() {
 		console.log("Start to post the info!" + url)
 	}//Post information to the server
 		$.post(url, function(data) {
-				alert(data.msg);
-				console.log(data.status)
+			//alert(data.msg);
+			console.log(data.status)
 			// If information saved sucessfully, reload the whole page
-			if (data.status!="Fail")
-				window.location.reload();
+
+			window.location.reload();
 			}
 		);
 }
@@ -49,8 +49,6 @@ function addGroup() {
 	//Get data
 	var new_group = document.querySelector('#add_new_group').value;
 
-	// var define_new_group = document.querySelector('#define_new_group').value;
-
 	//Ensure there is no empty input
 	if (new_group == "") {
 		alert("Info Missed!")
@@ -59,11 +57,10 @@ function addGroup() {
 		url = "http://localhost:3000/addGroup/" + new_group;
 	}//Post information to the server
 		$.post(url, function(data) {
-			alert(data.msg);
+			//alert(data.msg);
 			console.log(data);
 			// If information saved sucessfully, reload the whole page
-			if (data.status!="Fail")
-				window.location.reload();
+			window.location.reload();
 			}
 		);
 }
@@ -304,7 +301,7 @@ function showTopContact(group_name){
 }
 
 function topGroup(group_name){
-	alert(group_name);
+	//alert(group_name);
 	$.ajax({
 		type:"POST",
 		url: "http://localhost:3000/setTopGroup/"+group_name,

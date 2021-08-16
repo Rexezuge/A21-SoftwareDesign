@@ -165,9 +165,20 @@ app.get('/getColor/:user_ID', function(req, res){
     })
 })
 
+//Top contact in the group
 app.post('/setTop/:group/:contact',function(req, res){
     var groupName = req.params.group;
     var contactName = req.params.contact;
+    axios.delete("http://localhost:3001/tops/" + groupName)
+        .then(function (response) {
+            console.log("DELETE TOP CONTACT STATUS:")
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
     axios.post('http://localhost:3001/tops/' + groupName + '/' + contactName)
         .then(function (response) {
             console.log(response);
@@ -179,9 +190,20 @@ app.post('/setTop/:group/:contact',function(req, res){
         });
 })
 
+//Top a group
 app.post('/setTopGroup/:group',function(req, res){
     var groupName = req.params.group;
     console.log("TOP "+groupName);
+    axios.delete("http://localhost:3001/tops")
+        .then(function (response) {
+            console.log("DELETE TOP GROUP STATUS:")
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+    });
     axios.post('http://localhost:3001/tops/' + groupName)
         .then(function (response) {
             console.log(response);
@@ -196,12 +218,16 @@ app.post('/setTopGroup/:group',function(req, res){
 //Add contact to the database
 app.delete('/DeleteContact/:account_name/', function(req, res) {
     var account_name = req.params.account_name;
+    var msg = "TRY DELETE "+ account_name; 
+    console.log(msg);
     axios.delete('http://localhost:3001/contacts/NULL/' + account_name)
     .then(function (response) {
+        console.log("DELETE");
         console.log(response);
         res.json(response);
     })
     .catch(function (error) {
+        console.log("ERROR");
         console.log(error);
         res.json(error);
     });
