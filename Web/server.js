@@ -3,7 +3,6 @@ var app = express();
 var http = require('http').Server(app);
 const path = require('path');
 var axios = require('axios');
-const fetch = require('node-fetch');
 var mongoose = require('mongoose');
 var cors = require('cors');
 app.use(cors());
@@ -38,97 +37,79 @@ const ContactInfo = mongoose.model('ContactInfo', contactInfo);
 
 
 //Add contact to the database
-app.post('/addContact/:account_name/:mail_address_1/:mail_address_2/:group_in', function(req, res) {
+app.post('/addContact/:account_name/:contact_phone/:contact_email/:contact_group', function(req, res) {
     var account_name = req.params.account_name;
-    var mail_address_1 = req.params.mail_address_1;
-    var mail_address_2 = req.params.mail_address_2;
-    var group_in = req.params.group_in;
-    GroupInfo.findOne({group_name: group_in}).exec(function(err,group){
-        //Group is not exist, addContact fail
-        if (group==null){
-            res.json({'msg':'Group '+ group_in + " is not exist\nPlease create the group first",
-                      'status':'Fail'});
-        }
-        else{
-            ContactInfo.findOne({account_name: account_name, group_in: group_in}).exec(function(err, contact) {
-            //Contact already exist, fail to add contact
-            if (contact) {
-                res.json({'msg': account_name + ' already existed in ' + group_in,
-                          'status':'Fail'});
-            } else {
-                //Save new contact into database
-                var thisContactInfo = new ContactInfo({
-                    account_name: account_name,
-                    mail_address_1: mail_address_1,
-                    mail_address_2: mail_address_2,
-                    group_in: group_in
-                })
-                thisContactInfo.save(function (err) {
-                    if (err) res.json(err);
-                    else {
-                        text = account_name + " added to Group: " + group_in;
-                        console.log(text);
-                        res.json({'msg': text});
-                    }
-                })
-            }
-        });
-        }
-
+    var contact_phone = req.params.contact_phone;
+    var contact_email = req.params.contact_email;
+    var contact_group = req.params.contact_group;
+    var meta_info = {"phone": Number(parseInt(contact_phone)), "email": contact_email}
+    console.log("Add contact:")
+    var url = 'http://localhost:3001/contacts/' + contact_group + '/' + account_name
+    axios.post(url, meta_info,{
+                headers:{
+                'Content-Type':'application/json'
+                }
     })
-
-    // avoid saving repetitive info
-
-})
-
-//Schema
-const groupInfo = new Schema ({
-    group_name: {type: String},
-    note: {type: String},
-});
-const GroupInfo = mongoose.model('GroupInfo', groupInfo);
-
-//Add group to the database
-app.post('/addGroup/:group_name/:note', function(req, res) {
-    var group_name = req.params.group_name;
-    var note = req.params.note;
-
-    // avoid saving repetitive info
-    GroupInfo.findOne({group_name: group_name}).exec(function(err, group) {
-        //Group already exist. Fail to add the group
-        if (group) {
-            res.json({'msg': 'Already existed',
-                    'status':'Fail'});
-        } else {
-            var thisGroupInfo = new GroupInfo({
-                group_name: group_name,
-                note: note
-            })
-            thisGroupInfo.save(function (err) {
-                if (err) res.json(err);
-                else res.json({'msg': group_name + " is added!"})
-            })
-        }
+    .then(function (response) {
+        console.log(response);
+        res.json(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.json(error);
     });
 })
 
 
+//Add group to the database
+app.post('/addGroup/:groupName', function(req, res) {
+    var groupName = req.params.groupName;
+    axios.post('http://localhost:3001/groups/' + groupName)
+        .then(function (response) {
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
+})
+
+
 //Get all groups in the database
-app.get('/getGroups', function(req, res){
-    GroupInfo.find((err, groups)=>{
-        console.log(groups);
-        res.json(groups);
-    })
+app.get('/groups', function(req, res){
+    var groupName = req.params.groupName;
+    var contactName = req.params.contactName;
+    console.log("______________________________________________________")
+    axios.get('http://localhost:3001/groups')
+        .then(function (response) {
+            console.log("—————————————Success———————————————")
+            //console.log(response.data);
+            res.send(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
 })
 
 //Get contacts in specific Group
-app.get('/getGroupContacts/:group_name', function(req, res){
-    var group_name = req.params.group_name;
-    ContactInfo.find({group_in: group_name},(err, contacts)=>{
-        console.log(contacts);
-        res.json(contacts);
-    })
+app.get('/contacts/:groupName', function(req, res){
+    var groupName = req.params.groupName;
+    //var contactName = req.params.contactName;
+    console.log("GET CONTACTS-START")
+    axios.get('http://localhost:3001/contacts/' + groupName)
+        .then(function (response) {
+            console.log("GET CONTACTS: ")
+            //console.log(response.data);
+            res.json(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
 })
+
 
 const colorInfo = new Schema ({
     user_ID: {type: String},
@@ -179,8 +160,56 @@ app.post('/postColor/:user_ID/:color', function(req, res) {
 app.get('/getColor/:user_ID', function(req, res){
     var user_ID = req.params.user_ID;
     ColorInfo.findOne({user_ID: user_ID},(err, color)=>{
-        console.log(color);
+        //console.log(color);
         res.json(color);
     })
 })
 
+//Top contact in the group
+app.post('/setTop/:group/:contact',function(req, res){
+    var groupName = req.params.group;
+    var contactName = req.params.contact;
+    msg = "TOP GROUP: "+groupName +" and CONTACT: "+contactName;
+    axios.put('http://localhost:3001/tops/' + groupName + '/' + contactName)
+        .then(function (response) {
+            console.log(response);
+            res.json(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+            res.json(error);
+        });
+})
+
+//Top a group
+app.post('/setTopGroup/:group',function(req, res){
+    var groupName = req.params.group;
+    console.log("TOP "+groupName);
+    axios.put('http://localhost:3001/tops/' + groupName)
+        .then(function (response) {
+            console.log(response.response);
+            res.json(response.response);
+        })
+        .catch(function (error) {
+            console.log(error.response);
+            res.json(error);
+        });
+})
+
+//Add contact to the database
+app.delete('/DeleteContact/:account_name/', function(req, res) {
+    var account_name = req.params.account_name;
+    var msg = "TRY DELETE "+ account_name; 
+    console.log(msg);
+    axios.delete('http://localhost:3001/contacts/NULL/' + account_name)
+    .then(function (response) {
+        console.log("DELETE");
+        console.log(response.response);
+        res.json(response.response);
+    })
+    .catch(function (error) {
+        console.log("ERROR");
+        console.log(error.response);
+        res.json(error);
+    });
+})

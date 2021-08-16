@@ -1,6 +1,7 @@
 ######   Project Specific   ######
-DataBase/libhv**
 ecdb
+DataBase/ecdb
+DataBase/libhv/**
 build
 
 ######   VSCode   ######
