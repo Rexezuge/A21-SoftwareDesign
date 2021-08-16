@@ -9,18 +9,20 @@ class APIRouter {
     static int pre(HttpRequest* req, HttpResponse* resp) {
         resp->content_type = APPLICATION_JSON;
         req->ParseBody();
+#if DEBUG
         printf("==APIS== Received from %s:%d\n", req->client_addr.ip.c_str(),
                req->client_addr.port);
-#if DEBUG
         printf("==APIS== %s\n", req->Dump(true, true).c_str());
-#endif
         printf("==APIS== %s", req->Dump(false, false).c_str());
+#endif
         return 0;
     };
 
     static int post(HttpRequest* req, HttpResponse* resp) {
         BYPASSUNUSED(req);
+#if DEBUG
         printf("==APIS== Returned %d\n", resp->status_code);
+#endif
         return 0;
     };
 
