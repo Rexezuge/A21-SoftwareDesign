@@ -329,6 +329,8 @@ function showTopContact(group_name, contact_name){
 
 function deleteContact(contact_name){
 	//alert(group_name);
+	msg = "Delete " + contact_name;
+	alert(msg);
 	$.ajax({
 		type:"DELETE",
 		url: "http://localhost:3000/DeleteContact/"+contact_name,
