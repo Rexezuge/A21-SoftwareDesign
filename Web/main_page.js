@@ -109,7 +109,7 @@ function showOneGroupContact(group_name){
 				group = $(this).parent();
 				var contact = $(this).next().next().text();
 				//alert(contact);
-				topContacts(group,contact);
+				showTopContact(group,contact);
 				console.log(group);
 					//showTopContact($("a.Contact_Group")[0].text);
 			})
