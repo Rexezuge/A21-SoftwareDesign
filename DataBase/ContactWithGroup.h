@@ -197,7 +197,15 @@ class ContactWithGroup {
     }
     bool PrioritySort_Contacts() {
         for (int i = 0; i < (int)_REP.size(); i++) {
-            _REP[i]->PrioritySort();
+          int PR=0;
+          for(int iR=0;iR<(int) _AlwaysTopContact.size();iR++){
+            if(_AlwaysTopContact[iR].first==_REP[i]->getName()){
+              _REP[i]->PrioritySort_Top(_AlwaysTopContact[iR].second);
+              PR=1;
+              break;
+            }
+          }
+          if(!PR)  _REP[i]->PrioritySort();
         }
         return true;
     }

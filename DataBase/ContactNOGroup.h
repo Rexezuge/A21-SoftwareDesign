@@ -193,4 +193,17 @@ class ContactNOGroup {
         }
         return true;
     }
+    bool PrioritySort_Top(const std::string AlwaysTop) {
+      this->PrioritySort();
+      for(std::list<Contact>::iterator i=_Group.begin();i!=_Group.end();i++){
+        if(i->getName()==AlwaysTop){
+          Contact T;
+          T.cpyContact(*i);
+          _Group.push_front(T);
+          _Group.erase(i);
+          return true;
+        }
+      }
+      return false;
+    }
 };
