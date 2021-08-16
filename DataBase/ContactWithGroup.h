@@ -182,9 +182,15 @@ class ContactWithGroup {
         }
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->getName() == _AlwaysTopGroup) {
-                swap(_REP[0], _REP[i]);
+              if(i==0) break;
+              swap(_REP[i],_REP[0]);
+                for(int iR=1;iR<i;iR++){
+                  swap(_REP[iR],_REP[iR+1]);
+                }
             }
         }
+        #if 0
+        >>> TIME BASED SORTING IS DISABLED <<<
         for (int i = 1; i < (int)_REP.size(); i++) {
             for (int iR = i; iR < (int)_REP.size(); iR++) {
                 if (_REP[i]->getGroupPreferedTime() >
@@ -193,6 +199,7 @@ class ContactWithGroup {
                 }
             }
         }
+        #endif
         return true;
     }
     bool PrioritySort_Contacts() {
