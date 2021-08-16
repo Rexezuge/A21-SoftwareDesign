@@ -94,31 +94,37 @@ function showOneGroupContact(group_name){
 					var contact_name = data[i].name;
 					var mail1 = data[i].email;
 					var phone = data[i].phone;
+					var mostRecent = data[i].mostRecent;
 					var contactHtml = '<li class="Contact">\
 						            <button class="Delete_Contact">Delete</button>\
 									<button class="Top_Contact">Top</button>\
+									<button class="Display_Recent_Email">Display</button>\
 						            <p class="Contact_Name">'+contact_name+'</p>\
 						            <p class="Address">'+mail1+'</p>\
 						            <p class="Address">'+phone+'</p>\
+						            <p class="Recent_Email">Recent Email: '+mostRecent+'</p>\
 						         </li>'
 					$("#Contacts_Info_List").append(contactHtml);
 				}
 			}
 			$(".Top_Contact").click(function(){
 				groups = $("#Contacts_Info_List").contents();
-					group = $(this).parent();
-					var contact = $(this).next().text();
-					topContacts(group,contact);
-					console.log(group);
-					showTopContact($("a.Contact_Group")[0].text);
+				group = $(this).parent();
+				var contact = $(this).next().next().text();
+				topContacts(group,contact);
+				console.log(group);
+					//showTopContact($("a.Contact_Group")[0].text);
 			})
 
 			$(".Delete_Contact").click(function(){
-				groups = $("#Contacts_Info_List").contents();
-					group = $(this).parent();
-					topContacts(group);
-					console.log(group);
-					showTopContact($("a.Contact_Group")[0].text);
+				var contact = $(this).next().next().text();
+				deleteContact(contact);
+				console.log(contact);
+				//Contact($("a.Contact_Group")[0].text);
+			})
+
+			$(".Display_Recent_Email").click(function(){
+				$(this).next().next().next().next().toggle(100);
 			})
 		}
 	})
@@ -204,6 +210,8 @@ function checkAndChangeColor() {
 			$(".Delete_Contact").css("border",'2px solid #F5DF4D');
 			$(".TOP").css("background-color", "#F5DF4D");
 			$(".TOP").css("color", "white");
+			$(".Display_Recent_Email").css("color",'#F5DF4D');
+			$(".Display_Recent_Email").css("border",'2px solid #F5DF4D');
 		// change the color to the 2020 Pantone year's color
 		} else if (current_selected_color == "2020") {
 			document.querySelector(".account").style.backgroundColor = '#34558b';
@@ -220,6 +228,8 @@ function checkAndChangeColor() {
 			$(".Delete_Contact").css("border",'2px solid #34558b');
 			$(".TOP").css("background-color", "#34558b");
 			$(".TOP").css("color", "white");
+			$(".Display_Recent_Email").css("color",'#34558b');
+			$(".Display_Recent_Email").css("border",'2px solid #34558b');
 		// change the color to the 2019 Pantone year's color
 		} else if (current_selected_color == "2019") {
 			document.querySelector(".account").style.backgroundColor = '#ff6f61';
@@ -236,6 +246,8 @@ function checkAndChangeColor() {
 			$(".Delete_Contact").css("border",'2px solid #ff6f61');
 			$(".TOP").css("background-color", "#ff6f61");
 			$(".TOP").css("color", "white");
+			$(".Display_Recent_Email").css("color",'#ff6f61');
+			$(".Display_Recent_Email").css("border",'2px solid #ff6f61');
 		// change the color to the 2018 Pantone year's color
 		} else if (current_selected_color == "2018") {
 			document.querySelector(".account").style.backgroundColor = '#604c8d';
@@ -252,6 +264,8 @@ function checkAndChangeColor() {
 			$(".Delete_Contact").css("border",'2px solid #604c8d');
 			$(".TOP").css("background-color", "#604c8d");
 			$(".TOP").css("color", "white");
+			$(".Display_Recent_Email").css("color",'#604c8d');
+			$(".Display_Recent_Email").css("border",'2px solid #604c8d');
 		} 
 	});
 }
@@ -309,11 +323,21 @@ function showTopContact(group_name, contact_name){
 		url: "http://localhost:3000/setTop/"+group_name+"/"+contact_name,
 		beforeSend: function(){},
 		success:function(data){
-			//If there is no data
-			if (data!=null){
-				window.location.reload();
-			}
+			window.location.reload();
 		}
 	})
 
+}
+
+
+function deleteContact(contact_name){
+	//alert(group_name);
+	$.ajax({
+		type:"DELETE",
+		url: "http://localhost:3000/DeleteContact/"+contact_name,
+		beforeSend: function(){},
+		success:function(data){
+			window.location.reload();
+		}
+	})
 }
