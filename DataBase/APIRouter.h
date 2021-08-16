@@ -247,6 +247,25 @@ class APIRouter {
                 return 200;
             });
 
+        router.POST("/tops/:group", [](HttpRequest* req, HttpResponse* resp) {
+            std::string groupName = req->GetParam("group");
+
+            if (groupName == "" || groupName == "NULL") return 400;
+
+            // Check if topped already
+            if (hasAlwaysTop()) return 403;
+            // Check this group's existence
+            std::vector<std::string> currentGrps = getGroups();
+            if (currentGrps.size() == 0) return 404;
+            for (int i = 0; i < (int)currentGrps.size(); i++) {
+                if (currentGrps[i] == groupName) break;
+                if (i == (int)currentGrps.size() - 1) return 404;
+            }
+            AlwaysTop(groupName);
+
+            resp->json["msg"] = "Created";
+            return 201;
+        });
         router.POST(
             "/tops/:group/:contact", [](HttpRequest* req, HttpResponse* resp) {
                 std::string groupName = req->GetParam("group");
@@ -254,39 +273,27 @@ class APIRouter {
 
                 if (groupName == "" || groupName == "NULL") return 400;
 
-                if (contactName == "") {
-                    // Check if topped already
-                    if (hasAlwaysTop()) return 403;
-                    // Check this group's existence
-                    std::vector<std::string> currentGrps = getGroups();
-                    if (currentGrps.size() == 0) return 404;
-                    for (int i = 0; i < (int)currentGrps.size(); i++) {
-                        if (currentGrps[i] == groupName) break;
-                        if (i == (int)currentGrps.size() - 1) return 404;
-                    }
-                    AlwaysTop(groupName);
-                } else {
-                    if (hasAlwaysTop(groupName)) return 403;
-                    // Check this group's existence
-                    std::vector<std::string> currentGrps = getGroups();
-                    if (currentGrps.size() == 0) return 404;
-                    for (int i = 0; i < (int)currentGrps.size(); i++) {
-                        if (currentGrps[i] == groupName) break;
-                        if (i == (int)currentGrps.size() - 1) return 404;
-                    }
-                    // Check the current contact's existence
-                    std::vector<Contact> currentCntcts = getGroup(groupName);
-                    if (currentCntcts.size() == 0) return 404;
-                    for (int i = 0; i < (int)currentCntcts.size(); i++) {
-                        if (currentCntcts[i].getName() == contactName) break;
-                        if (i == (int)currentCntcts.size() - 1) return 404;
-                    }
-                    AlwaysTop(groupName, contactName);
+                if (hasAlwaysTop(groupName)) return 403;
+                // Check this group's existence
+                std::vector<std::string> currentGrps = getGroups();
+                if (currentGrps.size() == 0) return 404;
+                for (int i = 0; i < (int)currentGrps.size(); i++) {
+                    if (currentGrps[i] == groupName) break;
+                    if (i == (int)currentGrps.size() - 1) return 404;
                 }
+                // Check the current contact's existence
+                std::vector<Contact> currentCntcts = getGroup(groupName);
+                if (currentCntcts.size() == 0) return 404;
+                for (int i = 0; i < (int)currentCntcts.size(); i++) {
+                    if (currentCntcts[i].getName() == contactName) break;
+                    if (i == (int)currentCntcts.size() - 1) return 404;
+                }
+                AlwaysTop(groupName, contactName);
 
                 resp->json["msg"] = "Created";
                 return 201;
             });
+
         router.PUT("/tops/:group/:contact",
                    [](HttpRequest* req, HttpResponse* resp) {
                        std::string groupName = req->GetParam("group");
@@ -330,27 +337,24 @@ class APIRouter {
             resp->json["msg"] = "OK";
             return 200;
         });
-        router.Delete("/tops/:group/:contact",
-                      [](HttpRequest* req, HttpResponse* resp) {
-                          std::string groupName = req->GetParam("group");
-                          std::string contactName = req->GetParam("contact");
-
-                          if (groupName == "" || groupName == "NULL")
-                              return 400;
-
-                          // Check this group's existence
-                          std::vector<std::string> currentGrps = getGroups();
-                          if (currentGrps.size() == 0) return 404;
-                          for (int i = 0; i < (int)currentGrps.size(); i++) {
-                              if (currentGrps[i] == groupName) break;
-                              if (i == (int)currentGrps.size() - 1) return 404;
-                          }
-                          CancelTop(groupName);
-
-                          resp->json["msg"] = "OK";
-                          return 200;
-                      });
         router.Delete("/tops/:group", [](HttpRequest* req, HttpResponse* resp) {
+            std::string groupName = req->GetParam("group");
+
+            if (groupName == "" || groupName == "NULL") return 400;
+
+            // Check this group's existence
+            std::vector<std::string> currentGrps = getGroups();
+            if (currentGrps.size() == 0) return 404;
+            for (int i = 0; i < (int)currentGrps.size(); i++) {
+                if (currentGrps[i] == groupName) break;
+                if (i == (int)currentGrps.size() - 1) return 404;
+            }
+            CancelTop(groupName);
+
+            resp->json["msg"] = "OK";
+            return 200;
+        });
+        router.Delete("/tops", [](HttpRequest* req, HttpResponse* resp) {
             std::string groupName = req->GetParam("group");
 
             if (groupName == "" || groupName == "NULL") return 400;

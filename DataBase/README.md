@@ -3,6 +3,7 @@
 A DataBase System implemented with `C++`.
 
 ## Software Requirement
+
     ```shell
     Linux: G++ Version 11.1.0+; CMake Version 3.5.0+
     Windows: MinGW Version 9.0.0+; CMake Version 3.5.0+
@@ -20,14 +21,15 @@ A DataBase System implemented with `C++`.
 - Compile DataBase
 
     ```shell
-    cmake .   # For DEBUG Usage: cmake -DEBUG=on .
-    cmake --build . && mv ./ecdb DataBase
+    cd DataBase
+    cmake ..   # For DEBUG Usage: cmake -DEBUG=on .
+    cmake --build ..
     ```
-    
+
 ## Execute
 
 ```shell
-cd DataBase && ./ecdb
+./ecdb
 ```
 
 ## Compile [APIDemo](apidemo.cpp) (Developers Only)
