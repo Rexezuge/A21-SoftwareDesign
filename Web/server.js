@@ -194,23 +194,23 @@ app.post('/setTop/:group/:contact',function(req, res){
 app.post('/setTopGroup/:group',function(req, res){
     var groupName = req.params.group;
     console.log("TOP "+groupName);
-    axios.delete("http://localhost:3001/tops")
+    axios.delete("http://localhost:3001/tops/")
         .then(function (response) {
             console.log("DELETE TOP GROUP STATUS:")
-            console.log(response);
-            res.json(response);
+            console.log(response.response);
+            res.json(response.response);
         })
         .catch(function (error) {
-            console.log(error);
+            console.log(error.response);
             res.json(error);
     });
     axios.post('http://localhost:3001/tops/' + groupName)
         .then(function (response) {
-            console.log(response);
-            res.json(response);
+            console.log(response.response);
+            res.json(response.response);
         })
         .catch(function (error) {
-            console.log(error);
+            console.log(error.response);
             res.json(error);
         });
 })
@@ -223,12 +223,12 @@ app.delete('/DeleteContact/:account_name/', function(req, res) {
     axios.delete('http://localhost:3001/contacts/NULL/' + account_name)
     .then(function (response) {
         console.log("DELETE");
-        console.log(response);
-        res.json(response);
+        console.log(response.response);
+        res.json(response.response);
     })
     .catch(function (error) {
         console.log("ERROR");
-        console.log(error);
+        console.log(error.response);
         res.json(error);
     });
 })
