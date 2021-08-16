@@ -105,13 +105,12 @@ function showOneGroupContact(group_name){
 				}
 			}
 			$(".Top_Contact").click(function(){
-				groups = $("#Contacts_Info_List").contents();
-				group = $(this).parent();
+				group = $("a.Contact_Group")[0].text
 				var contact = $(this).next().next().text();
 				//alert(contact);
 				showTopContact(group,contact);
 				console.log(group);
-					//showTopContact($("a.Contact_Group")[0].text);
+				//showTopContact($("a.Contact_Group")[0].text);
 			})
 
 			$(".Delete_Contact").click(function(){
