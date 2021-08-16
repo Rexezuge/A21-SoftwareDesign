@@ -25,5 +25,5 @@ find_package(Threads REQUIRED)
 target_link_libraries(ecdb PUBLIC m Threads::Threads)
 
 add_dependencies(ecdb hv)
-set_target_properties(ecdb PROPERTIES CMAKE_CXX_FLAGS "-Wall -Wextra -g -Werror -w")
+set_target_properties(ecdb PROPERTIES CMAKE_CXX_FLAGS "-w -g -O2")
 set_target_properties(ecdb PROPERTIES RUNTIME_OUTPUT_DIRECTORY "DataBase")
