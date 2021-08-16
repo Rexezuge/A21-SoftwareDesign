@@ -43,7 +43,12 @@ app.post('/addContact/:account_name/:contact_phone/:contact_email/:contact_group
     var contact_email = req.params.contact_email;
     var contact_group = req.params.contact_group;
     var meta_info = {"phone": Number(parseInt(contact_phone)), "email": contact_email}
-    axios.post('http://localhost:3001/contacts/' + contact_group + '/' + account_name + '/', meta_info)
+    var url = 'http://localhost:3001/contacts/' + contact_group + '/' + account_name
+    axios.post(url, meta_info,{
+                headers:{
+                'Content-Type':'application/json'
+                }
+    })
     .then(function (response) {
         console.log(response);
         res.json(response);
@@ -190,7 +195,7 @@ app.post('/setTopGroup/:group',function(req, res){
 //Add contact to the database
 app.delete('/DeleteContact/:account_name/', function(req, res) {
     var account_name = req.params.account_name;
-    axios.delete('http://localhost:3001/contacts/' + account_name)
+    axios.delete('http://localhost:3001/contacts/NULL/' + account_name)
     .then(function (response) {
         console.log(response);
         res.json(response);
