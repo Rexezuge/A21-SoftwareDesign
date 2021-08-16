@@ -108,13 +108,14 @@ function showOneGroupContact(group_name){
 				groups = $("#Contacts_Info_List").contents();
 				group = $(this).parent();
 				var contact = $(this).next().next().text();
+				//alert(contact);
 				topContacts(group,contact);
 				console.log(group);
 					//showTopContact($("a.Contact_Group")[0].text);
 			})
 
 			$(".Delete_Contact").click(function(){
-				var contact = $(this).next().next().text();
+				var contact = $(this).next().next().next().text();
 				deleteContact(contact);
 				console.log(contact);
 				//Contact($("a.Contact_Group")[0].text);
@@ -315,6 +316,8 @@ function topGroup(group_name){
 function showTopContact(group_name, contact_name){
 	group_name = group_name.substring(0, group_name.length-18);
 	//Connerct to the server to get contacts information
+	msg = "TOP GROUP: "+group_name +" and CONTACT: "+contact_name;
+	alert(msg);
 	$.ajax({
 		type:"POST",
 		url: "http://localhost:3000/setTop/"+group_name+"/"+contact_name,
@@ -330,7 +333,7 @@ function showTopContact(group_name, contact_name){
 function deleteContact(contact_name){
 	//alert(group_name);
 	msg = "Delete " + contact_name;
-	alert(msg);
+	//alert(msg);
 	$.ajax({
 		type:"DELETE",
 		url: "http://localhost:3000/DeleteContact/"+contact_name,
