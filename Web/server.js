@@ -43,6 +43,7 @@ app.post('/addContact/:account_name/:contact_phone/:contact_email/:contact_group
     var contact_email = req.params.contact_email;
     var contact_group = req.params.contact_group;
     var meta_info = {"phone": Number(parseInt(contact_phone)), "email": contact_email}
+    console.log("Add contact:")
     var url = 'http://localhost:3001/contacts/' + contact_group + '/' + account_name
     axios.post(url, meta_info,{
                 headers:{
@@ -83,7 +84,7 @@ app.get('/groups', function(req, res){
     axios.get('http://localhost:3001/groups')
         .then(function (response) {
             console.log("—————————————Success———————————————")
-            console.log(response.data);
+            //console.log(response.data);
             res.send(response.data);
         })
         .catch(function (error) {
@@ -100,7 +101,7 @@ app.get('/contacts/:groupName', function(req, res){
     axios.get('http://localhost:3001/contacts/' + groupName)
         .then(function (response) {
             console.log("GET CONTACTS: ")
-            console.log(response.data);
+            //console.log(response.data);
             res.json(response.data);
         })
         .catch(function (error) {
@@ -159,7 +160,7 @@ app.post('/postColor/:user_ID/:color', function(req, res) {
 app.get('/getColor/:user_ID', function(req, res){
     var user_ID = req.params.user_ID;
     ColorInfo.findOne({user_ID: user_ID},(err, color)=>{
-        console.log(color);
+        //console.log(color);
         res.json(color);
     })
 })
