@@ -170,17 +170,7 @@ app.post('/setTop/:group/:contact',function(req, res){
     var groupName = req.params.group;
     var contactName = req.params.contact;
     msg = "TOP GROUP: "+groupName +" and CONTACT: "+contactName;
-    // axios.delete("http://localhost:3001/tops/" + groupName)
-    //     .then(function (response) {
-    //         console.log("DELETE TOP CONTACT STATUS:")
-    //         console.log(response);
-    //         res.json(response);
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //         res.json(error);
-    //     });
-    axios.post('http://localhost:3001/tops/' + groupName + '/' + contactName)
+    axios.put('http://localhost:3001/tops/' + groupName + '/' + contactName)
         .then(function (response) {
             console.log(response);
             res.json(response);
@@ -195,17 +185,7 @@ app.post('/setTop/:group/:contact',function(req, res){
 app.post('/setTopGroup/:group',function(req, res){
     var groupName = req.params.group;
     console.log("TOP "+groupName);
-    axios.delete("http://localhost:3001/tops")
-        .then(function (response) {
-            console.log("DELETE TOP GROUP STATUS:")
-            console.log(response.response);
-            res.json(response.response);
-        })
-        .catch(function (error) {
-            console.log(error.response);
-            res.json(error);
-    });
-    axios.post('http://localhost:3001/tops/' + groupName)
+    axios.put('http://localhost:3001/tops/' + groupName)
         .then(function (response) {
             console.log(response.response);
             res.json(response.response);
