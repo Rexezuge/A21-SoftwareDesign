@@ -25,7 +25,7 @@ class ContactWithGroup {
         _REP.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name)));
         return CheckRep();
     }
-    bool addContact(const string& groupName, const Contact& contact) {
+    bool addContact_init(const string& groupName, const Contact& contact) {
 #ifdef DEBUG
         printf("==DATA== Request Add New Contact to Group [%s]\n",
                groupName.c_str());
@@ -41,8 +41,14 @@ class ContactWithGroup {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->getName() == groupName) {
                 _REP[i]->addContact(contact);
-                return CheckRep();
+                return true;
             }
+        }
+        return false;
+    }
+    bool addContact(const string& groupName, const Contact& contact) {
+        if (this->addContact_init(groupName, contact)) {
+            return CheckRep();
         }
         return false;
     }
