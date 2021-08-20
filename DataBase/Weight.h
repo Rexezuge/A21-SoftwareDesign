@@ -5,6 +5,12 @@ class Weight {
     std::list<int> _Times;
 
    public:
+   /**
+    * Create entry for the new email
+    *
+    * @param newMail
+    * @param MailTime
+    */
     void newMail(const std::string& newMail, const int MailTime) {
         _Mail = newMail;
         if (_Times.size() > 100) {
@@ -12,7 +18,17 @@ class Weight {
         }
         _Times.push_front(MailTime);
     }
+    /**
+     * Get the Mail
+     *
+     * @return const std::string&
+     */
     const std::string& getMail() { return _Mail; }
+    /**
+     * Get the Preferred Time
+     *
+     * @return int
+     */
     int getPreferedTime() {
         if (!_Times.size()) {
             return 0;
@@ -63,12 +79,29 @@ class Weight {
                _WEIGHT_2 / _WEIGHT_2_SIZE * 0.3 +
                _WEIGHT_3 / _WEIGHT_2_SIZE * 0.3;
     }
+    /**
+     * Get the Latest email received Time
+     *
+     * @return int
+     */
     int getLatestTime() { return _Times.front(); }
+    /**
+     * Reset the weight of the email
+     *
+     * @param mail
+     * @param T
+     * @return true
+     */
     bool restoreWeight(const std::string& mail, const std::list<int>& T) {
         _Mail = mail;
         _Times = T;
         return true;
     }
+    /**
+     * Get the Total number of emails
+     *
+     * @return int
+     */
     int getTotalMails() { return (int)_Times.size(); }
     void cpyWeight(const Weight& W) {
         this->_Mail = W._Mail;

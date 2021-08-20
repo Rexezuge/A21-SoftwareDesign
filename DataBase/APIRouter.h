@@ -6,6 +6,13 @@
 
 class APIRouter {
    public:
+   /**
+    * Pre Processorr of HTTP requests
+    * Parse the body and set the response to json
+    * @param req HttpRequest
+    * @param resp HttpResponse
+    * @return int 0
+    */
     static int pre(HttpRequest* req, HttpResponse* resp) {
         resp->content_type = APPLICATION_JSON;
         req->ParseBody();
@@ -18,6 +25,11 @@ class APIRouter {
         return 0;
     };
 
+    /**
+     * Post Processor of HTTP requests
+     * Only debug information
+     * @return int 0
+     */
     static int post(HttpRequest* req, HttpResponse* resp) {
         BYPASSUNUSED(req);
 #if DEBUG
@@ -26,9 +38,18 @@ class APIRouter {
         return 0;
     };
 
+    /**
+     * Collection of logics and routes.
+     * These routes will be registered to the HttpService
+     */
     static void register_router(HttpService& router) {
+        // specify pre- and post-processors
         router.preprocessor = pre;
         router.postprocessor = post;
+        /**
+         * GET /contacts/:groupName
+         * Get the list of contacts in a group.
+         */
         router.GET("/contacts/:groupName",
                    [](HttpRequest* req, HttpResponse* resp) {
                        // Parse the query URL
@@ -52,8 +73,7 @@ class APIRouter {
                    });
         /**
          * GET /contacts/:groupName/:contactName
-         * Get the specific contact, or a list of contacts in one group
-         * with order.
+         * Get the specific contact in a group.
          */
         router.GET("/contacts/:groupName/:contactName", [](HttpRequest* req,
                                                            HttpResponse* resp) {
@@ -249,6 +269,10 @@ class APIRouter {
                 return 200;
             });
 
+        /**
+         * POST /tops/:group
+         * Top a group in this contact book
+         */
         router.POST("/tops/:group", [](HttpRequest* req, HttpResponse* resp) {
             std::string groupName = req->GetParam("group");
 
@@ -268,6 +292,10 @@ class APIRouter {
             resp->json["msg"] = "Created";
             return 201;
         });
+        /**
+         * POST /tops/:group/:contact
+         * Top a contact in the specifc group
+         */
         router.POST(
             "/tops/:group/:contact", [](HttpRequest* req, HttpResponse* resp) {
                 std::string groupName = req->GetParam("group");
@@ -295,7 +323,10 @@ class APIRouter {
                 resp->json["msg"] = "Created";
                 return 201;
             });
-
+        /**
+         * PUT /tops/:group/:contact
+         * Delete the current top and top a contact in the specific group
+         */
         router.PUT("/tops/:group/:contact",
                    [](HttpRequest* req, HttpResponse* resp) {
                        std::string groupName = req->GetParam("group");
@@ -322,6 +353,10 @@ class APIRouter {
                        resp->json["msg"] = "OK";
                        return 200;
                    });
+        /**
+         * PUT /tops/:group
+         * Delete the contact book top and top the specifc group
+         */
         router.PUT("/tops/:group", [](HttpRequest* req, HttpResponse* resp) {
             std::string groupName = req->GetParam("group");
 
@@ -339,6 +374,10 @@ class APIRouter {
             resp->json["msg"] = "OK";
             return 200;
         });
+        /**
+         * DELETE /tops/:group
+         * Delete the contact top in the specifc group
+         */
         router.Delete("/tops/:group", [](HttpRequest* req, HttpResponse* resp) {
             std::string groupName = req->GetParam("group");
 
@@ -356,6 +395,10 @@ class APIRouter {
             resp->json["msg"] = "OK";
             return 200;
         });
+        /**
+         * DELETE /tops
+         * Delete the group top in the contact book
+         */
         router.Delete("/tops", [](HttpRequest* req, HttpResponse* resp) {
             std::string groupName = req->GetParam("group");
 
