@@ -2,8 +2,14 @@
 #define _SLEEPTIMER 10
 extern pthread_mutex_t REP_INUSE;
 
+/**
+ * Signal handler for priority sort
+ */
 void PR_SignalMain() { kill(getpid(), SIGUSR2); }
 
+/**
+ * Sort the database
+ */
 int UpdateDatabase(ContactWithGroup* DB) {
 #ifdef DEBUG
     printf("==PRST== Now Sorting the DataBase\n");
@@ -13,6 +19,9 @@ int UpdateDatabase(ContactWithGroup* DB) {
     return EXIT_SUCCESS;
 }
 
+/**
+ * Main entrypoint for priority sort, will loop to sort DB in a time period
+ */
 void* StartPrioritySort(void* ARGV) {
     ContactWithGroup* DB = (ContactWithGroup*)ARGV;
     pthread_detach(pthread_self());

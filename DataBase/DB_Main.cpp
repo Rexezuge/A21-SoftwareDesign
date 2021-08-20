@@ -4,14 +4,26 @@
 #include "hv/HttpServer.h"
 #include "hv/hv.h"
 using namespace hv;
+// mutex lock for contact book vector
 pthread_mutex_t REP_INUSE;
+// mutex lock for email representation
 pthread_mutex_t EMAIL_INUSE;
+// pointer to the contact book representation
 ContactWithGroup* _REP;
+// email reader pid
 pthread_t PID_ER;
+// sorting program pid
 pthread_t PID_PR;
+// API http server
 http_server_t g_http_server;
+// API http services (routes) of the http server
 HttpService g_http_service;
 
+/**
+ * Email updater
+ *
+ * It reads the `newMail.txt` to extract new email for different users.
+ */
 void SIGupdateEmail() {
     FILE* EM = fopen("newMail.txt", "r");
     char _TIME[32];
@@ -34,6 +46,15 @@ void SIGupdateEmail() {
     pthread_mutex_unlock(&REP_INUSE);
 }
 
+/**
+ * Handles the signals.
+ *
+ * SIGINT: stop all the services and exit
+ * SIGUSR1: update emails
+ * SIGUSR2: sort the database contacts
+ *
+ * @param SIG Signal ID
+ */
 void Signal_Handler(int SIG) {
     if (SIG == SIGINT) {
 #ifdef DEBUG
@@ -73,9 +94,11 @@ int main(int numArgs, char** Argv) {
     if (numArgs != 1) {
         return EXIT_FAILURE;
     }
+    // ignore signals for initializing
     signal(SIGINT, SIG_IGN);
     signal(SIGUSR1, SIG_IGN);
     signal(SIGUSR2, SIG_IGN);
+    // pthread mutex init
     REP_INUSE = PTHREAD_MUTEX_INITIALIZER;
     EMAIL_INUSE = PTHREAD_MUTEX_INITIALIZER;
 #ifdef DEBUG
@@ -87,15 +110,19 @@ int main(int numArgs, char** Argv) {
     Import_Email_From_Local("ECDB_EM.csv", _REP);
     printf("==EZCT== Easy Contact BackEnd DataBase is Now Running...\n");
     printf("==EZCT== To Terminate, Press \"Ctrl+C\"\n");
+    // create email reader thread
     pthread_create(&PID_ER, 0, StartEmailReader, _REP);
+    // create priority sort thread
     pthread_create(&PID_PR, 0, StartPrioritySort, _REP);
-
+    // configure the API HTTP server
     g_http_server.port = 3001;
     g_http_service.base_url = "";
+    // register all API RESTful routes
     APIRouter::register_router(g_http_service);
     g_http_server.service = &g_http_service;
+    // start HTTP server without blocking
     http_server_run(&g_http_server, 0);
-
+    // register the signals
     signal(SIGUSR1, Signal_Handler);
     signal(SIGUSR2, Signal_Handler);
     signal(SIGINT, Signal_Handler);

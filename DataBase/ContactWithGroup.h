@@ -25,6 +25,9 @@ class ContactWithGroup {
         _REP.push_back(unique_ptr<ContactNOGroup>(new ContactNOGroup(name)));
         return CheckRep();
     }
+    /**
+     * Add a contact at initialization (without sorting)
+     */
     bool addContact_init(const string& groupName, const Contact& contact) {
 #ifdef DEBUG
         printf("==DATA== Request Add New Contact to Group [%s]\n",
@@ -46,12 +49,21 @@ class ContactWithGroup {
         }
         return false;
     }
+    /**
+     * Add a contact
+     */
     bool addContact(const string& groupName, const Contact& contact) {
         if (this->addContact_init(groupName, contact)) {
             return CheckRep();
         }
         return false;
     }
+    /**
+     * Get the Contact object
+     * It will return NULL if the Contact is not presented
+     * @param name Contact Name
+     * @return Contact*
+     */
     Contact* getContact(const string& name) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             list<Contact> lst = _REP[i]->getList();
@@ -61,6 +73,12 @@ class ContactWithGroup {
         }
         return NULL;
     }
+    /**
+     * @brief Get the contacts from a group
+     * If the specific group is not presented, an empty list is returned
+     * @param groupName
+     * @return list<Contact>
+     */
     list<Contact> getGroup(const string& groupName) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->getName() == groupName) {
@@ -69,6 +87,11 @@ class ContactWithGroup {
         }
         return std::list<Contact>();
     }
+    /**
+     * Get the group names
+     *
+     * @return vector<string> Group names
+     */
     vector<string> getGroups() {
         std::vector<std::string> _RESULT;
         for (int i = 0; i < (int)_REP.size(); i++) {
@@ -76,6 +99,9 @@ class ContactWithGroup {
         }
         return _RESULT;
     }
+    /**
+     * Set the Contact object
+     */
     bool setContact(const Contact& contact) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->contains(contact)) {
@@ -84,6 +110,9 @@ class ContactWithGroup {
         }
         return true;
     }
+    /**
+     * Remove the specific contact
+     */
     bool removeContact(const std::string& name) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->contains(name)) {
@@ -92,6 +121,7 @@ class ContactWithGroup {
         }
         return false;
     }
+
     bool setGroup(const std::string& groupName, const std::string& name) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             std::list<Contact> LC = _REP[i]->getList();
@@ -110,16 +140,34 @@ class ContactWithGroup {
         }
         return false;
     }
+    /**
+     * has always topped group
+     *
+     * @return true
+     * @return false
+     */
     bool hasAlwaysTop() { return _AlwaysTopGroup != ""; }
+    /**
+     * Set the always top group and trigger the sorting
+     */
     bool AlwaysTop(const std::string& groupName) {
         _AlwaysTopGroup = groupName;
         return CheckRep();
     }
+    /**
+     * Cancel the current top of a group
+     */
     bool CancelTop() {
         if (!hasAlwaysTop()) return false;
         _AlwaysTopGroup = string("");
         return true;
     }
+    /**
+     * has always top contact in a group
+     *
+     * @return true
+     * @return false
+     */
     bool hasAlwaysTop(const std::string& groupName) {
         for (int i = 0; i < (int)_AlwaysTopContact.size(); i++) {
             if (_AlwaysTopContact[i].first == groupName) {
@@ -128,6 +176,9 @@ class ContactWithGroup {
         }
         return false;
     }
+    /**
+     * Set the always top contact in a group and trigger sorting
+     */
     bool AlwaysTop(const std::string& groupName,
                    const std::string& contactName) {
         for (int i = 0; i < (int)_AlwaysTopContact.size(); i++) {
@@ -142,6 +193,9 @@ class ContactWithGroup {
         _AlwaysTopContact.push_back(top);
         return CheckRep();
     }
+    /**
+     * Cancel the current top of a contact in a specific group
+     */
     bool CancelTop(const string& groupName) {
         for (vector<pair<string, string>>::iterator i =
                  _AlwaysTopContact.begin();
@@ -153,6 +207,12 @@ class ContactWithGroup {
         }
         return false;
     }
+    /**
+     * @brief Set the Priority of a contact
+     *
+     * @param contact
+     * @param priority
+     */
     void setPriority(const Contact& contact, int priority) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->contains(contact)) {
@@ -160,6 +220,12 @@ class ContactWithGroup {
             }
         }
     }
+    /**
+     * @brief Set the Priority of a group
+     *
+     * @param groupName
+     * @param priority
+     */
     void setPriority(const string& groupName, int priority) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->getName() == groupName) {
@@ -169,6 +235,13 @@ class ContactWithGroup {
             }
         }
     }
+    /**
+     * Add the new email
+     *
+     * @param address
+     * @param time
+     * @param email
+     */
     void updateEmail(const string& address, int time, const string& email) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->containsAddress(address)) {
@@ -177,11 +250,17 @@ class ContactWithGroup {
             }
         }
     }
+    /**
+     * Call the priority sorts
+     */
     bool PrioritySort() {
         this->PrioritySort_Groups();
         this->PrioritySort_Contacts();
         return true;
     }
+    /**
+     * Call the priority sort for groups
+     */
     bool PrioritySort_Groups() {
         if (_REP.size() < 2) {
             return true;
@@ -208,6 +287,9 @@ class ContactWithGroup {
 #endif
         return true;
     }
+    /**
+     * Call the priority sort for contacts
+     */
     bool PrioritySort_Contacts() {
         for (int i = 0; i < (int)_REP.size(); i++) {
             int PR = 0;
@@ -222,6 +304,12 @@ class ContactWithGroup {
         }
         return true;
     }
+    /**
+     * Show the group name contains in the contact book
+     *
+     * @return true
+     * @return false
+     */
     bool containBook(const string& groupName) {
         for (int i = 0; i < (int)_REP.size(); i++) {
             if (_REP[i]->getName() == groupName) {
@@ -230,6 +318,9 @@ class ContactWithGroup {
         }
         return false;
     }
+    /**
+     * Reset all weights for a contact
+     */
     bool restoreWeight(const std::string& contact, const std::string& numMails,
                        const std::string& lastMail, const std::string& times) {
         for (int i = 0; i < (int)_REP.size(); i++) {

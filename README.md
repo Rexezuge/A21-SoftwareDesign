@@ -6,9 +6,9 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 
 ## Run Application
 
-[Complete Installation Guide](INSTALL.md)
+Use the [Installation Script](INSTALL.sh) or [Compile Manually](INSTALL.md).
 
-_Additional Informations &#8595;_
+_Manually Configure All Stacks &#8595;_
 
 - [DataBase/README.md](DataBase/README.md)
 
@@ -30,11 +30,7 @@ git clone https://github.com/reC4P7CH4/A21-EasyContact.git
 
 ## Contact
 
-If you have any question, sent email to
-
-```shell
-easycontact.sdd@gmail.com
-```
+If you have any question, sent email to `easycontact.sdd#gmail.com`.
 
 ## Security
 

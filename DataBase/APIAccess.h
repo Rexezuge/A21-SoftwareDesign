@@ -1,3 +1,7 @@
+/**
+ * This file is a interface between API and the contact book
+ * Please refer to the comments in `ContactWithGroup.h`
+ */
 #ifndef SDD_EASYCONTACT_APIACCESS
 #define SDD_EASYCONTACT_APIACCESS
 
@@ -22,6 +26,9 @@ bool removeContact(const std::string& CONTACTNAME) {
     return _REP->removeContact(CONTACTNAME);
 }
 
+/**
+ * Get the Group contacts in vector
+ */
 std::vector<Contact> getGroup(const std::string& GROUPNAME) {
     std::list<Contact> tmp = _REP->getGroup(GROUPNAME);
     std::vector<Contact> ret;
@@ -30,6 +37,9 @@ std::vector<Contact> getGroup(const std::string& GROUPNAME) {
     return ret;
 }
 
+/**
+ * Edit a contact by deleting and adding.
+ */
 bool editContact(const std::string& OLDCONTACT, const std::string& GROUPNAME,
                  const Contact& CONTACT) {
     _REP->removeContact(OLDCONTACT);

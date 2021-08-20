@@ -3,6 +3,9 @@
 extern pthread_mutex_t REP_INUSE;
 extern pthread_mutex_t EMAIL_INUSE;
 
+/**
+ * has no new email
+ */
 int NoNewEmail(FILE* FP) {
     fseek(FP, 0, SEEK_END);
     if (!ftell(FP)) {
@@ -12,8 +15,14 @@ int NoNewEmail(FILE* FP) {
     return 0;
 }
 
+/**
+ * Signal handler of email reader
+ */
 void ER_SignalMain() { kill(getpid(), SIGUSR1); }
 
+/**
+ * Read emails from local
+ */
 int ReadLocalEmail() {
     FILE* EM = fopen("newMail.txt", "r");
     if (NoNewEmail(EM)) {
@@ -43,6 +52,9 @@ int ReadLocalEmail() {
     return EXIT_SUCCESS;
 }
 
+/**
+ * Email reader main, will loop to read email in a period of time
+ */
 void* StartEmailReader(void* ARGV) {
     BYPASSUNUSED(ARGV);
     pthread_detach(pthread_self());
