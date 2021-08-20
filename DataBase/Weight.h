@@ -5,12 +5,12 @@ class Weight {
     std::list<int> _Times;
 
    public:
-   /**
-    * Create entry for the new email
-    *
-    * @param newMail
-    * @param MailTime
-    */
+    /**
+     * Create entry for the new email
+     *
+     * @param newMail
+     * @param MailTime
+     */
     void newMail(const std::string& newMail, const int MailTime) {
         _Mail = newMail;
         if (_Times.size() > 100) {
