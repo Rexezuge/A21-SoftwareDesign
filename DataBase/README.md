@@ -4,11 +4,11 @@ A DataBase System implemented with `C++`.
 
 ## Software Requirement
 
-    ```shell
-    Linux: G++ Version 11.1.0+; CMake Version 3.5.0+
-    Windows: MinGW Version 9.0.0+; CMake Version 3.5.0+
-    MacOS: G++ Version 10.1.1+; CMake Version 3.5.0+
-    ```
+```shell
+Linux: G++ Version 11.1.0+; CMake Version 3.5.0+
+Windows: MinGW Version 9.0.0+; CMake Version 3.5.0+
+MacOS: G++ Version 10.1.1+; CMake Version 3.5.0+
+```
 
 ## Compile With CMake
 
@@ -23,7 +23,7 @@ A DataBase System implemented with `C++`.
     ```shell
     cd DataBase
     cmake ..   # For DEBUG Usage: cmake -DEBUG=on .
-    cmake --build ..
+    cmake --build .. -j 4
     ```
 
 - Execute
