@@ -6,7 +6,7 @@ A Contact Book & Address Book system aims to polarize information stored in the 
 
 ## Run Application
 
-Use the [installation script](INSTALL.sh) or [compile manually](INSTALL.md).
+Use the [Installation Script](INSTALL.sh) or [Compile Manually](INSTALL.md).
 
 _Manually Configure All Stacks &#8595;_
 
