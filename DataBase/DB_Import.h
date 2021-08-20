@@ -67,9 +67,11 @@ class DB_Import {
                             // If new Contact list
                             if (!contactBook->containBook(groupName)) {
                                 contactBook->addGroup(groupName);
-                                contactBook->addContact(groupName, newContact);
+                                contactBook->addContact_init(groupName,
+                                                             newContact);
                             } else {
-                                contactBook->addContact(groupName, newContact);
+                                contactBook->addContact_init(groupName,
+                                                             newContact);
                             }
                         }
                     }
